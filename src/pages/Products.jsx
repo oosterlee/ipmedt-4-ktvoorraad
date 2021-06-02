@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../css/products.css';
+import Searchbar from "../components/Searchbar";
 
 import { Link } from 'react-router-dom';
 
@@ -8,6 +9,11 @@ import ProductsItem from '../components/ProductsItem';
 import { getUserInfo } from '../utils';
 
 class Products extends Component {
+	state = {title: ""}
+
+    makeApiCall = searchTerm =>{
+        console.log(searchTerm);
+    }
 	constructor(props) {
 		super(props);
 		
@@ -35,6 +41,7 @@ class Products extends Component {
 					}
 				</ul>
 				<Link to="/cart">My Cart</Link>
+				<Searchbar onSubmit={this.makeApiCall}/>
 			</section>
 		);
 	}

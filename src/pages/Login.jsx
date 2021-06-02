@@ -47,22 +47,27 @@ class Login extends Component {
 				</section>
 				<form className="login__form" onSubmit={this.login.bind(this)}>
 					<div className="login__form__group">
-						<label>E-mail</label>
-						<input type="email" placeholder="E-mail" required value={this.state.username} onChange={(e) => this.setState({ username: e.target.value })}/>
+						<label className="login__form__label">E-mailadres</label>
+						<input className="login__form__input" type="email" placeholder="E-mail" required value={this.state.username} onChange={(e) => this.setState({ username: e.target.value })}/>
 					</div>
 					<div className="login__form__group">
-						<label>Wachtwoord</label>
-						<input type="password" placeholder="Wachtwoord" required value={this.state.password} onChange={(e) => this.setState({ password: e.target.value })}/>
+						<label className="login__form__label">Wachtwoord</label>
+						<input className="login__form__input" type="password" placeholder="Wachtwoord" required value={this.state.password} onChange={(e) => this.setState({ password: e.target.value })}/>
 					</div>
 
 					{
 						this.state.loading ?
-						<input type="submit" value="Logging in..." onClick={this.login.bind(this)} disabled="disabled" />
+						<input className="login__form__submit" type="submit" value="Logging in..." onClick={this.login.bind(this)} disabled="disabled" />
 						:
-						<input type="submit" value="Login" onClick={this.login.bind(this)} />
+						<input className="login__form__submit" type="submit" value="Login" onClick={this.login.bind(this)} />
 
 					}
 				</form>
+
+				<section className="login__forgot">
+					<p className="login__forgot__p"><a className="login__forgot__a" href="https://www.google.com/">Wachtwoord</a> vergeten?</p>
+					<p className="login__forgot__p"><a className="login__forgot__a" href="https://www.google.com/theapot">E-mailadres</a> vergeten?</p>
+				</section>
 			</article>
 		);
 	}

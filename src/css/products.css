@@ -1,0 +1,42 @@
+.products {
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+.products__list {
+	box-sizing: border-box;
+	list-style-type: none;
+	display: grid;
+	padding: 0;
+	max-width: 100%;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	grid-gap: 1rem;
+}
+
+.products__list__item {
+	/*margin: 2rem;*/
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
+
+.products__list__figure {
+	margin: 0;
+	padding: 0;
+	margin-left: 1rem;
+	margin-right: 1rem;
+}
+
+.products__item__image {
+	width: 100%;
+}
+
+.products__item__button {
+	display: block;
+	margin-left: auto;
+	margin-right: 1rem;
+}
+
+
+.products__item__text--m1 {
+	margin: 1rem;
+}

@@ -9,7 +9,7 @@ import {
 
 import PrivateRoute from '../components/PrivateRoute';
 
-import '../css/products.css'
+import '../css/main.css'
 
 import Products from './Products';
 import Login from './Login';

@@ -33,6 +33,7 @@ class Products extends Component {
 	render() {
 		return (
 			<section className="products">
+				<Searchbar onSubmit={this.makeApiCall}/>
 				<ul className="products__list">
 					{
 						this.state.products.map((item, i) => 
@@ -41,7 +42,6 @@ class Products extends Component {
 					}
 				</ul>
 				<Link to="/cart">My Cart</Link>
-				<Searchbar onSubmit={this.makeApiCall}/>
 			</section>
 		);
 	}

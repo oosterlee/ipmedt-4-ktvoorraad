@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import '../css/create-user.css';
 
+import { Link } from 'react-router-dom';
+
+import { getUserInfo } from '../utils';
+
 function CreateUser(){
   return(
     <div className="CreateUser">
@@ -15,3 +19,4 @@ function CreateUser(){
     </div>
   )
 }
+export default CreateUser;

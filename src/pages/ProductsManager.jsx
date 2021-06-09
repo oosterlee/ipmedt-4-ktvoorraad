@@ -4,6 +4,7 @@ import '../css/productsmanagement.css';
 import { Link } from 'react-router-dom';
 
 import BasicButton from '../components/BasicButton';
+import ProductsTableRow from '../components/ProductsTableRow';
 
 
 class Products extends Component {
@@ -12,21 +13,34 @@ class Products extends Component {
 		
 		this.state = {
 			products: [
-				{ image: "image", title: "Product1" },
-				{ image: undefined, title: "Product2" },
-				{ image: undefined, title: "Product3" },
-				{ image: undefined, title: "Product4" },
-				{ image: undefined, title: "Product5" },
-				{ image: undefined, title: "Product6" },
-				{ image: undefined, title: "Product7" },
+				{ image: "image", productname: "Product1" },
+				{ image: undefined, productname: "Product2" },
+				{ image: undefined, productname: "Product3" },
+				{ image: undefined, productname: "Product4" },
+				{ image: undefined, productname: "Product5" },
+				{ image: undefined, productname: "Product6" },
+				{ image: undefined, productname: "Product7" },
 			],
-			productsKeys: [
-				"image",
-				"title",
+			productKeys: [
+				{item: "image", name: "Plaatje", type: "image"},
+				{item: "productname", name: "Productnaam", type: "text"},
+				{item: "category", name: "Categorie", type: "dropdown", dropdownItems: ["1", "2", "3"]},
+				{item: "brand", name: "Merk", type: "text"},
+				{item: "model", name: "Model", type: "text"},
+				{item: "approval", name: "Goedkeuring", type: "dropdown", dropdownItems: ["Rege"]},
 			],
 			editProduct: false,
 		};
 	}
+
+// category
+// productname
+// brand
+// model
+// price
+// maximum
+// condition
+// approval
 
 	removeProduct(item) {
 		let products = this.state.products;
@@ -67,14 +81,15 @@ class Products extends Component {
 	}
 
 	render() {
+		console.log(this.state.products);
 		return (
 			<section className="productsmanagement">
 				<table className="productsmanagement__table">
 					<thead>
 						<tr>
 							{
-								this.state.productsKeys.map((item) => (
-									<th key={item}>{item}</th>
+								this.state.productKeys.map((item) => (
+									<th key={item.item}>{item.name}</th>
 								))
 							}
 						</tr>
@@ -83,26 +98,12 @@ class Products extends Component {
 					<tbody>
 						{
 							this.state.products.map((item, i) => (
-								<tr key={i}>
-									{
-										this.state.productsKeys.map((key, j) => (
-											<td className="productsmanagement__col" key={key+j}>
-												{
-													i === this.state.editProduct ?
-													<input
-														defaultValue={item[key] || "-"}
-														data-key={key}
-														onChange={e => this.onProductInfoChange.bind(this, item, e)()}
-														onKeyDown={e => {if (e.code == "Enter") this.editProduct.bind(this, item)();}} />
-													:
-													item[key] || "-"
-												}
-											</td>
-										))
-									}
-									<td className="productsmanagement__col productsmanagement__col--fit-content"><BasicButton title={i === this.state.editProduct ? "Done" : "Edit"} onClick={this.editProduct.bind(this, item)} /></td>
-									<td className="productsmanagement__col productsmanagement__col--fit-content"><BasicButton title="Remove" onClick={this.removeProduct.bind(this, item)} /></td>
-								</tr>
+								<ProductsTableRow
+									key={"ptr_" + i}
+									product={item}
+									onProductInfoChange={this.onProductInfoChange}
+									productKeys={this.state.productKeys}
+								/>
 							))
 						}
 					</tbody>
@@ -112,5 +113,33 @@ class Products extends Component {
 		);
 	}
 }
+
+
+
+// {
+// 							this.state.products.map((item, i) => (
+// 								<tr key={i}>
+// 									{
+// 										this.state.productsKeys.map((key, j) => (
+// 											<td className="productsmanagement__col" key={key+j}>
+// 												{
+// 													i === this.state.editProduct ?
+// 													<input
+// 														defaultValue={item[key] || "-"}
+// 														data-key={key}
+// 														onChange={e => this.onProductInfoChange.bind(this, item, e)()}
+// 														onKeyDown={e => {if (e.code == "Enter") this.editProduct.bind(this, item)();}} />
+// 													:
+// 													item[key] || "-"
+// 												}
+// 											</td>
+// 										))
+// 									}
+// 									<td className="productsmanagement__col productsmanagement__col--fit-content"><BasicButton title={i === this.state.editProduct ? "Done" : "Edit"} onClick={this.editProduct.bind(this, item)} /></td>
+// 									<td className="productsmanagement__col productsmanagement__col--fit-content"><BasicButton title="Remove" onClick={this.removeProduct.bind(this, item)} /></td>
+// 								</tr>
+// 							))
+// 						}
+
 
 export default Products;

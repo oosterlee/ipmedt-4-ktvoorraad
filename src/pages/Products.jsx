@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../css/products.css';
+import axios from "axios";
 
 import { Link } from 'react-router-dom';
 
@@ -12,17 +13,21 @@ class Products extends Component {
 		super(props);
 		
 		this.state = {
-			products: [
-				{ image: undefined, title: "Product1", verifyRequired: true },
-				{ image: undefined, title: "Product2", verifyRequired: true },
-				{ image: undefined, title: "Product3", verifyRequired: false, rule: "Maximaal 1 per jaar" },
-				{ image: undefined, title: "Product4", verifyRequired: true },
-				{ image: undefined, title: "Product5", verifyRequired: true },
-				{ image: undefined, title: "Product6", verifyRequired: false, rule: "Maximaal 10 per jaar" },
-				{ image: undefined, title: "Product7", verifyRequired: false, rule: "Maximaal 1 per jaar zonder goedkeuring" },
-			],
+			products: [],
 		};
 	}
+
+	componentDidMount(){
+		this.makeApiCall();
+	  }
+
+	makeApiCall = searchTerm => {
+		const BASE_URL = "http://localhost:8001/api/products";
+		axios.get(BASE_URL).then(json => this.setState({ products: json.data }));
+		
+	  };
+
+
 
 	render() {
 		return (
@@ -30,7 +35,7 @@ class Products extends Component {
 				<ul className="products__list">
 					{
 						this.state.products.map((item, i) => 
-							<ProductsItem {...item} key={item.title} />
+							<ProductsItem {...item} key={item.id} />
 						)
 					}
 				</ul>

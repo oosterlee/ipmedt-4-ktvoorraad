@@ -13,7 +13,7 @@ class Products extends Component {
 		
 		this.state = {
 			products: [
-				{ image: "image", productname: "Product1" },
+				{ image: "image", productname: "Product1", category: "Randapperatuur" },
 				{ image: undefined, productname: "Product2" },
 				{ image: undefined, productname: "Product3" },
 				{ image: undefined, productname: "Product4" },
@@ -21,26 +21,27 @@ class Products extends Component {
 				{ image: undefined, productname: "Product6" },
 				{ image: undefined, productname: "Product7" },
 			],
+			renderProducts: [],
 			productKeys: [
 				{item: "image", name: "Plaatje", type: "image"},
 				{item: "productname", name: "Productnaam", type: "text"},
-				{item: "category", name: "Categorie", type: "dropdown", dropdownItems: ["1", "2", "3"]},
+				{item: "category", name: "Categorie", type: "dropdown", dropdownItems: ["Electronica", "Randapperatuur", "Print"]},
 				{item: "brand", name: "Merk", type: "text"},
 				{item: "model", name: "Model", type: "text"},
-				{item: "approval", name: "Goedkeuring", type: "dropdown", dropdownItems: ["Rege"]},
+				{item: "approval", name: "Goedkeuring", type: "dropdown", dropdownItems: ["Ja", "Nee"]},
+				{item: "price", name: "Prijs", type: "number"},
+				{item: "maximumorder", name: "Maximaal aantal", type: "number"},
+				{item: "condition", name: "Regel", type: "textarea"},
+				{item: "description", name: "Omschrijving", type: "textarea"},
 			],
 			editProduct: false,
+			searchValue: "",
 		};
 	}
 
-// category
-// productname
-// brand
-// model
-// price
-// maximum
-// condition
-// approval
+	componentDidMount() {
+		this.fillProducts();
+	}
 
 	removeProduct(item) {
 		let products = this.state.products;
@@ -54,39 +55,48 @@ class Products extends Component {
 		this.setState({ products });
 	}
 
-	editProduct(item) {
-		let products = this.state.products;
-
-		const i = products.indexOf(item);
-
-		if (i === this.state.editProduct) {
-			console.log("Done editing");
-			return this.setState({ editProduct: false });
-		}
-
-		if (i < 0) return;
-
-		this.setState({ editProduct: i });
+	fillProducts() {
+		this.setState({ renderProducts: this.state.products });
 	}
 
-	onProductInfoChange(item, event) {
+	search(e) {
+		let searchValue = e.target.value;
+
+		let products = this.state.products;
+
+		let renderProducts = [];
+
+
+		products.forEach((item, i) => {
+			if (JSON.stringify(item).toLowerCase().includes(searchValue.toLowerCase())) renderProducts.push(item);
+		});
+		this.setState({ searchValue, renderProducts });
+	}
+
+	editProduct(item, editing) {
+		// TODO: Prevent editing of multiple rows at once
+	}
+
+	onProductInfoChange(item, itemName, value) {
 		let products = this.state.products;
 
 		const i = products.indexOf(item);
 		if (i < 0) return;
 
-		products[i][event.target.getAttribute('data-key')] = event.target.value;
+		products[i][itemName] = value;
 
 		this.setState({ products });
 	}
 
 	render() {
-		console.log(this.state.products);
 		return (
 			<section className="productsmanagement">
+				<input value={this.state.searchValue} onChange={this.search.bind(this)} />
 				<table className="productsmanagement__table">
 					<thead>
 						<tr>
+							<th></th>
+							<th></th>
 							{
 								this.state.productKeys.map((item) => (
 									<th key={item.item}>{item.name}</th>
@@ -97,17 +107,17 @@ class Products extends Component {
 
 					<tbody>
 						{
-							this.state.products.map((item, i) => (
+							this.state.renderProducts.map((item, i) => (
 								<ProductsTableRow
 									key={"ptr_" + i}
 									product={item}
-									onProductInfoChange={this.onProductInfoChange}
+									onProductInfoChange={this.onProductInfoChange.bind(this, item)}
+									removeProduct={this.removeProduct.bind(this, item)}
 									productKeys={this.state.productKeys}
 								/>
 							))
 						}
 					</tbody>
-					
 				</table>
 			</section>
 		);

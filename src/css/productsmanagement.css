@@ -1,6 +1,7 @@
 .productsmanagement {
 	max-width: 100rem;
 	margin: 0 auto;
+  overflow-x: auto;
 }
 
 .productsmanagement__table {

@@ -18,40 +18,61 @@ class ProductsTableRow extends Component {
 	}
 
 	componentDidMount() {
-		console.log("ProductsTableRow", this.props);
 		// this.context.onCartChange(() => {console.log("CART CHANGE", this.context.cart)});
 	}
 
-	typeToHTML(type, data) {
-		console.log("tth", type, data);
+	editProduct(item) {
+		// this.props.editProduct(!this.state.editProduct); // TODO: make it so you cannot edit multiple products at once
+		this.setState({ editProduct: !this.state.editProduct });
+	}
 
+	typeToHTML(item, data, itemName) {
 		if (this.state.editProduct) {
-			switch(type) {
+			switch(item.type) {
 				case "text":
-					return (<input defaultValue={data} />);
+					return (<input className="input--w100" defaultValue={data} onChange={e => this.props.onProductInfoChange(itemName, e.target.value)} size="1" />);
+				case "dropdown":
+					return (<select defaultValue={data} onChange={e => this.props.onProductInfoChange(itemName, e.target.value)}>
+						{
+							!item.dropdownItems.includes(data) ?
+							<option key={data} value="NULL">Selecteer</option>
+							:
+							<></>
+						}
+						{
+							item.dropdownItems.map((item, i) => (
+								<option key={"opt_" + i} value={item}>{item}</option>
+							))
+						}
+					</select>);
+					// {...(data == item ? {selected: "selected"} : "")}
+				case "image":
+					return (<input type="file" accept="image/*" onChange={e => this.props.onProductInfoChange(itemName, URL.createObjectURL(e.target.files[0]))} />);
+				case "number":
+					return (<input className="input--w100" defaultValue={data} type="number" min="0" max="999999.99" step="1" onChange={e => this.props.onProductInfoChange(itemName, e.target.value)} size="1" />);
+				case "textarea":
+					return(<textarea>{data}</textarea>)
 			}
 		}
 
-		switch(type) {
-			case "text":
-				return(<>{data || "-"}</>);
-			case "":
-				return(<></>);
+		switch(item.type) {
+			case "image":
+				return(<figure><img src={data} alt={data ? "Afbeelding van product" : "Geen plaatje"} height="100%" width="100%" /></figure>);
 		}
 
-		return (<>default</>);
+		return (<>{data || "-"}</>);
 	}
 
 	render() {
 		return (
 			<tr>
+				<td className="productsmanagement__col productsmanagement__col--fit-content"><BasicButton icon="trash" onClick={this.props.removeProduct} /></td>
+				<td className="productsmanagement__col productsmanagement__col--fit-content"><BasicButton icon={this.state.editProduct ? "check" : "pen"} onClick={this.editProduct.bind(this)} /></td>
 				{
 					this.props.productKeys.map((item, i) => (
-						<td key={"td_" + i}>{this.typeToHTML(item.type, this.props.product[item.item])}</td>
+						<td key={"td_" + i}>{this.typeToHTML(item, this.props.product[item.item], item.item)}</td>
 					))
 				}
-				<td className="productsmanagement__col productsmanagement__col--fit-content"><BasicButton title={this.state.editProduct ? "Done" : "Edit"} onClick={this.editProduct.bind(this, item)} /></td>
-//				<td className="productsmanagement__col productsmanagement__col--fit-content"><BasicButton title="Remove" onClick={this.removeProduct.bind(this, item)} /></td>
 			</tr>
 		);
 	}

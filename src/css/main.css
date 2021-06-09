@@ -17,3 +17,7 @@ body{
 	text-decoration: none;
 	color: inherit;
 }
+
+.input--w100 {
+	width: 100%;
+}

@@ -45,8 +45,8 @@ class ProductsItem extends Component {
 					/>
 				</figure></Link>
 				<div className="products__list__info-wrapper">
-					<h2 className="products__item__title products__item__text--m1" { ...(this.state.showInfo ? { "data-info": "show" } : {}) } title={ this.props.rule || "Geen bestelregel" }>
-						<Link to={"/product/" + this.props.id} className="link--no-style">{ this.props.title || "Product" }</Link>
+					<h2 className="products__item__title products__item__text--m1" { ...(this.state.showInfo ? { "data-info": "show" } : {}) } title={ this.props.condition || "Geen bestelregel" }>
+						<Link to={"/product/" + this.props.id} className="link--no-style">{ this.props.productname || "Product" }</Link>
 					</h2>
 					<FontAwesomeIcon icon="info-circle" className="products__item__info-icon" onMouseEnter={this.showInfo.bind(this)} onMouseLeave={this.hideInfo.bind(this)} />
 					<p className="products__item__description">{ this.props.description || "Dit is een test beschrijving om te testen of alles wel een beetje past op de pagina. Ja mooie beschrijving, ik weet het." }</p>

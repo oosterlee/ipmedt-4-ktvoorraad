@@ -1,5 +1,10 @@
 .component__basicbutton {
 	padding: 1.2rem 2rem;
+	background: #363b42;
+	color: #fff;
+	border: none;
+	font-family: sans-bold,Arial,sans-serif;
+    letter-spacing: .4px;
 }
 
 .component__basicbutton--icon {

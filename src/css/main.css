@@ -11,3 +11,9 @@ html{
 body{
     font-size: 1.8rem;
 }
+
+
+.link--no-style {
+	text-decoration: none;
+	color: inherit;
+}

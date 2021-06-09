@@ -5,8 +5,16 @@
 	border: none;
 	font-family: sans-bold,Arial,sans-serif;
     letter-spacing: .4px;
+	width: 100%;
 }
 
 .component__basicbutton--icon {
-	padding: 0.8rem 1.6rem;
+	display:flex;
+	bottom: 0;
+	
+}
+.component__basicbutton:hover {
+	background: #4c5157;
+	color: #fff;
+
 }

@@ -52,7 +52,7 @@
 
 .products__list__item {
 	/*margin: 2rem;*/
-	height: 10rem;
+	/*height: 10rem;*/
 	margin-top: 1rem;
 	margin-bottom: 2rem;
 	padding: 1.6rem 1.2rem;
@@ -80,7 +80,8 @@
 
 .products__item__button {
 	display: block;
-	
+	position: relative;
+	margin-top: 2rem;
 }
 
 .products__item__verify-required {
@@ -95,6 +96,14 @@
 	margin-bottom: 1rem;
 	font-family: sans-normal,Arial,sans-serif;
     letter-spacing: .2px;
+}
+
+.products__item__button.pib--verify::after {
+	content: "Goedkeuring vereist.";
+	top: -1.2rem;
+	font-size: 1rem;
+	position: absolute;
+	color: black;
 }
 
 

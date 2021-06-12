@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import '../css/login.css';
-
-import {
-	Redirect
-} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
+import apiClient from '../services/api';
 
 import { tryLogin, isLoggedIn } from '../utils';
 
@@ -12,8 +10,9 @@ class Login extends Component {
 		super(props);
 
 		this.state = {
-			username: "",
+			email: "",
 			password: "",
+			isChecked: false,
 			loading: false,
 			loggedIn: isLoggedIn(),
 		}
@@ -31,8 +30,23 @@ class Login extends Component {
 			this.setState({ loading: false, loggedIn: res.loggedIn });
 		});
 	}
+	
+	login_webtoken(event){
+		event.preventDefault(); //voorkomt dat de pagina refreshed
+
+		apiClient.get('/sanctum/csrf-cookie').then(response => { //haalt cookies op bij de api die nodig zijn om een request te versturen
+			apiClient.post("/api/login", //stuurt een post request naar de API
+				JSON.stringify({ //dit is wat de er naar de db gestuurd wordt| LETOP als je iets naar de db stuurt moet het een .JSON zijn
+					email: this.state.email, //De eerste email moet overeen komen met de naam in de db. De tweede email is van de states dus de daat werkelijke waarde
+					password: this.state.password}) //password het zelfde verhaal als email
+				).then(response =>{ //Op het moment is er een CSRF token mismatch error dit is een safety iets van laravel maar dit betekent wel dat de req bij de API binnekomt 
+					console.log(response);
+				});
+		});
+	}
 
 	render() {
+		const {username, password, isChecked} = this.state;
 		if (this.state.loggedIn) {
 			return (<Redirect to="/" />)
 		}
@@ -45,23 +59,16 @@ class Login extends Component {
 					</figure>
 					<h2 className="login__header__sub-title">Inloggen</h2>
 				</section>
-				<form className="login__form" onSubmit={this.login.bind(this)}>
+				<form className="login__form" onSubmit={event => this.login_webtoken(event)}>
 					<div className="login__form__group">
 						<label className="login__form__label">E-mailadres</label>
-						<input className="login__form__input" type="email" placeholder="E-mail" required value={this.state.username} onChange={(e) => this.setState({ username: e.target.value })}/>
+						<input className="login__form__input" name="name" type="email" placeholder="E-mail" required value={username} onChange={e => this.setState({ email: e.target.value })}/>
 					</div>
 					<div className="login__form__group">
 						<label className="login__form__label">Wachtwoord</label>
-						<input className="login__form__input" type="password" placeholder="Wachtwoord" required value={this.state.password} onChange={(e) => this.setState({ password: e.target.value })}/>
+						<input className="login__form__input" name="password" type="password" placeholder="Wachtwoord" required value={password} onChange={e => this.setState({ password: e.target.value })}/>
 					</div>
-
-					{
-						this.state.loading ?
-						<input className="login__form__submit" type="submit" value="Logging in..." onClick={this.login.bind(this)} disabled="disabled" />
-						:
-						<input className="login__form__submit" type="submit" value="Login" onClick={this.login.bind(this)} />
-
-					}
+					<input className="login__form__submit" type="submit" value="Login"/>
 				</form>
 
 				<section className="login__forgot">

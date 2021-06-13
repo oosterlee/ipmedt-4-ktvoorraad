@@ -10,8 +10,8 @@ class CreateUser extends Component{
 
   render (){
     return(
-      <main className="">
-        <div className="create-user">
+      <main className="create-user">
+        <div className="create-user--form">
           <h1>Registration</h1>
           <label>Username</label>
           <input type="text"

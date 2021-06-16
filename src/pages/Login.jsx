@@ -57,7 +57,7 @@ class Login extends Component {
 
 					{
 						this.state.loading ?
-						<input type="submit" value="Logging in..." onClick={this.login.bind(this)} disabled="disabled" />
+						<input type="submit" value="Logging in...." onClick={this.login.bind(this)} disabled="disabled" />
 						:
 						<input type="submit" value="Login" onClick={this.login.bind(this)} />
 

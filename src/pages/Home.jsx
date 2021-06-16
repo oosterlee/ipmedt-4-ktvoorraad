@@ -9,53 +9,62 @@ import {
 
 import PrivateRoute from '../components/PrivateRoute';
 
-import '../css/products.css'
+import '../css/main.css'
 
 import Products from './Products';
 import Login from './Login';
 import ShoppingCart from './ShoppingCart';
 import ProductsManager from './ProductsManager';
+import AddProducts from './AddProducts';
+import CreateUser from './CreateUser';
 
 class Home extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			loggedIn: false,
-		};
-	}
+  constructor(props) {
+    super(props);
+    this.state = {
+      loggedIn: false,
+    };
+  }
 
-	render() {
-		return (
-			<main>
-				<Router>
-					<Switch>
-						<PrivateRoute exact path="/products">
-							<Products />
-						</PrivateRoute>
+  render() {
+    return (
+      <main>
+        <Router>
+          <Switch>
+            <PrivateRoute exact path="/products">
+              <Products />
+            </PrivateRoute>
 
-						<Route exact path="/cart">
-							<ShoppingCart />
-						</Route>
+            <Route exact path="/cart">
+              <ShoppingCart />
+            </Route>
+            <Route exact path="/toevoegen">
+              <AddProducts />
+            </Route>
 
-						<Route exact path="/login">
-							<Login />
-						</Route>
+            <Route exact path="/createuser">
+              <CreateUser />
+            </Route>
 
-						<Route exact path="/">
-							{/* TODO: Redirect to dashboard?? */}
-							<Redirect to="/products" />
-						</Route>
+            <Route exact path="/login">
+              <Login />
+            </Route>
 
-						<PrivateRoute exact path="/management/products">
-							<ProductsManager />
-						</PrivateRoute>
+            <Route exact path="/">
+              {/* TODO: Redirect to dashboard?? */}
+              <Redirect to="/products" />
+            </Route>
 
-						<Link to="/management/products">Management</Link>
-					</Switch>
-				</Router>
-			</main>
-		);
-	}
+            <PrivateRoute exact path="/management/products">
+              <ProductsManager />
+            </PrivateRoute>
+
+            <Link to="/management/products">Management</Link>
+          </Switch>
+        </Router>
+      </main>
+    );
+  }
 }
 
 export default Home;

@@ -1,0 +1,41 @@
+.login__header{
+    background-color: rgba(255, 185, 0, 1);
+    height: 20rem;
+    width: 100%;
+    position: relative;
+    padding: 1rem;
+}
+
+.login__header::after{
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 99.79%;
+    height: 10rem;
+    width: 100%;
+    background-color: rgba(255, 185, 0, 1);
+    clip-path: polygon(100% 0, 0 0, 100% 100%);
+}
+
+.login__header__figure{
+    width: 100%;
+    margin: 0 auto;
+}
+
+.login__header__img{
+    width: 100%;
+}
+
+.login__header__sub-title{
+    font-weight: 400;
+    font-size: 250%;
+    text-align: center;
+    text-transform: uppercase;
+    font-style: italic;
+    bottom: 40rem;
+}
+
+.login__form{
+    padding-top: 15rem;
+}

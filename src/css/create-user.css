@@ -1,0 +1,8 @@
+.create-user{
+  padding-left: 22.5%;
+}
+.create-user--form{
+  display: grid;
+  width: 45%;
+  justify-content: center;
+}

@@ -16,6 +16,7 @@ import Login from './Login';
 import ShoppingCart from './ShoppingCart';
 import ProductsManager from './ProductsManager';
 import AddProducts from './AddProducts';
+import CreateUser from './CreateUser';
 
 class Home extends Component {
 	constructor(props) {
@@ -39,6 +40,10 @@ class Home extends Component {
 						</Route>
 						<Route exact path="/toevoegen">
 							<AddProducts />
+						</Route>
+
+            <Route exact path="/createuser">
+							<CreateUser />
 						</Route>
 
 						<Route exact path="/login">

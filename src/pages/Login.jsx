@@ -41,7 +41,7 @@ class Login extends Component {
 			<article className="login">
 				<section className="login__header">
 					<figure className="login__header__figure">
-						<img className="login__header__img" src="https://img.via-mobilis.com/1/jungheintich_logo_401.jpg" alt="Logo van Jungheinrich" /> {/* temp logo */}
+						<img className="login__header__img" src="https://werkenbijjungheinrich.nl/img/svgs/logo.svg" alt="Logo van Jungheinrich" /> {/* temp logo */}
 					</figure>
 					<h2 className="login__header__sub-title">Inloggen</h2>
 				</section>

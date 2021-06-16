@@ -14,7 +14,8 @@ class Login extends Component {
 			password: "",
 			isChecked: false,
 			loading: false,
-			loggedIn: isLoggedIn(),
+			loggedIn: false,
+			token: "",
 		}
 	}
 
@@ -33,23 +34,24 @@ class Login extends Component {
 	
 	login_webtoken(event){
 		event.preventDefault(); //voorkomt dat de pagina refreshed
-
-		apiClient.get('/sanctum/csrf-cookie').then(response => { //haalt cookies op bij de api die nodig zijn om een request te versturen
-			apiClient.post("/api/login", //stuurt een post request naar de API
-				JSON.stringify({ //dit is wat de er naar de db gestuurd wordt| LETOP als je iets naar de db stuurt moet het een .JSON zijn
+			apiClient.post("/api/login", 
+			{//stuurt een post request naar de API
 					email: this.state.email, //De eerste email moet overeen komen met de naam in de db. De tweede email is van de states dus de daat werkelijke waarde
-					password: this.state.password}) //password het zelfde verhaal als email
+					password: this.state.password} //password het zelfde verhaal als email
 				).then(response =>{ //Op het moment is er een CSRF token mismatch error dit is een safety iets van laravel maar dit betekent wel dat de req bij de API binnekomt 
-					console.log(response);
-				});
+					this.setState({loggedIn: true, token: response.data});
+				
 		});
 	}
 
 	render() {
 		const {username, password, isChecked} = this.state;
-		if (this.state.loggedIn) {
-			return (<Redirect to="/" />)
+		if (this.state.loggedIn === true) {
+			window.localStorage.setItem('token', this.state.token.token);
+			apiClient.defaults.headers.Authorization = "Bearer " + this.state.token.token;
+			return (<Redirect to="/products" />)
 		}
+
 
 		return (
 			<article className="login">

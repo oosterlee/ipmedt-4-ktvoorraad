@@ -11,7 +11,6 @@ class ProductsItem extends Component {
 	}
 
 	componentDidMount() {
-		console.log(this.context);
 		this.context.onCartChange(() => {console.log("CART CHANGE", this.context.cart)});
 	}
 

@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import ProductsItem from '../components/ProductsItem';
 
 import { getUserInfo } from '../utils';
+import apiClient from '../services/api';
+
 
 class Products extends Component {
 	constructor(props) {
@@ -25,6 +27,9 @@ class Products extends Component {
 	}
 
 	render() {
+		apiClient.get('/api/user').then(response => {
+			console.log(response);
+		});
 		return (
 			<section className="products">
 				<ul className="products__list">

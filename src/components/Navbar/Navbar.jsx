@@ -20,15 +20,17 @@ const Navbar = () => {
   };
 
   return (
-    <nav>
-      <div className="logo">
-        Jung<font>heinrich</font>
-      </div>
-      <div className="menu-icon" onClick={handleClick}>
-        <i className={clicked ? "fas fa-times" : "fas fa-bars"}></i>
-      </div>
-      <ul className={clicked ? "menu-list" : "menu-list close"}>{menuList}</ul>
-    </nav>
+      <header classname="navbar">
+          <nav>
+            <div className="navbar__logo">
+              Jung<font>heinrich</font>
+            </div>
+            <div className="navbar__menu-icon" onClick={handleClick}>
+              <i className={clicked ? "fas fa-times" : "fas fa-bars"}></i>
+            </div>
+            <ul className={clicked ? "navbar__menu-list" : "navbar__menu-list close"}>{menuList}</ul>
+          </nav>
+      </header>
   );
 };
 

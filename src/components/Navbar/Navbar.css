@@ -21,38 +21,38 @@ nav {
   cursor: pointer;
 }
 
-.menu-icon {
+.navbar__menu-icon {
   display: none;
   font-size: 2rem;
 }
-.menu-icon .fa-times {
+.navbar__menu-icon .fa-times {
   transform: rotate(360deg);
   transition: all 0.2s ease-in-out;
 }
 
-.menu-icon .fa-bars {
+.navbar__menu-icon.fa-bars {
   transform: rotate(180deg);
   transition: all 0.2s ease-in-out;
 }
 
-.logo {
+.navbar__logo {
   font-weight: 800;
   font-size: 2.5rem;
   color: #FFB900;
 }
 
-.logo font {
+.navbar__logo font {
   color: #fff;
 }
 
-.menu-list {
+.navbar__menu-list {
   list-style-type: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.menu-list li:last-child a {
+.navbar__menu-list li:last-child a {
   font-weight: 300;
   padding: .5rem 1rem;
   background-color: #FFB900;
@@ -61,7 +61,7 @@ nav {
   border-radius: .2rem;
 }
 
-.menu-list li a {
+.navbar__menu-list li a {
   text-decoration: none;
   color: #fff;
   font-weight: 300;
@@ -69,8 +69,8 @@ nav {
   margin-left: 2rem;
 }
 
-.menu-list li a:hover,
-.menu-list li a.active {
+.navbar__menu-list li a:hover,
+.navbar__menu-list li a.active {
   background-color: #fff;
   border-radius: .2rem;
   color: #000;
@@ -78,20 +78,20 @@ nav {
 }
 
 @media screen and (max-width: 80rem) {
-  .logo {
+  .navbar__logo {
     font-size: 2rem;
   }
-  .menu-list li a {
+  .navbar__menu-list li a {
     font-size: 1.4rem;
     margin-left: 1rem;
   }
 }
 
 @media screen and (max-width: 60rem) {
-  .menu-icon {
+  .navbar__menu-icon {
     display: block;
   }
-  .menu-list {
+  .navbar__menu-list {
     flex-direction: column;
     width: 100%;
     position: absolute;
@@ -102,71 +102,25 @@ nav {
     transition: all 0.5s ease-in-out;
   }
 
-  .menu-list li {
+  .navbar__menu-list li {
     margin-bottom: 2rem;
     width: 100%;
     text-align: center;
   }
-  .menu-list li:last-child {
+  .navbar__menu-list li:last-child {
     margin-bottom: 0rem;
   }
 
-  .menu-list li a,
-  .menu-list li:last-child a {
-    width: 10rem;
+  .navbar__menu-list li a,
+  .navbar__menu-list li:last-child a {
+    width: 12rem;
     display: block;
     margin: auto;
+    font-size: 1.8rem;
   }
 
-  .menu-list.close {
+  .navbar__menu-list.close {
     right: -100%;
     transition: all 0.5s ease-in-out;
-  }
-}
-
-
-/* App css */
-.container {
-  background-position: center;
-  background-size: cover;
-  width: 100%;
-  height: 100vh;
-  position: relative;
-  overflow: hidden;
-}
-
-.container::after {
-  content: "";
-  background: rgba(0, 0, 0, 0.6);
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 0;
-}
-.page-heading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 80vh;
-  position: relative;
-  z-index: 2;
-}
-
-.page-heading h1 {
-  font-size: 5rem;
-  color: #fff;
-  font-weight: 300;
-  background: rgba(0, 0, 0, 0.5);
-  padding: 0rem 2rem;
-  border-radius: .2rem;
-}
-
-@media screen and (max-width: 60rem) {
-  .page-heading h1 {
-    font-size: 3rem;
   }
 }

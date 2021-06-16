@@ -3,8 +3,6 @@ import '../css/login.css';
 import {Redirect} from 'react-router-dom';
 import apiClient from '../services/api';
 
-import { tryLogin, isLoggedIn } from '../utils';
-
 class Login extends Component {
 	constructor(props) {
 		super(props);
@@ -12,24 +10,9 @@ class Login extends Component {
 		this.state = {
 			email: "",
 			password: "",
-			isChecked: false,
-			loading: false,
 			loggedIn: false,
 			token: "",
 		}
-	}
-
-	login(e) {
-		e.preventDefault();
-		const form = e.target.closest("form");
-		if (!form) return;
-
-		this.setState({ loading: true });
-
-		tryLogin(this.state.username, this.state.password).then((res) => {
-			console.log(res);
-			this.setState({ loading: false, loggedIn: res.loggedIn });
-		});
 	}
 	
 	login_webtoken(event){

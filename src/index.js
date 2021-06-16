@@ -14,12 +14,10 @@ const dataContextData = {
 	__cartCallbacks: [],
 	cart: [],
 	addProductToCart: (product) => {
-		console.log("addd", product);
 		dataContextData.cart.push(product);
 		dataContextData.__callCartCallbacks();
 	},
 	removeProductFromCart: (id) => {
-		console.log("remv", id);
 		let index = -1;
 		for (let i = 0; i < dataContextData.cart.length; i++){
 			if (dataContextData.cart[i].id ==id){

@@ -17,14 +17,17 @@ class ShoppingCart extends Component {
 		this.setState({ cart: this.context.cart });
 		this.context.onCartChange(() => {
 			this.setState({ cart: this.context.cart });
+			console.log(this.context.cart);
 		});
 	}
+	
 
 	render() {
 		if (this.state.cart.length <= 0) {
 			return (
 				<section class="shoppingcart">
 					<p class="shoppingcart_noitems">Je hebt niks in de winkelwagen zitten.</p>
+				
 				</section>
 			);
 		}
@@ -33,10 +36,12 @@ class ShoppingCart extends Component {
 				<ul className="products__list">
 					{
 						this.state.cart.map((item, i) => 
-							<ProductsItem {...item} key={item.title + i} />
+							<ProductsItem {...item} key={item.title + i} cart={true} />
+
 						)
 					}
 				</ul>
+				<a class="create-form__btn"><button class="products__order__button" type="submit">Bestellen</button></a>
 			</section>
 		);
 	}

@@ -1,0 +1,19 @@
+.products__order__button{
+    padding: 0.8rem 1.6rem;
+    margin: 1rem 0 3rem 0;
+    background-color: #363B42;
+    border: 0.1rem solid rgb(238, 238, 238);
+    transition: all 0.4s ease 0s;
+    color:#fff;
+    height: 4rem;
+}
+
+.create-form__btn {
+    width: 100%;
+    max-width: 23rem;
+    margin: 2rem;
+}
+.products__order__button:hover {
+    background: #FBA900;
+    color:black;
+}

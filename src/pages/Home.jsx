@@ -16,6 +16,7 @@ import Login from './Login';
 import ShoppingCart from './ShoppingCart';
 import ProductsManager from './ProductsManager';
 import CreateUser from './CreateUser';
+import Navbar from "../components/Navbar/Navbar";
 
 class Home extends Component {
 	constructor(props) {
@@ -29,6 +30,7 @@ class Home extends Component {
 		return (
 			<main>
 				<Router>
+				<Navbar />
 					<Switch>
 						<PrivateRoute exact path="/products">
 							<Products />
@@ -38,7 +40,7 @@ class Home extends Component {
 							<ShoppingCart />
 						</Route>
 
-            <Route exact path="/createuser">
+            			<Route exact path="/createuser">
 							<CreateUser />
 						</Route>
 

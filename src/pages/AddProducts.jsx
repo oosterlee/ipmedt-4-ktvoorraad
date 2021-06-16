@@ -16,6 +16,8 @@ class AddProducts extends Component {
                 <label for="name">Titel</label>
                 <input class="create-form__input" name="name" id="name" type="text"/>
                 <label for="kind">Categorie</label>
+                <input class="create-form__input" name="kind" id="kind" type="text"/>
+
                     
 
                 <label for="description">Beschrijving</label>

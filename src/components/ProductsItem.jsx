@@ -49,12 +49,12 @@ class ProductsItem extends Component {
 						<Link to={"/product/" + this.props.id} className="link--no-style">{ this.props.title || "Product" }</Link>
 					</h2>
 					<FontAwesomeIcon icon="info-circle" className="products__item__info-icon" onMouseEnter={this.showInfo.bind(this)} onMouseLeave={this.hideInfo.bind(this)} />
-					<p className="products__item__description">{ this.props.description || "Dit is een test beschrijving om te testen of alles wel een beetje past op de pagina. Ja mooie beschrijving, ik weet het.".substr(0, 50) + "..." }</p>
-					{/*<button className="products__item__button">In winkelwagen</button>*/}
-					
+					<p className="products__item__description">{ this.props.description || "Dit is een test beschrijving om te testen of alles wel een beetje past op de pagina. Ja mooie beschrijving, ik weet het.".substr(0, 50) + "..." }</p>			
+					</div>
+					<button className="products__item__button__info" >Meer informatie</button>
 					<BasicButton icon="cart-plus" className={"products__item__button" + (this.props.verifyRequired ? " pib--verify" : "")} onClick={this.addToCart.bind(this)} />
-					{/*<p className="products__item__price products__item__text--m2">€{ this.props.price || "--" }</p>*/}
-				</div>
+				
+				
 			</li>
 		);
 	}

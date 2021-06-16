@@ -15,6 +15,7 @@ import Products from './Products';
 import Login from './Login';
 import ShoppingCart from './ShoppingCart';
 import ProductsManager from './ProductsManager';
+import AddProducts from './AddProducts';
 
 class Home extends Component {
 	constructor(props) {
@@ -35,6 +36,9 @@ class Home extends Component {
 
 						<Route exact path="/cart">
 							<ShoppingCart />
+						</Route>
+						<Route exact path="/toevoegen">
+							<AddProducts />
 						</Route>
 
 						<Route exact path="/login">

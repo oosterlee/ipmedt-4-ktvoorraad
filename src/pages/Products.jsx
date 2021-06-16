@@ -15,6 +15,8 @@ class Products extends Component {
     
     this.state = {
       products: [],
+	  searchValue: "",
+	  renderProducts: [],
     };
   }
 
@@ -24,19 +26,30 @@ class Products extends Component {
 
   makeApiCall = searchTerm => {
     const BASE_URL = "http://localhost:8001/api/products";
-    axios.get(BASE_URL).then(json => this.setState({ products: json.data }));
+    axios.get(BASE_URL).then(json => this.setState({ products: json.data, renderProducts: json.data }));
     
     };
+
+	search(e){
+		let searchValue = e.target.value;
+		let products = this.state.products;
+		let renderProducts = []
+		products.forEach((item, i) => {
+            if (JSON.stringify(item).toLowerCase().includes(searchValue.toLowerCase())) renderProducts.push(item);
+        });
+		console.log(e);
+		this.setState({searchValue, renderProducts});
+	}
 
 
 
   render() {
     return (
       <section className="products">
-        <Searchbar onSubmit={this.makeApiCall}/>
+        <Searchbar value={this.state.searchValue} onChange={this.search.bind(this)}/>
         <ul className="products__list">
           {
-            this.state.products.map((item, i) => 
+            this.state.renderProducts.map((item, i) => 
               <ProductsItem {...item} key={item.id} />
             )
           }

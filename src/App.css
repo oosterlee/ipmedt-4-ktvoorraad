@@ -1,3 +1,18 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Colours */
+:root{
+  --main-text-color: #3d464b;
+  --main-bg-color: #ffffff;
+  --main-logo-color:#e32306;
+  --main-product-color: #e7f4f4;
+  --main-accent-color: #f9b800;
+  }
+
 .App {
   text-align: center;
 }

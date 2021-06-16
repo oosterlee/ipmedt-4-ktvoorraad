@@ -15,6 +15,7 @@ import Products from './Products';
 import Login from './Login';
 import ShoppingCart from './ShoppingCart';
 import ProductsManager from './ProductsManager';
+import AddProducts from './AddProducts';
 import CreateUser from './CreateUser';
 
 class Home extends Component {
@@ -36,6 +37,9 @@ class Home extends Component {
 
 						<Route exact path="/cart">
 							<ShoppingCart />
+						</Route>
+						<Route exact path="/toevoegen">
+							<AddProducts />
 						</Route>
 
             <Route exact path="/createuser">

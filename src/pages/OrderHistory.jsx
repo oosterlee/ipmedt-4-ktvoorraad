@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import '../css/shoppingcart.css';
+import '../css/orderrequests.css';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link, useParams } from 'react-router-dom';
 
 // import ProductsItem from '../components/ProductsItem';
 // import DataContext from '../DataContext';
@@ -11,112 +12,79 @@ class OrderHistory extends Component {
 		super(props);
 		
 		this.state = {
-			products: [
-				{ image: "image", title: "Product1" },
-				{ image: undefined, title: "Product2" },
-				{ image: undefined, title: "Product3" },
-				{ image: undefined, title: "Product4" },
-				{ image: undefined, title: "Product5" },
-				{ image: undefined, title: "Product6" },
-				{ image: undefined, title: "Product7" },
-			],
-			productsKeys: [
-				"id",
-				"productname",
-				"category",
-				"description",
-				"sub",
-				"brand",
-				"model",
-				"price",
-				"approval",
-				"maxorders",
-				"condition",
-				"image",
-			],
-			editProduct: false,
+			products: [],
+			renderProducts: [],
+			loading: true,
+			sortBy: "time",
 		};
+
+		axios.get("http://localhost:8000/api/orderhistory/" + (this.props.match.params.id || 1)).then(json => this.setState({ products: json.data, renderProducts: json.data.sort(this.sortProducts.bind(this)), loading: false }));
 	}
 
-	removeProduct(item) {
-		let products = this.state.products;
-
-		const i = products.indexOf(item);
-
-		if (i < 0) return;
-
-		products.splice(i, 1);
-
-		this.setState({ products });
-	}
-
-	editProduct(item) {
-		let products = this.state.products;
-
-		const i = products.indexOf(item);
-
-		if (i === this.state.editProduct) {
-			console.log("Done editing");
-			return this.setState({ editProduct: false });
+	sortProducts(el1, el2) {
+		if (this.state.sortBy == "time") {
+			let el1Time = new Date(el1.created_at).getTime();
+			let el2Time = new Date(el2.created_at).getTime()
+			return (el1Time < el2Time) ? 1 : ((el1Time > el2Time) ? -1 : 0);
 		}
-
-		if (i < 0) return;
-
-		this.setState({ editProduct: i });
-	}
-
-	onProductInfoChange(item, event) {
-		let products = this.state.products;
-
-		const i = products.indexOf(item);
-		if (i < 0) return;
-
-		products[i][event.target.getAttribute('data-key')] = event.target.value;
-
-		this.setState({ products });
 	}
 
 	render() {
+		console.log(this.state);
+		if (this.state.loading) {
+			return(<section><p>Loading... Please wait</p></section>);
+		}
+
 		return (
-			<section className="productsmanagement">
-				<table className="productsmanagement__table">
+			<section>
+				<table className="orderrequests">
 					<thead>
 						<tr>
-							{
-								this.state.productsKeys.map((item) => (
-									<th key={item}>{item}</th>
-								))
-							}
+							<th colSpan="2">Product informatie</th>
+							<th colSpan="2">Verzendinformatie</th>
+
+							<th colSpan="1">Status</th>
 						</tr>
 					</thead>
-
 					<tbody>
 						{
-							this.state.products.map((item, i) => (
-								<tr key={i}>
-									{
-										this.state.productsKeys.map((key, j) => (
-											<td className="productsmanagement__col" key={key+j}>
-												{
-													i === this.state.editProduct ?
-													<input
-														defaultValue={item[key] || "-"}
-														data-key={key}
-														onChange={e => this.onProductInfoChange.bind(this, item, e)()}
-														onKeyDown={e => {if (e.code == "Enter") this.editProduct.bind(this, item)();}} />
-													:
-													item[key] || "-"
-												}
-											</td>
-										))
-									}
-									<td className="productsmanagement__col productsmanagement__col--fit-content"><BasicButton title={i === this.state.editProduct ? "Done" : "Edit"} onClick={this.editProduct.bind(this, item)} /></td>
-									<td className="productsmanagement__col productsmanagement__col--fit-content"><BasicButton title="Remove" onClick={this.removeProduct.bind(this, item)} /></td>
+							this.state.renderProducts.map((item, i) => (
+								<tr key={"tr_" + i}>
+									<td class="key" colspan="1" data-label="Product informatie">
+										<p>Naam</p>
+										<p>Merk</p>
+										<p>Model</p>
+										<p>Besteld op</p>
+									</td>
+									<td class="value" colspan="1">
+										<p>{item.product.productname}</p>
+										<p>{item.product.brand}</p>
+										<p>{item.product.model}</p>
+										<p>{(new Date(item.created_at)).toLocaleDateString()}</p>
+									</td>
+
+									<td class="key" colspan="1" data-label="Persoon details">
+										<p>Naam</p>
+										<p>Email</p>
+										<p>Adres</p>
+										<p>Postcode</p>
+										<p>Huisnummer</p>
+									</td>
+									<td class="value" colspan="1">
+										<p><Link className="link" to={"/orderhistory/" + item.user_id}>{item.user.name}</Link></p>
+										<p>{item.user.email}</p>
+										<p>{item.user.address}</p>
+										<p>{item.user.postalcode}</p>
+										<p>{item.user.housenumber}</p>
+									</td>
+
+									<td colspan="1" data-label="Acties" className={item.approved == 0 ? "or-wait" : (item.approved == 1) ? "or-approved" : "or-rejected"}>
+										<p>{item.approved == 0 ? "In afwachting" : (item.approved == 1) ? "Goedgekeurd" : "Afgekeurd"}</p>
+									</td>
 								</tr>
 							))
 						}
 					</tbody>
-					
 				</table>
 			</section>
 		);

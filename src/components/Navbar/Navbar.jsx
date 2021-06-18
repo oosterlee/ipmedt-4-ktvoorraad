@@ -23,7 +23,7 @@ const Navbar = () => {
       <header classname="navbar">
           <nav>
             <div className="navbar__logo">
-              Jung<font>heinrich</font>
+              <a href="/" className="navbar__redirect">Jung<font>heinrich</font></a>
             </div>
             <div className="navbar__menu-icon" onClick={handleClick}>
               <i className={clicked ? "fas fa-times" : "fas fa-bars"}></i>

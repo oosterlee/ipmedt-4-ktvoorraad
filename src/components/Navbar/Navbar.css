@@ -35,6 +35,18 @@ nav {
   transition: all 0.2s ease-in-out;
 }
 
+a, a:hover, a:focus, a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+.navbar__redirect{
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 2.4rem;
+  
+}
+
 .navbar__logo {
   font-weight: 800;
   font-size: 2.5rem;

@@ -43,8 +43,6 @@ class Products extends Component {
 		this.setState({searchValue, renderProducts});
 	}
 
-
-
   render() {
     return (
       <section className="products">

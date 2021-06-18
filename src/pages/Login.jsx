@@ -21,9 +21,8 @@ class Login extends Component {
 			{//stuurt een post request naar de API
 					email: this.state.email, //De eerste email moet overeen komen met de naam in de db. De tweede email is van de states dus de daat werkelijke waarde
 					password: this.state.password} //password het zelfde verhaal als email
-				).then(response =>{ //Op het moment is er een CSRF token mismatch error dit is een safety iets van laravel maar dit betekent wel dat de req bij de API binnekomt 
+				).then(response =>{ 
 					this.setState({loggedIn: true, token: response.data});
-				
 		});
 	}
 
@@ -32,7 +31,7 @@ class Login extends Component {
 		if (this.state.loggedIn === true) {
 			window.localStorage.setItem('token', this.state.token.token);
 			apiClient.defaults.headers.Authorization = "Bearer " + this.state.token.token;
-			return (<Redirect to="/products" />)
+			return (<Redirect to="/profile" />)
 		}
 
 

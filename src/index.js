@@ -14,13 +14,7 @@ const dataContextData = {
 	__cartCallbacks: [],
 	cart: [],
 	addProductToCart: (product) => {
-		let index = -1;
-		for (let i = 0; i < dataContextData.cart.length; i++){
-			if (dataContextData.cart[i].id == product.id){
-				index = i;
-				break;
-			}
-		}
+		let index = dataContextData.findProductById(product.id);
 
 		if (index < 0) {
 			index = dataContextData.cart.push({...product});
@@ -32,7 +26,7 @@ const dataContextData = {
 
 		dataContextData.__callCartCallbacks();
 	},
-	removeProductFromCart: (id) => {
+	findProductById: (id) => {
 		let index = -1;
 		for (let i = 0; i < dataContextData.cart.length; i++){
 			if (dataContextData.cart[i].id ==id){
@@ -40,6 +34,10 @@ const dataContextData = {
 				break;
 			}
 		}
+		return index;
+	},
+	removeProductFromCart: (id) => {
+		let index = dataContextData.findProductById(id);
 		console.log("index", index);
 		if (index < 0) return;
 		dataContextData.cart.splice(index, 1);

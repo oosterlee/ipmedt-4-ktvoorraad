@@ -29,7 +29,6 @@ class Home extends Component {
 
 	render() {
 		return (
-			<main>
 				<Router>
 				<Navbar />
 					<Switch>
@@ -64,7 +63,6 @@ class Home extends Component {
             <Link to="/management/products">Management</Link>
           </Switch>
         </Router>
-      </main>
     );
   }
 }

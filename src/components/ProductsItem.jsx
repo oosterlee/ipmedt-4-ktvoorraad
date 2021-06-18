@@ -64,7 +64,7 @@ class ProductsItem extends Component {
 						<span class="products__item__input__minus">–</span><input class="products__item__input__number" type="text" value="1" min="0" max="10"/><span class="products__item__input__plus">+</span>
 						</section>
 						:
-						<></>
+						""
 					}
 					<button className="products__item__button__info" >Meer informatie</button>
 					

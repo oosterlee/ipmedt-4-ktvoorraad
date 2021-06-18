@@ -40,7 +40,7 @@ li.products__list__item {
 }
 
 .products__list {
-	margin: 2rem;
+	margin: 2rem 0;
 	list-style-type: none;
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
@@ -101,12 +101,28 @@ li.products__list__item {
 
 }
 
-
-
-
 .products__item__text--m1 {
 	margin-bottom: 1rem;
 	color: #ffb900;
+}
+
+.searchbar {
+    position: relative;   
+}
+
+.searchbar__input {
+	padding: 1.5rem 1.5rem;
+    border: 0.1rem solid #ffb900;
+    width: 100%;
+    color: #363b42;
+    font-weight: 600;
+}
+
+.searchbar__icon {
+    position: absolute;
+    right: 0;
+	padding: 1.3rem;
+	color: #363b42;
 }
 
 @media only screen and (min-width: 10rem){

@@ -1,68 +1,65 @@
 import React, { Component } from 'react';
 import '../css/login.css';
-
-import {
-	Redirect
-} from 'react-router-dom';
-
-import { tryLogin, isLoggedIn } from '../utils';
+import {Redirect} from 'react-router-dom';
+import apiClient from '../services/api';
 
 class Login extends Component {
-	constructor(props) {
-		super(props);
+  constructor(props) {
+    super(props);
 
 		this.state = {
-			username: "",
+			email: "",
 			password: "",
-			loading: false,
-			loggedIn: isLoggedIn(),
+			loggedIn: false,
+			token: "",
 		}
 	}
-
-	login(e) {
-		e.preventDefault();
-		const form = e.target.closest("form");
-		if (!form) return;
-
-		this.setState({ loading: true });
-
-		tryLogin(this.state.username, this.state.password).then((res) => {
-			console.log(res);
-			this.setState({ loading: false, loggedIn: res.loggedIn });
+	
+	login_webtoken(event){
+		event.preventDefault(); //voorkomt dat de pagina refreshed
+			apiClient.post("/api/login", 
+			{//stuurt een post request naar de API
+					email: this.state.email, //De eerste email moet overeen komen met de naam in de db. De tweede email is van de states dus de daat werkelijke waarde
+					password: this.state.password} //password het zelfde verhaal als email
+				).then(response =>{ //Op het moment is er een CSRF token mismatch error dit is een safety iets van laravel maar dit betekent wel dat de req bij de API binnekomt 
+					this.setState({loggedIn: true, token: response.data});
+				
 		});
 	}
 
 	render() {
-		if (this.state.loggedIn) {
-			return (<Redirect to="/" />)
+		const {username, password, isChecked} = this.state;
+		if (this.state.loggedIn === true) {
+			window.localStorage.setItem('token', this.state.token.token);
+			apiClient.defaults.headers.Authorization = "Bearer " + this.state.token.token;
+			return (<Redirect to="/products" />)
 		}
+
 
 		return (
 			<article className="login">
 				<section className="login__header">
 					<figure className="login__header__figure">
-						<img className="login__header__img" src="https://werkenbijjungheinrich.nl/img/svgs/logo.svg" alt="Logo van Jungheinrich" /> {/* temp logo */}
+						<img className="login__header__img" src="https://img.via-mobilis.com/1/jungheintich_logo_401.jpg" alt="Logo van Jungheinrich" /> {/* temp logo */}
 					</figure>
 					<h2 className="login__header__sub-title">Inloggen</h2>
 				</section>
-				<form className="login__form" onSubmit={this.login.bind(this)}>
+				<form className="login__form" onSubmit={event => this.login_webtoken(event)}>
 					<div className="login__form__group">
-						<label>E-mail</label>
-						<input type="email" placeholder="E-mail" required value={this.state.username} onChange={(e) => this.setState({ username: e.target.value })}/>
+						<label className="login__form__label">E-mailadres</label>
+						<input className="login__form__input" name="name" type="email" placeholder="E-mail" required value={username} onChange={e => this.setState({ email: e.target.value })}/>
 					</div>
 					<div className="login__form__group">
-						<label>Wachtwoord</label>
-						<input type="password" placeholder="Wachtwoord" required value={this.state.password} onChange={(e) => this.setState({ password: e.target.value })}/>
+						<label className="login__form__label">Wachtwoord</label>
+						<input className="login__form__input" name="password" type="password" placeholder="Wachtwoord" required value={password} onChange={e => this.setState({ password: e.target.value })}/>
 					</div>
-
-					{
-						this.state.loading ?
-						<input type="submit" value="Logging in..." onClick={this.login.bind(this)} disabled="disabled" />
-						:
-						<input type="submit" value="Login" onClick={this.login.bind(this)} />
-
-					}
+					<input className="login__form__submit" type="submit" value="Login"/>
 				</form>
+
+				<section className="login__forgot">
+					<p className="login__forgot__p"><a className="login__forgot__a" href="https://www.google.com/">Wachtwoord</a> vergeten?</p>
+					<p className="login__forgot__p"><a className="login__forgot__a" href="https://www.google.com/theapot">E-mailadres</a> vergeten?</p>
+				</section>
 			</article>
 		);
 	}

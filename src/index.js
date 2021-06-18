@@ -14,11 +14,36 @@ const dataContextData = {
 	__cartCallbacks: [],
 	cart: [],
 	addProductToCart: (product) => {
-		dataContextData.cart.push(product);
+		let index = -1;
+		for (let i = 0; i < dataContextData.cart.length; i++){
+			if (dataContextData.cart[i].id == product.id){
+				index = i;
+				break;
+			}
+		}
+
+		if (index < 0) {
+			index = dataContextData.cart.push({...product});
+			index--;	
+			dataContextData.cart[index]["amount"] = 0;
+		}
+
+		dataContextData.cart[index].amount += 1;
+
 		dataContextData.__callCartCallbacks();
 	},
-	removeProductFromCart: (product) => {
-		// TODO
+	removeProductFromCart: (id) => {
+		let index = -1;
+		for (let i = 0; i < dataContextData.cart.length; i++){
+			if (dataContextData.cart[i].id ==id){
+				index = i;
+				break;
+			}
+		}
+		console.log("index", index);
+		if (index < 0) return;
+		dataContextData.cart.splice(index, 1);
+		dataContextData.__callCartCallbacks();
 	},
 	onCartChange: (func) => {
 		if (typeof func == "function") dataContextData.__cartCallbacks.push(func);

@@ -17,7 +17,7 @@ class AddProducts extends Component {
             price: '',
             maxorders: '',
             condition: '',
-            approval: '',
+            approval: '1',
         }
 
         

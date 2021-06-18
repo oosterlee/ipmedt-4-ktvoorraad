@@ -16,6 +16,8 @@ class ProductsItem extends Component {
 			showInfo: false,
 			redirectTo: false,
 			lastAmount: this.props.amount,
+			putInCart: false,
+			putInCartTimer: setTimeout(()=>{}, 0),
 		};
 	}
 
@@ -24,6 +26,9 @@ class ProductsItem extends Component {
 	}
 
 	addToCart() {
+		clearTimeout(this.state.putInCartTimer);
+		this.setState({ putInCart: true, putInCartTimer: setTimeout(() => this.setState({ putInCart: false }), 1000) });
+
 		this.context.addProductToCart(this.props);
 	}
 
@@ -44,11 +49,10 @@ class ProductsItem extends Component {
 		if (e.target.value <= 1) {
 			this.context.cart[index].amount = 1;
 		} else {
-			this.context.cart[index].amount = e.target.value;
+			this.context.cart[index].amount = Number(e.target.value);
 		}
 		if (this.state.lastAmount == 1 && e.target.value >= 1) {
-			console.log(e.target.value);
-			this.context.cart[index].amount = e.target.value.substr(1, 1);
+			this.context.cart[index].amount = Number(e.target.value.substr(1, 1));
 		}
 		this.setState({ lastAmount: this.context.cart[index].amount });
 		this.context.__callCartCallbacks();
@@ -108,7 +112,7 @@ class ProductsItem extends Component {
 						this.props.cart ?
 						<BasicButton icon="trash" className={"products__item__button" + (this.props.verifyRequired ? " pib--verify" : "")} onClick={this.removeFromCart.bind(this)} />
 						: 
-						<BasicButton icon="cart-plus" className={"products__item__button" + (this.props.verifyRequired ? " pib--verify" : "")} onClick={this.addToCart.bind(this)} />
+						<BasicButton {...(!this.state.putInCart ? {icon: "cart-plus"} : {title: "Toegevoegd aan winkelwagen"})} className={"products__item__button" + (this.props.verifyRequired ? " pib--verify" : "") + (this.state.putInCart ? " pic--animation" : "")} onClick={this.addToCart.bind(this)} />
 
 
 					}

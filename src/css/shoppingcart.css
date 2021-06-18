@@ -6,6 +6,7 @@
     transition: all 0.4s ease 0s;
     color:#fff;
     height: 4rem;
+    pointer-events: all;
 }
 
 .create-form__btn {
@@ -16,4 +17,25 @@
 .products__order__button:hover {
     background: #FBA900;
     color:black;
+}
+
+.products__order__button[disabled] {
+    background-color: rgba(54, 59, 66, .5);
+    pointer-events: none;
+}
+
+.products__order__button[disabled]:hover {
+    background-color: rgba(54, 59, 66, .5);
+    pointer-events: none;
+}
+
+.shoppingcart_noitems {
+	text-align: center;
+	font-size: 2rem;
+	margin-top: 5rem;
+}
+
+.shoppingcart_noitems--ordered {
+	color: green;
+	font-weight: bold;
 }

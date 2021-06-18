@@ -91,7 +91,7 @@ class AddProducts extends Component {
                 <label for="Goedkeuring">Goedkeuring nodig?</label>
                 <select id="approval" name="approval" value={approval} onChange={this.changeHandler}>
                     <option value="1">Wel nodig</option>
-                    <option value="false">Niet nodig</option>
+                    <option value="0">Niet nodig</option>
                 </select>
                 
                 <div class="create-form__u-flex">

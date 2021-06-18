@@ -16,8 +16,8 @@ class CreateUser extends Component{
       password: "",
       conf_password: "",
       adress: "",
-      house_number: "",
-      zip_code: "",
+      housenumber: "",
+      postalcode: "",
       error_mesage: "",
     }
   }
@@ -44,14 +44,17 @@ class CreateUser extends Component{
     else {
       this.setState({error_mesage: null});
     }
-		// 	apiClient.post("/api/register",
-		// 	{//stuurt een post request naar de API
-		// 			email: this.state.email, //De eerste email moet overeen komen met de naam in de db. De tweede email is van de states dus de daat werkelijke waarde
-		// 			password: this.state.password} //password het zelfde verhaal als email
-		// 		).then(response =>{ //Op het moment is er een CSRF token mismatch error dit is een safety iets van laravel maar dit betekent wel dat de req bij de API binnekomt
-		// 			this.setState({loggedIn: true, token: response.data});
-    //
-		// });
+		apiClient.post("/api/register",
+			{//stuurt een register request naar de API
+			email: this.state.email,
+			password: this.state.password,
+      adress: this.state.adress,
+      housenumber: this.state.housenumber,
+      postalcode: this.state.postalcode
+      }
+			).then(response =>{ //Op het moment is er een CSRF token mismatch error dit is een safety iets van laravel maar dit betekent wel dat de req bij de API binnekomt
+			this.setState({loggedIn: true, token: response.data});
+		});
 	}
 
   render (){
@@ -97,15 +100,15 @@ class CreateUser extends Component{
             placeholder="1a"
             required
             value={this.state.house_number}
-            onChange={(e) => this.setState({ house_number: e.target.value })}/>
+            onChange={(e) => this.setState({ housenumber: e.target.value })}/>
           </div>
           <div className="create_user__form__group">
             <label>Postcode:</label>
-            <input type="zip_code"
+            <input type="postalcode"
             placeholder="1234AB"
             required
-            value={this.state.zip_code}
-            onChange={(e) => this.setState({ zip_code: e.target.value })}/>
+            value={this.state.postalcode}
+            onChange={(e) => this.setState({ postalcode: e.target.value })}/>
           </div>
           <div>
             <label>Kies rol:</label>

@@ -11,12 +11,6 @@ html {
 }
 
 
-
-main {
-    max-width: 120rem;
-    margin: 0 auto;
-}
-
 /*general styles*/
 h1 {
     font-family: 'OpenSans-Bold', sans-serif;

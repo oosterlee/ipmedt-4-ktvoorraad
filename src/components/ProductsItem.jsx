@@ -84,7 +84,7 @@ class ProductsItem extends Component {
 			<li className="products__list__item">
 				<Link to={"/product/" + this.props.id} className="link--no-style"><figure className="products__list__figure">
 					<img
-						src={ this.props.image || "https://www.dia.org/sites/default/files/No_Img_Avail.jpg" }
+						src={"http://localhost:8000" + this.props.image || "https://www.dia.org/sites/default/files/No_Img_Avail.jpg" }
 						alt={ this.props.title || "Plaatje niet beschikbaar" }
 						className="products__item__image"
 					/>

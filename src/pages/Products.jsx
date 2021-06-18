@@ -46,9 +46,6 @@ class Products extends Component {
 
 
   render() {
-	apiClient.get('/api/user').then(response => {
-		console.log(response);
-	});
     return (
       <section className="products">
         <Searchbar value={this.state.searchValue} onChange={this.search.bind(this)}/>

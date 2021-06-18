@@ -17,6 +17,8 @@ import ShoppingCart from './ShoppingCart';
 import ProductsManager from './ProductsManager';
 import AddProducts from './AddProducts';
 import CreateUser from './CreateUser';
+import Profile from './Profile';
+
 
 class Home extends Component {
   constructor(props) {
@@ -57,6 +59,10 @@ class Home extends Component {
 
             <PrivateRoute exact path="/management/products">
               <ProductsManager />
+            </PrivateRoute>
+
+            <PrivateRoute exact path="/profile">
+              <Profile />
             </PrivateRoute>
 
             <Link to="/management/products">Management</Link>

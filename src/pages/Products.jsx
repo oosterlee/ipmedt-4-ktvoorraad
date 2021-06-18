@@ -8,29 +8,26 @@ import ProductsItem from '../components/ProductsItem';
 import Searchbar from "../components/Searchbar";
 
 import { getUserInfo } from '../utils';
-import apiClient from '../services/api';
-
 
 class Products extends Component {
-  constructor(props) {
-    super(props);
-    
-    this.state = {
-      products: [],
-	  searchValue: "",
-	  renderProducts: [],
-    };
-  }
+	constructor(props) {
+		super(props);
 
-  componentDidMount(){
-    this.makeApiCall();
-    }
+		this.state = {
+			products: [],
+			searchValue: "",
+			renderProducts: [],
+		};
+	}
 
-  makeApiCall = searchTerm => {
-    const BASE_URL = "http://localhost:8001/api/products";
-    axios.get(BASE_URL).then(json => this.setState({ products: json.data, renderProducts: json.data }));
-    
-    };
+	componentDidMount(){
+		this.makeApiCall();
+	}
+
+	makeApiCall = searchTerm => {
+		const BASE_URL = "http://localhost:8001/api/products";
+		axios.get(BASE_URL).then(json => this.setState({ products: json.data, renderProducts: json.data }));
+	}
 
 	search(e){
 		let searchValue = e.target.value;
@@ -45,24 +42,21 @@ class Products extends Component {
 
 
 
-  render() {
-	apiClient.get('/api/user').then(response => {
-		console.log(response);
-	});
-    return (
-      <section className="products">
-        <Searchbar value={this.state.searchValue} onChange={this.search.bind(this)}/>
-        <ul className="products__list">
-          {
-            this.state.renderProducts.map((item, i) => 
-              <ProductsItem {...item} key={item.id} />
-            )
-          }
-        </ul>
-        <Link to="/cart">My Cart</Link>
-      </section>
-    );
-  }
+	render() {
+		return (
+			<section className="products">
+				<Searchbar value={this.state.searchValue} onChange={this.search.bind(this)}/>
+				<ul className="products__list">
+					{
+						this.state.renderProducts.map((item, i) => 
+							<ProductsItem {...item} key={item.id} />
+						)
+					}
+				</ul>
+				<Link to="/cart">My Cart</Link>
+			</section>
+		);
+	}
 }
 
 export default Products;

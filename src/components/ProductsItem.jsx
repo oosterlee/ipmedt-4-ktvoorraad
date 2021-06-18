@@ -15,6 +15,7 @@ class ProductsItem extends Component {
 		this.state = {
 			showInfo: false,
 			redirectTo: false,
+			lastAmount: this.props.amount,
 		};
 	}
 
@@ -36,6 +37,41 @@ class ProductsItem extends Component {
 	removeFromCart(){
 		this.context.removeProductFromCart(this.props.id);
 
+	}
+
+	cartProductAmountChange(e) {
+		let index = this.context.findProductById(this.props.id);
+		if (e.target.value <= 1) {
+			this.context.cart[index].amount = 1;
+		} else {
+			this.context.cart[index].amount = e.target.value;
+		}
+		if (this.state.lastAmount == 1 && e.target.value >= 1) {
+			console.log(e.target.value);
+			this.context.cart[index].amount = e.target.value.substr(1, 1);
+		}
+		this.setState({ lastAmount: this.context.cart[index].amount });
+		this.context.__callCartCallbacks();
+	}
+
+	cartMinus() {
+		let index = this.context.findProductById(this.props.id);
+		if (this.context.cart[index].amount <= 1) {
+			this.context.cart[index].amount = 1;
+		} else {
+			this.context.cart[index].amount--;
+		}
+
+		this.setState({ lastAmount: this.context.cart[index].amount });
+		this.context.__callCartCallbacks();
+	}
+
+	cartPlus() {
+		let index = this.context.findProductById(this.props.id);
+		this.context.cart[index].amount++;
+
+		this.setState({ lastAmount: this.context.cart[index].amount });
+		this.context.__callCartCallbacks();
 	}
 	
 
@@ -61,7 +97,7 @@ class ProductsItem extends Component {
 					{
 						this.props.cart ?
 						<section class="products__item__input">
-						<span class="products__item__input__minus">–</span><input class="products__item__input__number" type="text" value="1" min="0" max="10"/><span class="products__item__input__plus">+</span>
+						<span class="products__item__input__minus" onClick={this.cartMinus.bind(this)}>–</span><input class="products__item__input__number" type="text" value={this.props.amount} min="0" max="10" onChange={this.cartProductAmountChange.bind(this)} /><span class="products__item__input__plus"  onClick={this.cartPlus.bind(this)}>+</span>
 						</section>
 						:
 						""

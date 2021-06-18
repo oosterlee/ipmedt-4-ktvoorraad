@@ -163,6 +163,18 @@ li.products__list__item {
 	background-color: white;
 }
 
+.pic--animation {
+	animation: picAnimation .5s;
+}
+
+@keyframes picAnimation {
+	from {
+		color: white;
+	}
+	to {
+		color: limegreen;
+	}
+}
 
 @media only screen and (min-width: 10rem){
 

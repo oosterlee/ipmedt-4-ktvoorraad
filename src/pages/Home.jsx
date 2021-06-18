@@ -17,6 +17,7 @@ import ShoppingCart from './ShoppingCart';
 import ProductsManager from './ProductsManager';
 import AddProducts from './AddProducts';
 import CreateUser from './CreateUser';
+import Navbar from "../components/Navbar/Navbar";
 
 class Home extends Component {
   constructor(props) {
@@ -26,14 +27,15 @@ class Home extends Component {
     };
   }
 
-  render() {
-    return (
-      <main>
-        <Router>
-          <Switch>
-            <PrivateRoute exact path="/products">
-              <Products />
-            </PrivateRoute>
+	render() {
+		return (
+			<main>
+				<Router>
+				<Navbar />
+					<Switch>
+						<PrivateRoute exact path="/products">
+							<Products />
+						</PrivateRoute>
 
             <Route exact path="/cart">
               <ShoppingCart />
@@ -42,9 +44,9 @@ class Home extends Component {
               <AddProducts />
             </Route>
 
-            <Route exact path="/createuser">
-              <CreateUser />
-            </Route>
+            			<Route exact path="/createuser">
+							<CreateUser />
+						</Route>
 
             <Route exact path="/login">
               <Login />

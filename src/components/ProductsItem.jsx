@@ -38,6 +38,7 @@ class ProductsItem extends Component {
 
 	}
 	
+	
 
 	render() {
 		return (
@@ -72,7 +73,8 @@ class ProductsItem extends Component {
 						this.props.cart ?
 						<BasicButton icon="trash" className={"products__item__button" + (this.props.verifyRequired ? " pib--verify" : "")} onClick={this.removeFromCart.bind(this)} />
 						: 
-						<BasicButton icon="cart-plus" className={"products__item__button" + (this.props.verifyRequired ? " pib--verify" : "")} onClick={this.addToCart.bind(this)} />
+						<BasicButton id="Toegevoegd" icon="cart-plus" className={"products__item__button" + (this.props.verifyRequired ? " pib--verify" : "")} onClick={this.addToCart.bind(this)} />
+				
 
 
 					}

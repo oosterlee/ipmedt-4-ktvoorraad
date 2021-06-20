@@ -17,14 +17,11 @@ import ShoppingCart from './ShoppingCart';
 import ProductsManager from './ProductsManager';
 import AddProducts from './AddProducts';
 import CreateUser from './CreateUser';
-<<<<<<< HEAD
 import Profile from './Profile';
 
-=======
 import OrderRequests from './OrderRequests';
 import OrderHistory from './OrderHistory';
 import Navbar from "../components/Navbar/Navbar";
->>>>>>> dev
 
 class Home extends Component {
   constructor(props) {

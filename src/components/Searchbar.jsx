@@ -1,5 +1,6 @@
 import React from 'react';
 import '../css/components/searchbar.css';
+import { IoSearch } from "react-icons/io5";
 
 class Searchbar extends React.Component{
     
@@ -9,14 +10,12 @@ class Searchbar extends React.Component{
         console.log(this.state.searchTerm);
         return(
         <section>
-            <form onSubmit={e => e.preventDefault()}>
-                <input 
-                className="searchbar" 
-                type="text"
-                placeholder="Zoek hier op product"
-                value = {this.props.value}
-                onChange= {this.props.onChange}
-                />
+            <form className="searchbar" onSubmit={e => e.preventDefault()}>
+            <input id="searchbar" name="searchbar" className="searchbar__input" type="text" placeholder="Zoek hier op product..."  value = {this.props.value} onChange= {this.props.onChange}  />
+            <i className="searchbar__icon"><IoSearch /> </i>
+                
+            
+                
             </form>
         </section>
         );

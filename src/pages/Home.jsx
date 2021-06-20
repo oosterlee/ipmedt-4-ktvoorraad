@@ -17,8 +17,14 @@ import ShoppingCart from './ShoppingCart';
 import ProductsManager from './ProductsManager';
 import AddProducts from './AddProducts';
 import CreateUser from './CreateUser';
+<<<<<<< HEAD
 import Profile from './Profile';
 
+=======
+import OrderRequests from './OrderRequests';
+import OrderHistory from './OrderHistory';
+import Navbar from "../components/Navbar/Navbar";
+>>>>>>> dev
 
 class Home extends Component {
   constructor(props) {
@@ -28,14 +34,14 @@ class Home extends Component {
     };
   }
 
-  render() {
-    return (
-      <main>
-        <Router>
-          <Switch>
-            <PrivateRoute exact path="/products">
-              <Products />
-            </PrivateRoute>
+	render() {
+		return (
+				<Router>
+				<Navbar />
+					<Switch>
+						<PrivateRoute exact path="/products">
+							<Products />
+						</PrivateRoute>
 
             <Route exact path="/cart">
               <ShoppingCart />
@@ -44,9 +50,9 @@ class Home extends Component {
               <AddProducts />
             </Route>
 
-            <Route exact path="/createuser">
-              <CreateUser />
-            </Route>
+            			<Route exact path="/createuser">
+							<CreateUser />
+						</Route>
 
             <Route exact path="/login">
               <Login />
@@ -61,14 +67,19 @@ class Home extends Component {
               <ProductsManager />
             </PrivateRoute>
 
+            <PrivateRoute exact path="/management/orderrequests">
+              <OrderRequests />
+            </PrivateRoute>
+
+            <PrivateRoute exact path="/orderhistory/:id" component={OrderHistory} />
+
             <PrivateRoute exact path="/profile">
               <Profile />
             </PrivateRoute>
-
+            
             <Link to="/management/products">Management</Link>
           </Switch>
         </Router>
-      </main>
     );
   }
 }

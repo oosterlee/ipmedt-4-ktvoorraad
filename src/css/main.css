@@ -5,13 +5,13 @@
 }
 
 :root{
-  --jh-yellow: var(255,185,0);
-  --black: var(0,0,0);
-  --dark-grey: var(60,70,75);
-  --light-grey: var(234,235,235);
-  --white: var(255,255,255);
-  --red: var(204,0,0);
-  --green: var(0,150,151);
+  --jh-yellow: rgb(255,185,0);
+  --black: rgb(0,0,0);
+  --dark-grey: rgb(60,70,75);
+  --light-grey: rgb(234,235,235);
+  --white: rgb(255,255,255);
+  --red: rgb(204,0,0);
+  --green: rgb(0,150,151);
 }
 
 html{
@@ -27,4 +27,13 @@ body{
 .link--no-style {
 	text-decoration: none;
 	color: inherit;
+}
+
+.price::before {
+	content: '€ ';
+}
+
+.link {
+	color: var(--jh-yellow);
+	text-decoration: underline;
 }

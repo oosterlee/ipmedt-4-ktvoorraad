@@ -1,0 +1,138 @@
+/* Navbar css */
+html{
+  font-size: 62.5%; /*1rem => 10px*/
+}
+
+body{
+  font-size: 1.8rem;
+}
+
+nav {
+  background: rgba(0, 0, 0, 0.95);
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  position: relative;
+  z-index: 99;
+}
+
+.fas {
+  cursor: pointer;
+}
+
+.navbar__menu-icon {
+  display: none;
+  font-size: 2rem;
+}
+.navbar__menu-icon .fa-times {
+  transform: rotate(360deg);
+  transition: all 0.2s ease-in-out;
+}
+
+.navbar__menu-icon.fa-bars {
+  transform: rotate(180deg);
+  transition: all 0.2s ease-in-out;
+}
+
+a, a:hover, a:focus, a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+.navbar__redirect{
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 2.4rem;
+  
+}
+
+.navbar__logo {
+  font-weight: 800;
+  font-size: 2.5rem;
+  color: #FFB900;
+}
+
+.navbar__logo font {
+  color: #fff;
+}
+
+.navbar__menu-list {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar__menu-list li:last-child a {
+  font-weight: 300;
+  padding: .5rem 1rem;
+  background-color: #FFB900;
+  transition: all 0.5s ease-in-out;
+  margin-left: 2rem;
+  border-radius: .2rem;
+}
+
+.navbar__menu-list li a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 300;
+  padding: .5rem 1rem;
+  margin-left: 2rem;
+}
+
+.navbar__menu-list li a:hover,
+.navbar__menu-list li a.active {
+  background-color: #fff;
+  border-radius: .2rem;
+  color: #000;
+  transition: all 0.5s ease-in-out;
+}
+
+@media screen and (max-width: 80rem) {
+  .navbar__logo {
+    font-size: 2rem;
+  }
+  .navbar__menu-list li a {
+    font-size: 1.4rem;
+    margin-left: 1rem;
+  }
+}
+
+@media screen and (max-width: 60rem) {
+  .navbar__menu-icon {
+    display: block;
+  }
+  .navbar__menu-list {
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 2rem;
+    right: 0;
+    top: 6.4rem;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .navbar__menu-list li {
+    margin-bottom: 2rem;
+    width: 100%;
+    text-align: center;
+  }
+  .navbar__menu-list li:last-child {
+    margin-bottom: 0rem;
+  }
+
+  .navbar__menu-list li a,
+  .navbar__menu-list li:last-child a {
+    width: 12rem;
+    display: block;
+    margin: auto;
+    font-size: 1.8rem;
+  }
+
+  .navbar__menu-list.close {
+    right: -100%;
+    transition: all 0.5s ease-in-out;
+  }
+}

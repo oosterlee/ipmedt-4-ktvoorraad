@@ -13,6 +13,8 @@ class CreateUser extends Component{
 
     this.state = {
       email: "",
+      f_name: "",
+      l_name: "",
       password: "",
       conf_password: "",
       adress: "",
@@ -47,6 +49,7 @@ class CreateUser extends Component{
 		apiClient.post("/api/register",
 			{//stuurt een register request naar de API
 			email: this.state.email,
+      name: this.state.f_name + " " + this.state.l_name,
 			password: this.state.password,
       adress: this.state.adress,
       housenumber: this.state.housenumber,
@@ -62,6 +65,22 @@ class CreateUser extends Component{
       <main className="create_user">
         <h1>Registration</h1>
         <form className="create_user__form"  onSubmit={event => this.register_webtoken(event)}>
+        <div className="create_user__form__group">
+            <label>Voornaam:</label>
+            <input type="text"
+            placeholder="Voornaam"
+            required
+            value={this.state.f_name}
+            onChange={(e) => this.setState({ f_name: e.target.value })}/>
+          </div>
+          <div className="create_user__form__group">
+            <label>Achternaam:</label>
+            <input type="text"
+            placeholder="Achternaam"
+            required
+            value={this.state.l_name}
+            onChange={(e) => this.setState({ l_name: e.target.value })}/>
+          </div>
           <div className="create_user__form__group">
             <label>Email:</label>
             <input type="email"

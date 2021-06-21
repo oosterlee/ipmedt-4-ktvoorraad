@@ -112,6 +112,8 @@ a, a:hover, a:focus, a:active {
     right: 0;
     top: 6.4rem;
     transition: all 0.5s ease-in-out;
+    width: 100%;
+    display: block;
   }
 
   .navbar__menu-list li {
@@ -134,5 +136,7 @@ a, a:hover, a:focus, a:active {
   .navbar__menu-list.close {
     right: -100%;
     transition: all 0.5s ease-in-out;
+    display: none;
+    width: 0;
   }
 }

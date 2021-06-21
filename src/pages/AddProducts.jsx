@@ -27,15 +27,33 @@ class AddProducts extends Component {
             this.setState({[e.target.name]: e.target.value})
         }
 
+        this.fileHandler = e =>
+        {
+            this.setState({[e.target.name]: e.target.files[0]})
+        }
+
+
         this.submitHandler = e =>
         {
             e.preventDefault()
+            let Formdata = new FormData();
+            Formdata.append('image',this.state.image
+            );
+
+            let keys = Object.keys(this.state);
+            for(let i = 0 ; i<keys.length; i++)
+            {
+                Formdata.append(keys[i], this.state[keys[i]]);
+            }
+
             console.log(this.state)
             const header = {
-                headers: {"Accept": "application/json"}
+                headers: {"Accept": "application/json",
+                'content-type': 'multipart/form-data'}
+                
               };
             axios
-			    .post('http://localhost:8000/api/products/store', this.state, header)
+			    .post('http://localhost:8000/api/products/store', Formdata, header)
 			    .then(response => {
 				console.log(response)
 			    })
@@ -46,23 +64,15 @@ class AddProducts extends Component {
         };
         
 	}
-                //   axios({
-            //     method: 'post',
-            //     url: '/http://localhost:8000/api/products/store',
-            //     data: {
-            //       firstName: 'Fred',
-            //       lastName: 'Flintstone'
-            //     }
-            //   });
 
     render() {
         const { image, productname, description, category, brand, model, price, maxorders, condition, approval} = this.state
 		return (
             <section class="add">
                 <h1 class="add__title"> Product toevoegen </h1>
-            <form class="create-form" action="/products" method="POST" onSubmit={this.submitHandler}>
+            <form class="create-form" action="/products" method="POST" enctype="multipart/form-data" onSubmit={this.submitHandler}>
                 <label for="image">Kies een afbeelding </label>
-                <input class="create-form__input" type="text" name="image" value={image} onChange={this.changeHandler} /> 
+                <input class="create-form__input form-control-file" type="file" name="image"  onChange={this.fileHandler} /> 
                 
 
                 <label for="name">Titel</label>

@@ -51,9 +51,7 @@ class Login extends Component {
 
 			window.localStorage.setItem('login', true);
 			apiClient.defaults.headers.Authorization = "Bearer " + this.state.token.token;
-
-			callOnLoginCallbacks();
-			return (<Redirect to="/products" />)
+			return (<Redirect to="/toevoegen" />)
 		}
 
 

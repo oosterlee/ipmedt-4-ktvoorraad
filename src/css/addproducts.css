@@ -22,7 +22,7 @@ h1 {
 }
 
 
-button {
+button, .button {
     background: #ffb900;
     color: #363B42;
     padding: 1rem 2rem;

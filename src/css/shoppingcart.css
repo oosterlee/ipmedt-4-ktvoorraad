@@ -1,10 +1,10 @@
 .products__order__button{
     padding: 0.8rem 1.6rem;
     margin: 1rem 0 3rem 0;
-    background-color: #363B42;
-    border: 0.1rem solid rgb(238, 238, 238);
+    background-color: var(--dark-grey);
+    border: 0.1rem solid var(--light-grey);
     transition: all 0.4s ease 0s;
-    color:#fff;
+    color:var(--white);
     height: 4rem;
     pointer-events: all;
 }
@@ -15,7 +15,7 @@
     margin: 2rem;
 }
 .products__order__button:hover {
-    background: #FBA900;
+    background: var(--jh-yellow);
     color:black;
 }
 

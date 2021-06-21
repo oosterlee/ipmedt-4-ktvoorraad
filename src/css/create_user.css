@@ -1,0 +1,36 @@
+.create_user{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.create_user__form{
+  display: grid;
+  max-width: 50%;
+}
+.create_user__form__group{
+  padding: 5px 16px;
+  background-color: var(--white);
+}
+
+.create_user__form__group:nth-last-child(2){
+  padding-bottom: 15px;
+}
+
+.create_user__form__input{
+  width: 100%;
+  padding: 5px;
+  display: inline-block;
+  border: none;
+  background: var(--light-grey);
+}
+
+.create_user__form__input[type=submit]{
+  background-color: var(--jh-yellow);
+  padding: 5px;
+  margin-top: 5px;
+}
+
+.create_user__form__input:focus {
+  background-color: #ddd;
+  outline: none;
+}

@@ -1,0 +1,19 @@
+.profile{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.profile__wrapper{
+    grid-column-start: 2;
+}
+
+.profile__info{
+    font-size: 120%;
+    margin-top: 2rem;
+}
+
+.profile__logout{
+    margin-top: 4rem;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}

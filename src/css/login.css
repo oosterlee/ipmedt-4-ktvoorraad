@@ -3,7 +3,7 @@
 }
 
 .login__header{
-    background-color: rgba(255, 185, 0, 1);
+    background-color: var(--jh-yellow);
     width: 100%;
     position: relative;
     padding: 1rem;
@@ -17,7 +17,7 @@
     top: 99.8%;
     height: 10rem;
     width: 100%;
-    background-color: rgba(255, 185, 0, 1);
+    background-color: var(--jh-yellow);
     clip-path: polygon(100% 0, 0 0, 100% 100%);
 }
 
@@ -68,9 +68,9 @@
 }
 
 .login__form__submit{
-    background-color: rgba(255, 185, 0, 1);
+    background-color: var(--jh-yellow);
     border: 0.1rem black solid;
-    color: white;
+    color: var(--white);
     font-weight: bold;
     font-size: 1.8rem;
     text-align: center;
@@ -87,15 +87,36 @@
 
 .login__forgot__p{
     padding: 1rem;
-    color: rgb(60, 70, 75);
+    color: var(--dark-grey));
 }
 
 .login__forgot__a:link{
-    color: rgb(0,150,151);
+    color: var(--green);
 }
 
 .login__forgot__a:hover{
-    color: blue;
+    color: var(--dark-grey);
+}
+
+#login__error{
+    background-color: rgba(255, 0, 0, 0.2);
+    padding: 1rem;
+    color: black;
+    font-weight: 600;
+    border-radius: 0.8rem;
+    margin: 2rem 6rem;
+    border: red 0.3rem solid;
+    display: none;
+    height: 100%;
+    transition: 0.5s all;
+}
+
+.login__error--remove{
+    animation: error_message 1s 1 normal forwards;
+}
+
+.login__error--show{
+    animation: error_message 1s 1 reverse backwards;
 }
 
 @media only screen and (min-width: 26.38rem) {
@@ -137,3 +158,17 @@
         right: 40%;
     }
 }
+<<<<<<< HEAD
+
+@keyframes error_message {
+    from{
+        opacity: 1;
+        display: block;
+    }
+    to{
+        opacity: 0;
+        display: none;
+    }
+}
+=======
+>>>>>>> kilian

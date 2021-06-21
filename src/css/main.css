@@ -16,7 +16,7 @@
 
 html{
     font-size: 62.5%; /*1rem => 10px*/
-    background-color: #f1f1f1;
+    background-color: var(--light-grey);
 }
 
 body{

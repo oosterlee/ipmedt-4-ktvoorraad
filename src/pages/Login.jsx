@@ -32,7 +32,7 @@ class Login extends Component {
 		if (this.state.loggedIn === true) {
 			window.localStorage.setItem('token', this.state.token.token);
 			apiClient.defaults.headers.Authorization = "Bearer " + this.state.token.token;
-			return (<Redirect to="/products" />)
+			return (<Redirect to="/toevoegen" />)
 		}
 
 

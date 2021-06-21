@@ -46,14 +46,6 @@ class AddProducts extends Component {
         };
         
 	}
-                //   axios({
-            //     method: 'post',
-            //     url: '/http://localhost:8000/api/products/store',
-            //     data: {
-            //       firstName: 'Fred',
-            //       lastName: 'Flintstone'
-            //     }
-            //   });
 
     render() {
         const { image, productname, description, category, brand, model, price, maxorders, condition, approval} = this.state
@@ -62,7 +54,7 @@ class AddProducts extends Component {
                 <h1 class="add__title"> Product toevoegen </h1>
             <form class="create-form" action="/products" method="POST" onSubmit={this.submitHandler}>
                 <label for="image">Kies een afbeelding </label>
-                <input class="create-form__input" type="text" name="image" value={image} onChange={this.changeHandler} /> 
+                <input class="create-form__input form-control-file" type="file" name="image" value={image} onChange={this.changeHandler} /> 
                 
 
                 <label for="name">Titel</label>

@@ -60,10 +60,10 @@ class CreateUser extends Component{
   render (){
     return(
       <main className="create_user">
-        <h1>Registration</h1>
+        <h1>Registratie</h1>
         <form className="create_user__form"  onSubmit={event => this.register_webtoken(event)}>
           <div className="create_user__form__group">
-            <label>Email:</label>
+            <label>Email: </label>
             <input type="email"
             placeholder="Work Email"
             required
@@ -71,7 +71,7 @@ class CreateUser extends Component{
             onChange={(e) => this.setState({ email: e.target.value })}/>
           </div>
           <div className="create_user__form__group">
-            <label>Wachtwoord:</label>
+            <label>Wachtwoord: </label>
             <input type="password"
             placeholder="Password.."
             required
@@ -79,7 +79,7 @@ class CreateUser extends Component{
             onChange={(e) => this.setState({ password: e.target.value })}/>
           </div>
           <div className="create_user__form__group">
-            <label>Herhaal wachtwoord:</label>
+            <label>Herhaal wachtwoord: </label>
             <input type="password"
             placeholder="Confirm Password.."
             required
@@ -87,7 +87,7 @@ class CreateUser extends Component{
             onChange={(e) => this.setState({ conf_password: e.target.value })}/>
           </div>
           <div className="create_user__form__group">
-            <label>Adres:</label>
+            <label>Adres: </label>
             <input type="Adress"
             placeholder="Voorbeeldstraat"
             required
@@ -95,7 +95,7 @@ class CreateUser extends Component{
             onChange={(e) => this.setState({ adress: e.target.value })}/>
           </div>
           <div className="create_user__form__group">
-          <label>Huisnummer:</label>
+          <label>Huisnummer: </label>
             <input type="text"
             placeholder="1a"
             required
@@ -103,22 +103,23 @@ class CreateUser extends Component{
             onChange={(e) => this.setState({ housenumber: e.target.value })}/>
           </div>
           <div className="create_user__form__group">
-            <label>Postcode:</label>
+            <label>Postcode: </label>
             <input type="postalcode"
             placeholder="1234AB"
             required
             value={this.state.postalcode}
             onChange={(e) => this.setState({ postalcode: e.target.value })}/>
           </div>
-          <div>
-            <label>Kies rol:</label>
-            <input list="user_role"/>
+          <div className="create_user__form__group">
+            <label>Kies rol: </label>
+            <input list="user_role"
+            placeholder="Rol"/>
             <datalist id="user_role">
               <option value="Manager"/>
               <option value="Medewerker"/>
             </datalist>
           </div>
-          <input type="submit"/>
+          <input classname="create_user__form__button" type="submit"/>
         </form>
         <p id="create_user__form__notes">{this.state.error_mesage}</p>
       </main>

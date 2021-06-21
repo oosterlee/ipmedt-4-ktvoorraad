@@ -1,10 +1,11 @@
 .create_user{
-  padding-left: 25%;
+  display: flex;
   justify-content: center;
+  align-items: center;
 }
 .create_user__form{
   display: grid;
-  width: 50%;
+  max-width: 50%;
 }
 .create_user__form__group{
   padding: 5px 16px;
@@ -15,7 +16,7 @@
   padding-bottom: 15px;
 }
 
-input{
+.create_user__form__input{
   width: 100%;
   padding: 5px;
   display: inline-block;
@@ -23,13 +24,13 @@ input{
   background: var(--light-grey);
 }
 
-input[type=submit]{
+.create_user__form__input[type=submit]{
   background-color: var(--jh-yellow);
   padding: 5px;
   margin-top: 5px;
 }
 
-input:focus {
+.create_user__form__input:focus {
   background-color: #ddd;
   outline: none;
 }

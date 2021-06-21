@@ -63,11 +63,11 @@ class CreateUser extends Component{
   render (){
     return(
       <main className="create_user">
-        <h1>Registratie</h1>
         <form className="create_user__form"  onSubmit={event => this.register_webtoken(event)}>
+        <h1>Registratie</h1>
         <div className="create_user__form__group">
             <label>Voornaam:</label>
-            <input type="text"
+            <input className="create_user__form__input" type="text"
             placeholder="Voornaam"
             required
             value={this.state.f_name}
@@ -75,7 +75,7 @@ class CreateUser extends Component{
           </div>
           <div className="create_user__form__group">
             <label>Achternaam:</label>
-            <input type="text"
+            <input className="create_user__form__input" type="text"
             placeholder="Achternaam"
             required
             value={this.state.l_name}
@@ -83,7 +83,7 @@ class CreateUser extends Component{
           </div>
           <div className="create_user__form__group">
             <label>Email: </label>
-            <input type="email"
+            <input className="create_user__form__input" type="email"
             placeholder="Work Email"
             required
             value={this.state.email}
@@ -91,7 +91,7 @@ class CreateUser extends Component{
           </div>
           <div className="create_user__form__group">
             <label>Wachtwoord: </label>
-            <input type="password"
+            <input className="create_user__form__input" type="password"
             placeholder="Password.."
             required
             value={this.state.password}
@@ -99,7 +99,7 @@ class CreateUser extends Component{
           </div>
           <div className="create_user__form__group">
             <label>Herhaal wachtwoord: </label>
-            <input type="password"
+            <input className="create_user__form__input" type="password"
             placeholder="Confirm Password.."
             required
             value={this.state.conf_password}
@@ -107,7 +107,7 @@ class CreateUser extends Component{
           </div>
           <div className="create_user__form__group">
             <label>Adres: </label>
-            <input type="Adress"
+            <input className="create_user__form__input" type="Adress"
             placeholder="Voorbeeldstraat"
             required
             value={this.state.adress}
@@ -115,7 +115,7 @@ class CreateUser extends Component{
           </div>
           <div className="create_user__form__group">
           <label>Huisnummer: </label>
-            <input type="text"
+            <input className="create_user__form__input" type="text"
             placeholder="1a"
             required
             value={this.state.house_number}
@@ -123,7 +123,7 @@ class CreateUser extends Component{
           </div>
           <div className="create_user__form__group">
             <label>Postcode: </label>
-            <input type="postalcode"
+            <input className="create_user__form__input" type="postalcode"
             placeholder="1234AB"
             required
             value={this.state.postalcode}
@@ -131,7 +131,7 @@ class CreateUser extends Component{
           </div>
           <div className="create_user__form__group">
             <label>Kies rol: </label>
-            <input list="user_role"
+            <input className="create_user__form__input" list="user_role"
             placeholder="Rol"/>
             <datalist id="user_role">
               <option value="Manager"/>

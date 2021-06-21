@@ -16,7 +16,7 @@ function __setUserInfo(info) {
 }
 
 function isLoggedIn() {
-	return loggedIn;
+	return localStorage.getItem('login');
 }
 
 function getToken() {
@@ -26,12 +26,12 @@ function getToken() {
 function tryLogin(username, password) {
 	return new Promise((resolve, rejext) => {
 		// TODO: Try to login with token
-		setTimeout(() => {
+		// setTimeout(() => {
 			setLoginToken("jwt-token");
 			__setLoggedIn(true);
 			__setUserInfo({ username: "test", name: "Test User" });
 			resolve({ loggedIn: true });
-		}, 1000);
+		// }, 1000);
 	});
 }
 

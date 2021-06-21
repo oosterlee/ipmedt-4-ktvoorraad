@@ -17,6 +17,8 @@ import ShoppingCart from './ShoppingCart';
 import ProductsManager from './ProductsManager';
 import AddProducts from './AddProducts';
 import CreateUser from './CreateUser';
+import Profile from './Profile';
+
 import OrderRequests from './OrderRequests';
 import OrderHistory from './OrderHistory';
 import Navbar from "../components/Navbar/Navbar";
@@ -67,6 +69,10 @@ class Home extends Component {
             </PrivateRoute>
 
             <PrivateRoute exact path="/orderhistory/:id" component={OrderHistory} />
+
+            <PrivateRoute exact path="/profile">
+              <Profile />
+            </PrivateRoute>
             
             <Link to="/management/products">Management</Link>
           </Switch>

@@ -1,14 +1,33 @@
+const login = localStorage.getItem("login");
+
 export const MenuList = [
   {
-    title: "Products",
+    title: "Producten",
     url: "/products",
   },
   {
-    title: "Cart",
-    url: "/shoppingcart",
+    title: "Winkelwagen",
+    url: "/cart",
   },
+
   {
     title: "Login",
     url: "/login",
+  },
+];
+
+export const LoggedInMenu = [
+  {
+    title: "Producten",
+    url: "/products",
+  },
+  {
+    title: "Winkelwagen",
+    url: "/cart",
+  },
+
+  {
+    title: "Profiel",
+    url: "/profile",
   },
 ];

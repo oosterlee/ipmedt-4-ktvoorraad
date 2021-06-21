@@ -125,6 +125,57 @@ li.products__list__item {
 	color: #363b42;
 }
 
+.products__item__input{
+	margin-bottom: 12rem;
+	margin-left: 2rem;
+	
+}
+.products__item__input__minus,
+.products__item__input__plus,
+.products__item__input__number{
+	border: 1px solid #ccc;
+  	height: 40px;
+  	user-select: none;
+	display: inline-block;
+	width: 30px;
+	line-height: 38px;
+	background: #f1f1f1;
+	color: #444;
+	text-align: center;
+	font-weight: bold;
+	cursor: pointer;
+	
+}
+.products__item__input__minus{
+	border-right: none;
+ 	border-radius: 4px 0 0 4px;
+}
+.products__item__input__plus{
+	border-left: none;
+  	border-radius: 0 4px 4px 0;
+}
+.products__item__input__number{
+	width: 80px;
+	padding: 0 12px;
+	vertical-align: top;
+	text-align: center;
+	outline: none;
+	background-color: white;
+}
+
+.pic--animation {
+	animation: picAnimation .5s;
+}
+
+@keyframes picAnimation {
+	from {
+		color: white;
+	}
+	to {
+		color: limegreen;
+	}
+}
+
 @media only screen and (min-width: 10rem){
 
 	.products__list {

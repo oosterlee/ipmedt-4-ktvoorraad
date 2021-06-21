@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../css/login.css';
 import {Redirect} from 'react-router-dom';
 import apiClient from '../services/api';
-
+import {callOnLoginCallbacks} from '../utils';
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -30,8 +30,14 @@ class Login extends Component {
 	render() {
 		const {username, password, isChecked} = this.state;
 		if (this.state.loggedIn === true) {
+			console.log(this.state.token.token);
 			window.localStorage.setItem('token', this.state.token.token);
+			// Gets update when a user is logged.
+
+			window.localStorage.setItem('login', true);
 			apiClient.defaults.headers.Authorization = "Bearer " + this.state.token.token;
+
+			callOnLoginCallbacks();
 			return (<Redirect to="/products" />)
 		}
 

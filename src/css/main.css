@@ -29,4 +29,11 @@ body{
 	color: inherit;
 }
 
+.price::before {
+	content: '€ ';
+}
 
+.link {
+	color: var(--jh-yellow);
+	text-decoration: underline;
+}

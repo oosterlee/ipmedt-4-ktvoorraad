@@ -1,0 +1,161 @@
+html{
+    font-size: 62.5%;
+    background-color: #f1f1f1;
+}
+
+body{
+    font-size: 1.8rem;
+}
+
+
+.orderrequests {
+	width: 100%;
+	max-width: 100rem;
+	margin: 0 auto;
+	font-family: sans-medium,Arial,sans-serif;
+}
+
+.orderrequests th {
+	background: lightgrey;
+	padding: 1.5rem 1rem;
+	text-align: left;
+}
+
+.orderrequests td {
+	padding-bottom: 2rem;
+	vertical-align: baseline;
+	padding-bottom: 2rem;
+}
+
+.orderrequests td.key {
+	padding-left: 1rem;
+	color: darkgrey;
+}
+
+.orderrequests td.value {
+	padding-right: 2rem;
+}
+
+.orderrequests__button {
+	display: block;
+	width: 100%;
+	margin-right: 1rem;
+	margin-bottom: 2rem;
+
+	outline: none;
+	border: none;
+
+	text-transform: uppercase;
+	padding: 1.2rem 2rem;
+	border-radius: .6rem;
+
+	transition: all .4s;
+}
+
+.orderrequests__button--approve {
+	background: #28a745;
+	border: 1px solid #28a745;
+	color: white;
+}
+
+.orderrequests__button--reject {
+	background: #dc3545;
+	border: 1px solid #dc3545;
+	color: white;
+}
+
+.orderrequests__button:hover {
+	background: transparent;
+	color: black;
+	cursor: pointer;
+}
+
+.orderrequests__button--reject:hover {
+	color: red;
+	background: rgba(220, 53, 69, .2);
+	font-weight: bold;
+}
+
+.orderrequests__button[disabled] {
+	pointer-events: none;
+	filter: opacity(0.5);
+}
+
+.orderrequests--fade {
+	animation: orFade 1s;
+}
+
+.or-wait {
+	color: grey;
+}
+
+.or-approved {
+	color: #28a745;
+}
+
+.or-rejected {
+	color: #dc3545;
+}
+
+@keyframes orFade {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+		transform: scale(.6);
+	}
+}
+
+@media screen and (max-width: 950px) {
+	.orderrequests thead {
+		border: none;
+		clip: rect(0 0 0 0);
+		height: 1px;
+		margin: -1px;
+		overflow: hidden;
+		padding: 0;
+		position: absolute;
+		width: 1px;
+	}
+
+	.orderrequests tr {
+		/*border-bottom: 3px solid #ddd;*/
+		display: block;
+		margin-bottom: 5rem;
+		box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.3);
+	}
+
+	.orderrequests td {
+		border-bottom: 1px solid #ddd;
+		display: block;
+		font-size: 1.2rem;
+		margin-top: 2rem;
+		text-align: right;
+	}
+
+	.orderrequests td.key {
+		display: inline-block;
+		box-sizing: border-box;
+		width: 30%;
+	}
+
+	.orderrequests td.value {
+		display: inline-block;
+		box-sizing: border-box;
+		width: 65%;
+	}
+
+	.orderrequests td::before {
+		content: attr(data-label);
+		/*float: left;*/
+		font-weight: bold;
+		font-size: 2rem;
+		vertical-align: middle;
+		color: black;
+		width: 333%;
+		display: block;
+		text-align: left;
+		/*text-transform: uppercase;*/
+	}
+}

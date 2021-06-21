@@ -2,6 +2,18 @@ let loggedIn = false;
 let username = null;
 let name = null;
 
+let callbackLogins = [];
+
+export const onLoginChange = (func) => {
+	callbackLogins.push(func);
+};
+
+export const callOnLoginCallbacks = (func) => {
+	for (let i = 0; i < callbackLogins.length; i++) {
+	callbackLogins[i]();
+	}
+}
+
 function setLoginToken(token) {
 	localStorage.setItem('token', token);
 }
@@ -16,7 +28,7 @@ function __setUserInfo(info) {
 }
 
 function isLoggedIn() {
-	return loggedIn;
+	return localStorage.getItem('login');
 }
 
 function getToken() {
@@ -26,12 +38,12 @@ function getToken() {
 function tryLogin(username, password) {
 	return new Promise((resolve, rejext) => {
 		// TODO: Try to login with token
-		setTimeout(() => {
+		// setTimeout(() => {
 			setLoginToken("jwt-token");
 			__setLoggedIn(true);
 			__setUserInfo({ username: "test", name: "Test User" });
 			resolve({ loggedIn: true });
-		}, 1000);
+		// }, 1000);
 	});
 }
 

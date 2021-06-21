@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../css/main.css';
-import '../css/create-user.css';
+import '../css/create_user.css';
+import apiClient from '../services/api';
 
 import { Link } from 'react-router-dom';
 
@@ -13,56 +14,114 @@ class CreateUser extends Component{
     this.state = {
       email: "",
       password: "",
+      conf_password: "",
+      adress: "",
+      housenumber: "",
+      postalcode: "",
+      error_mesage: "",
     }
   }
 
+  register_webtoken(event){
+		event.preventDefault(); //voorkomt dat de pagina refreshed
+    const emailJH = this.state.email.split("@"); // check of email van JH is
+    const special_char = new RegExp(/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/); //special chars
+
+    if(emailJH[1] !== "jungheinrich.nl"){
+      this.setState({error_mesage: "Gebruik een Jungheinrich email"});
+      return;
+    }
+
+    else if(this.state.password !== this.state.conf_password){ //check of wachtwoorden overeen komen
+      this.setState({error_mesage: "Wachtwoorden komen niet overeen"});
+      return;
+    }
+
+    else if (this.state.password.length < 6 || special_char.test(this.state.password)){
+      this.setState({error_mesage: "Een wachtwoord moet minimaal 6 letters lang zijn en een special teken hebben"});
+    }
+
+    else {
+      this.setState({error_mesage: null});
+    }
+		apiClient.post("/api/register",
+			{//stuurt een register request naar de API
+			email: this.state.email,
+			password: this.state.password,
+      adress: this.state.adress,
+      housenumber: this.state.housenumber,
+      postalcode: this.state.postalcode
+      }
+			).then(response =>{ //Op het moment is er een CSRF token mismatch error dit is een safety iets van laravel maar dit betekent wel dat de req bij de API binnekomt
+			this.setState({loggedIn: true, token: response.data});
+		});
+	}
+
   render (){
     return(
-      <main className="create-user">
-        <div className="create-user--form">
-          <h1>Registration</h1>
-          <label>Username</label>
-          <input type="text"
-          placeholder="Work Email"/>
-          <label>Password</label>
-          <input type="text" placeholder="Password.."/>
-          <label>Confirm Password</label>
-          <input type="text" placeholder="Confirm Password.."/>
-          <button>Register</button>
-        </div>
-        <div className="create-user__notes">
-        </div>
-        <h1>Registration</h1>
-        <form action="LEEG" className="create-user--form">
-          <div className="create-user--form--group">
-            <label>Email</label>
+      <main className="create_user">
+        <h1>Registratie</h1>
+        <form className="create_user__form"  onSubmit={event => this.register_webtoken(event)}>
+          <div className="create_user__form__group">
+            <label>Email: </label>
             <input type="email"
             placeholder="Work Email"
             required
             value={this.state.email}
             onChange={(e) => this.setState({ email: e.target.value })}/>
           </div>
-          <div className="create-user--form--group">
-            <label>Password</label>
+          <div className="create_user__form__group">
+            <label>Wachtwoord: </label>
             <input type="password"
             placeholder="Password.."
-            required value={this.state.password}
+            required
+            value={this.state.password}
             onChange={(e) => this.setState({ password: e.target.value })}/>
           </div>
-          <div className="login__form__group">
-            <label>Confirm Password</label>
-            <input type="password" placeholder="Confirm Password.."/>
+          <div className="create_user__form__group">
+            <label>Herhaal wachtwoord: </label>
+            <input type="password"
+            placeholder="Confirm Password.."
+            required
+            value={this.state.conf_password}
+            onChange={(e) => this.setState({ conf_password: e.target.value })}/>
           </div>
-          <div>
-            <label for="browser">Kies rol:</label>
-            <datalist>
-              <option value="Piemol"/>
-              <option value="Niet Piemol"/>
+          <div className="create_user__form__group">
+            <label>Adres: </label>
+            <input type="Adress"
+            placeholder="Voorbeeldstraat"
+            required
+            value={this.state.adress}
+            onChange={(e) => this.setState({ adress: e.target.value })}/>
+          </div>
+          <div className="create_user__form__group">
+          <label>Huisnummer: </label>
+            <input type="text"
+            placeholder="1a"
+            required
+            value={this.state.house_number}
+            onChange={(e) => this.setState({ housenumber: e.target.value })}/>
+          </div>
+          <div className="create_user__form__group">
+            <label>Postcode: </label>
+            <input type="postalcode"
+            placeholder="1234AB"
+            required
+            value={this.state.postalcode}
+            onChange={(e) => this.setState({ postalcode: e.target.value })}/>
+          </div>
+          <div className="create_user__form__group">
+            <label>Kies rol: </label>
+            <input list="user_role"
+            placeholder="Rol"/>
+            <datalist id="user_role">
+              <option value="Manager"/>
+              <option value="Medewerker"/>
             </datalist>
           </div>
-            <input type="submit"/>
-
+          <input classname="create_user__form__button" type="submit"/>
         </form>
+        <p id="create_user__form__notes">{this.state.error_mesage}</p>
       </main>
     );
   }

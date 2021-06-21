@@ -2,6 +2,8 @@ import React, { useState, Component } from "react";
 import { NavLink } from "react-router-dom";
 import { MenuList, LoggedInMenu } from "./MenuList";
 import "./Navbar.css";
+import {onLoginChange} from '../../utils';
+import { textChangeRangeIsUnchanged } from "typescript";
 
 class Navbar extends Component {
   constructor(props) {
@@ -10,23 +12,28 @@ class Navbar extends Component {
     this.state = {
       clicked: false,
       menuList: [],
-      login: localStorage.getItem("login"),
+      login: JSON.parse(localStorage.getItem("login")),
     };
-
-    window.addEventListener("storage", () => {
-      console.log("Storage changed", window.localStorage);
-    });
+    
   }
 
+  
   componentDidMount() {
-    // onMenuChange((newNavItems) => {
-    //   let ml = this.mapMenuList(newNavItems);
+    
+    onLoginChange(() => {
+      this.setState({
+        login: JSON.parse(localStorage.getItem("login")),
 
-    //   this.setState({menuList: ml});
-    // });
+      }, () => this.getMenu());
 
+    });
+    
+    this.getMenu();
+  }
+
+  getMenu(){
     let ml;
-    if (this.state.login === true) {
+    if (this.state.login == true) {
       ml = this.mapMenuList(LoggedInMenu);
     } else {
       ml = this.mapMenuList(MenuList);
@@ -56,7 +63,7 @@ class Navbar extends Component {
     const menuList = this.state.menuList;
 
     return (
-      <header classname="navbar">
+      <header className="navbar">
         <nav>
           <div className="navbar__logo">
             <a href="/" className="navbar__redirect">

@@ -2,6 +2,18 @@ let loggedIn = false;
 let username = null;
 let name = null;
 
+let callbackLogins = [];
+
+export const onLoginChange = (func) => {
+	callbackLogins.push(func);
+};
+
+export const callOnLoginCallbacks = (func) => {
+	for (let i = 0; i < callbackLogins.length; i++) {
+	callbackLogins[i]();
+	}
+}
+
 function setLoginToken(token) {
 	localStorage.setItem('token', token);
 }

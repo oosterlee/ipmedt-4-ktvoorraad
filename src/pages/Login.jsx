@@ -31,6 +31,7 @@ class Login extends Component {
 		const {username, password, isChecked} = this.state;
 		if (this.state.loggedIn === true) {
 			window.localStorage.setItem('token', this.state.token.token);
+			window.localStorage.setItem('login', true);
 			apiClient.defaults.headers.Authorization = "Bearer " + this.state.token.token;
 			return (<Redirect to="/products" />)
 		}

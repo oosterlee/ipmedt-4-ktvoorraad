@@ -23,7 +23,23 @@ class Login extends Component {
 					password: this.state.password} //password het zelfde verhaal als email
 				).then(response =>{ 
 					this.setState({loggedIn: true, token: response.data});
+		}).catch(function (error){
+			if(error.response){
+				const error_message = document.getElementById("login__error");
+				error_message.style.display = "block";
+				error_message.innerHTML = error.response.data.message;
+				error_message.classList.remove("login__error--remove");
+				void error_message.offsetWidth;
+				error_message.classList.add("login__error--show");
+			}
 		});
+	}
+
+	display_error(){
+		const error_message = document.getElementById("login__error");
+		error_message.classList.remove("login__error--show");
+		void error_message.offsetWidth;
+		error_message.classList.add("login__error--remove");
 	}
 
 	render() {
@@ -43,7 +59,9 @@ class Login extends Component {
 					</figure>
 					<h2 className="login__header__sub-title">Inloggen</h2>
 				</section>
+
 				<form className="login__form" onSubmit={event => this.login_webtoken(event)}>
+					<p onClick={this.display_error} id="login__error">ERROR MESSAGE</p>
 					<div className="login__form__group">
 						<label className="login__form__label">E-mailadres</label>
 						<input className="login__form__input" name="name" type="email" placeholder="E-mail" required value={username} onChange={e => this.setState({ email: e.target.value })}/>

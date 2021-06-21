@@ -68,6 +68,10 @@ class OrderRequests extends Component {
 			return(<section><p>Loading... Please wait</p></section>);
 		}
 
+		if (this.state.products.length == 0) {
+			return(<section><p className="text--center text--sm">Er zijn geen orderrequests.</p></section>);
+		}
+
 		return (
 			<section>
 				<table className="orderrequests">

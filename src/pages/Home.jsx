@@ -20,6 +20,7 @@ import CreateUser from './CreateUser';
 import Profile from './Profile';
 
 import OrderRequests from './OrderRequests';
+import OrderExporter from './OrderExporter';
 import OrderHistory from './OrderHistory';
 import Navbar from "../components/Navbar/Navbar";
 
@@ -67,13 +68,16 @@ class Home extends Component {
             <PrivateRoute exact path="/management/orderrequests">
               <OrderRequests />
             </PrivateRoute>
+            <PrivateRoute exact path="/management/exports" component={OrderExporter} />
 
             <PrivateRoute exact path="/orderhistory/:id" component={OrderHistory} />
+
 
             <PrivateRoute exact path="/profile">
               <Profile />
             </PrivateRoute>
             
+
             <Link to="/management/products">Management</Link>
           </Switch>
         </Router>

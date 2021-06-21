@@ -23,3 +23,12 @@
 .productsmanagement tr:nth-child(even) {
   background-color: #dddddd;
 }
+
+.exports__button {
+  display: inline-block;
+  margin: 2rem;
+}
+
+.exports__button:hover {
+  color: white;
+}

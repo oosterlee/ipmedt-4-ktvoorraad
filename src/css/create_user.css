@@ -5,7 +5,7 @@
 }
 .create_user__form{
   display: grid;
-  max-width: 50%;
+  max-width: 30%;
 }
 .create_user__form__group{
   padding: 5px 16px;
@@ -24,7 +24,7 @@
   background: var(--light-grey);
 }
 
-.create_user__form__input[type=submit]{
+.create_user__form__button{
   background-color: var(--jh-yellow);
   padding: 5px;
   margin-top: 5px;

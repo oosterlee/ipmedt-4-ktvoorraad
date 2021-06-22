@@ -1,24 +1,24 @@
 .component__basicbutton {
 	padding: 1.2rem 3rem;
-	background: #363b42;
-	color: #fff;
+	background: var(--dark-grey);
+	color: var(--white);
 	border: none;
 	font-family: sans-bold,Arial,sans-serif;
-    letter-spacing: .4px;
+  letter-spacing: .4px;
 	right: 0;
 	bottom: 0;
 	position: absolute;
 	margin-bottom: 1rem;
-	
+
 }
 
 .component__basicbutton--icon {
 	display:flex;
 	bottom: 0;
-	
+
 }
 .component__basicbutton:hover {
-	background: #4c5157;
-	color: #fff;
+	background: var(--dark-grey);
+	color: var(--white);
 
 }

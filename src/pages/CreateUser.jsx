@@ -40,7 +40,7 @@ class CreateUser extends Component{
     }
 
     else if (this.state.password.length < 6 || special_char.test(this.state.password)){
-      this.setState({error_mesage: "Een wachtwoord moet minimaal 6 letters lang zijn en een special teken hebben"});
+      this.setState({error_mesage: "Een wachtwoord moet minimaal 6 letters lang zijn en een speciaal teken bevatten"});
     }
 
     else {
@@ -138,9 +138,9 @@ class CreateUser extends Component{
               <option value="Medewerker"/>
             </datalist>
           </div>
-          <input classname="create_user__form__button" type="submit"/>
+          <input className="create_user__form__button" type="submit"/>
+          <p id="create_user__form__notes">{this.state.error_mesage}</p>
         </form>
-        <p id="create_user__form__notes">{this.state.error_mesage}</p>
       </main>
     );
   }

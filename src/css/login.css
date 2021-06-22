@@ -98,6 +98,27 @@
     color: var(--dark-grey);
 }
 
+#login__error{
+    background-color: rgba(255, 0, 0, 0.2);
+    padding: 1rem;
+    color: black;
+    font-weight: 600;
+    border-radius: 0.8rem;
+    margin: 2rem 6rem;
+    border: red 0.3rem solid;
+    display: none;
+    height: 100%;
+    transition: 0.5s all;
+}
+
+.login__error--remove{
+    animation: error_message 1s 1 normal forwards;
+}
+
+.login__error--show{
+    animation: error_message 1s 1 reverse backwards;
+}
+
 @media only screen and (min-width: 26.38rem) {
 
     .login__header__figure{
@@ -135,5 +156,16 @@
 
     .login__form__input{
         right: 40%;
+    }
+}
+
+@keyframes error_message {
+    from{
+        opacity: 1;
+        display: block;
+    }
+    to{
+        opacity: 0;
+        display: none;
     }
 }

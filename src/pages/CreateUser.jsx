@@ -17,6 +17,7 @@ class CreateUser extends Component{
       l_name: "",
       password: "",
       conf_password: "",
+      role: "",
       adress: "",
       housenumber: "",
       postalcode: "",
@@ -53,7 +54,8 @@ class CreateUser extends Component{
 			password: this.state.password,
       adress: this.state.adress,
       housenumber: this.state.housenumber,
-      postalcode: this.state.postalcode
+      postalcode: this.state.postalcode,
+      role: this.state.role,
       }
 			).then(response =>{ //Op het moment is er een CSRF token mismatch error dit is een safety iets van laravel maar dit betekent wel dat de req bij de API binnekomt
 			this.setState({loggedIn: true, token: response.data});
@@ -132,7 +134,7 @@ class CreateUser extends Component{
           <div className="create_user__form__group">
             <label>Kies rol: </label>
             <input className="create_user__form__input" list="user_role"
-            placeholder="Rol"/>
+            placeholder="Rol" value={this.state.role} onChange={(e) => this.setState({ role: e.target.value })}/>
             <datalist id="user_role">
               <option value="Manager"/>
               <option value="Medewerker"/>

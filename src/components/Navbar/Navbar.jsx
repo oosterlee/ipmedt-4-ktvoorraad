@@ -1,9 +1,13 @@
-import React, { useState, Component } from "react";
+import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import { MenuList, LoggedInUser, LoggedinAdmin, LoggedInManager } from "./MenuList";
+import {
+  MenuList,
+  LoggedInUser,
+  LoggedInAdmin,
+  LoggedInManager,
+} from "./MenuList";
 import "./Navbar.css";
-import {onLoginChange} from '../../utils';
-import { textChangeRangeIsUnchanged } from "typescript";
+import { onLoginChange } from "../../utils";
 
 class Navbar extends Component {
   constructor(props) {
@@ -14,30 +18,48 @@ class Navbar extends Component {
       menuList: [],
       login: JSON.parse(localStorage.getItem("login")),
       old_login: false,
+      role: localStorage.getItem("role"),
+      userId: localStorage.getItem("userId"),
     };
-    
   }
 
-  
   componentDidMount() {
-    
     onLoginChange(() => {
-      this.setState({
-        login: JSON.parse(localStorage.getItem("login")),
-
-      }, () => this.getMenu());
-
+      console.log("onLoginChange");
+      this.setState(
+        {
+          login: JSON.parse(localStorage.getItem("login")),
+          role: localStorage.getItem("role"),
+          userId: localStorage.getItem("userId"),
+        },
+        () => this.getMenu()
+      );
     });
-    
+
     this.getMenu();
   }
 
-  getMenu(){
+  getMenu() {
     let ml;
-    if (this.state.login == true) {
-      ml = this.mapMenuList(LoggedInMenu);
-    } else {
-      ml = this.mapMenuList(MenuList);
+    let userRole = this.state.role;
+    let loggedIn = this.state.login;
+    console.log(userRole, loggedIn, this.state.userId);
+
+    switch ((userRole, loggedIn)) {
+      case userRole === "Medewerker" && loggedIn === true:
+        ml = this.mapMenuList(LoggedInUser);
+        break;
+
+      case userRole === "Manager" && loggedIn === true:
+        ml = this.mapMenuList(LoggedInManager);
+        break;
+
+      case userRole === "Admin" && loggedIn === true:
+        ml = this.mapMenuList(LoggedInAdmin);
+        break;
+
+      default:
+        ml = this.mapMenuList(MenuList);
     }
 
     this.setState({ menuList: ml });
@@ -47,7 +69,11 @@ class Navbar extends Component {
     return arr.map(({ url, title }, index) => {
       return (
         <li key={index}>
-          <NavLink exact to={url} activeClassName="active">
+          <NavLink
+            exact
+            to={url.replace(":id", this.state.userId)}
+            activeClassName="active"
+          >
             {title}
           </NavLink>
         </li>
@@ -62,11 +88,6 @@ class Navbar extends Component {
   render() {
     const clicked = this.state.clicked;
     const menuList = this.state.menuList;
-    this.state.login = JSON.parse(localStorage.getItem("login"));
-    if(this.state.login === this.state.old_login){
-      this.getMenu();
-    }
-    this.state.old_login = !this.state.login;
 
     return (
       <header className="navbar">
@@ -76,7 +97,10 @@ class Navbar extends Component {
               Jung<font>heinrich</font>
             </a>
           </div>
-          <div className="navbar__menu-icon" onClick={this.handleClick.bind(this)}>
+          <div
+            className="navbar__menu-icon"
+            onClick={this.handleClick.bind(this)}
+          >
             <i className={clicked ? "fas fa-times" : "fas fa-bars"}></i>
           </div>
           <ul

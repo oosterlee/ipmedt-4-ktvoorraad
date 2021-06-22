@@ -1,5 +1,3 @@
-const login = localStorage.getItem("login");
-
 export const MenuList = [
   {
     title: "Producten",
@@ -28,15 +26,13 @@ export const LoggedInUser = [
 
   {
     title: "Bestelgeschiedenis",
-    url: "/orderhistory/user",
+    url: "/orderhistory/:id",
   },
 
   {
     title: "Profiel",
     url: "/profile",
   },
-
-  
 ];
 
 export const LoggedInManager = [
@@ -65,7 +61,6 @@ export const LoggedInManager = [
   },
 ];
 
-
 export const LoggedInAdmin = [
   {
     title: "Producten",
@@ -85,7 +80,6 @@ export const LoggedInAdmin = [
     title: "Product Toevoegen",
     url: "/toevoegen",
   },
-
 
   {
     title: "Bestelverzoeken",

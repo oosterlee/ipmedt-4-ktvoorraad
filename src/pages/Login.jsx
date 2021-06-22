@@ -51,8 +51,21 @@ class Login extends Component {
 
 			window.localStorage.setItem('login', true);
 			apiClient.defaults.headers.Authorization = "Bearer " + this.state.token.token;
+			
+			apiClient
+			.get("/api/user")
+			.then((response) => {
+			console.log(response.data.role);
+			localStorage.setItem("role",response.data.role);
+			localStorage.setItem("userId",response.data.id);
+			callOnLoginCallbacks(); 
+
+			}).catch(function (error) {
+			console.log("er gaat iets fouts", error)
+
+			});
 			callOnLoginCallbacks();
-			return (<Redirect to="/toevoegen" />)
+			return (<Redirect to="/products" />)
 		}
 
 

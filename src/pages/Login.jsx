@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import '../css/login.css';
-import {Redirect} from 'react-router-dom';
 import apiClient from '../services/api';
+import {Redirect} from 'react-router-dom';
+
 import {callOnLoginCallbacks} from '../utils';
 class Login extends Component {
   constructor(props) {

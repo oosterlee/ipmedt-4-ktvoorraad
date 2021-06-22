@@ -24,6 +24,7 @@ class Navbar extends Component {
     onLoginChange(() => {
       this.setState({
         login: JSON.parse(localStorage.getItem("login")),
+        
 
       }, () => this.getMenu());
 

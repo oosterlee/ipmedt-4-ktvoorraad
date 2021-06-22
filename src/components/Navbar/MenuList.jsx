@@ -33,9 +33,40 @@ export const LoggedInMenu = [
     title: "Profiel",
     url: "/profile",
   },
+
+  
 ];
 
-export const LoggedInMenuManager = [
+
+
+export const LoggedInManager = [
+  {
+    title: "Producten",
+    url: "/products",
+  },
+  {
+    title: "Winkelwagen",
+    url: "/cart",
+  },
+
+  {
+    title: "Bestelgeschiedenis",
+    url: "/orderhistory/:id",
+  },
+
+  {
+    title: "Bestelverzoeken",
+    url: "/management/orderrequests",
+  },
+
+  {
+    title: "Profiel",
+    url: "/profile",
+  },
+];
+
+
+export const LoggedInAdmin = [
   {
     title: "Producten",
     url: "/products",

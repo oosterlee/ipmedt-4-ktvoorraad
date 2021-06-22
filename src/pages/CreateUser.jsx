@@ -84,7 +84,7 @@ class CreateUser extends Component{
           <div className="create_user__form__group">
             <label>Email: </label>
             <input className="create_user__form__input" type="email"
-            placeholder="Work Email"
+            placeholder="Werkmail"
             required
             value={this.state.email}
             onChange={(e) => this.setState({ email: e.target.value })}/>
@@ -92,7 +92,7 @@ class CreateUser extends Component{
           <div className="create_user__form__group">
             <label>Wachtwoord: </label>
             <input className="create_user__form__input" type="password"
-            placeholder="Password.."
+            placeholder="Wachtwoord"
             required
             value={this.state.password}
             onChange={(e) => this.setState({ password: e.target.value })}/>
@@ -100,7 +100,7 @@ class CreateUser extends Component{
           <div className="create_user__form__group">
             <label>Herhaal wachtwoord: </label>
             <input className="create_user__form__input" type="password"
-            placeholder="Confirm Password.."
+            placeholder="Wachtwoord"
             required
             value={this.state.conf_password}
             onChange={(e) => this.setState({ conf_password: e.target.value })}/>

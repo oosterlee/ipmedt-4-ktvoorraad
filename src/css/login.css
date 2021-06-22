@@ -87,7 +87,7 @@
 
 .login__forgot__p{
     padding: 1rem;
-    color: var(--dark-grey));
+    color: var(--dark-grey);
 }
 
 .login__forgot__a:link{
@@ -158,7 +158,6 @@
         right: 40%;
     }
 }
-<<<<<<< HEAD
 
 @keyframes error_message {
     from{
@@ -170,5 +169,3 @@
         display: none;
     }
 }
-=======
->>>>>>> kilian

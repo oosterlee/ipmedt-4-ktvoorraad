@@ -41,7 +41,7 @@ class CreateUser extends Component{
     }
 
     else if (this.state.password.length < 6 || special_char.test(this.state.password)){
-      this.setState({error_mesage: "Een wachtwoord moet minimaal 6 letters lang zijn en een special teken hebben"});
+      this.setState({error_mesage: "Een wachtwoord moet minimaal 6 letters lang zijn en een speciaal teken bevatten"});
     }
 
     else {
@@ -86,7 +86,7 @@ class CreateUser extends Component{
           <div className="create_user__form__group">
             <label>Email: </label>
             <input className="create_user__form__input" type="email"
-            placeholder="Work Email"
+            placeholder="Werkmail"
             required
             value={this.state.email}
             onChange={(e) => this.setState({ email: e.target.value })}/>
@@ -94,7 +94,7 @@ class CreateUser extends Component{
           <div className="create_user__form__group">
             <label>Wachtwoord: </label>
             <input className="create_user__form__input" type="password"
-            placeholder="Password.."
+            placeholder="Wachtwoord"
             required
             value={this.state.password}
             onChange={(e) => this.setState({ password: e.target.value })}/>
@@ -102,7 +102,7 @@ class CreateUser extends Component{
           <div className="create_user__form__group">
             <label>Herhaal wachtwoord: </label>
             <input className="create_user__form__input" type="password"
-            placeholder="Confirm Password.."
+            placeholder="Wachtwoord"
             required
             value={this.state.conf_password}
             onChange={(e) => this.setState({ conf_password: e.target.value })}/>
@@ -140,9 +140,9 @@ class CreateUser extends Component{
               <option value="Medewerker"/>
             </datalist>
           </div>
-          <input classname="create_user__form__button" type="submit"/>
+          <input className="create_user__form__button" type="submit"/>
+          <p id="create_user__form__notes">{this.state.error_mesage}</p>
         </form>
-        <p id="create_user__form__notes">{this.state.error_mesage}</p>
       </main>
     );
   }

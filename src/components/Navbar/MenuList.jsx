@@ -1,5 +1,3 @@
-const login = localStorage.getItem("login");
-
 export const MenuList = [
   {
     title: "Producten",
@@ -24,6 +22,48 @@ export const LoggedInMenu = [
   {
     title: "Winkelwagen",
     url: "/cart",
+  },
+
+  {
+    title: "Bestelgeschiedenis",
+    url: "/orderhistory/:id",
+  },
+
+  {
+    title: "Profiel",
+    url: "/profile",
+  },
+];
+
+export const LoggedInMenuManager = [
+  {
+    title: "Producten",
+    url: "/products",
+  },
+  {
+    title: "Winkelwagen",
+    url: "/cart",
+  },
+
+  {
+    title: "Bestelgeschiedenis",
+    url: "/orderhistory/:id",
+  },
+
+  {
+    title: "Product Toevoegen",
+    url: "/toevoegen",
+  },
+
+
+  {
+    title: "Bestelverzoeken",
+    url: "/management/orderrequests",
+  },
+
+  {
+    title: "Excel-export",
+    url: "/management/exports",
   },
 
   {

@@ -1,6 +1,6 @@
 import React, { useState, Component } from "react";
 import { NavLink } from "react-router-dom";
-import { MenuList, LoggedInMenu } from "./MenuList";
+import { MenuList, LoggedInMenu, LoggedInMenuManager } from "./MenuList";
 import "./Navbar.css";
 import {onLoginChange} from '../../utils';
 import { textChangeRangeIsUnchanged } from "typescript";
@@ -35,7 +35,13 @@ class Navbar extends Component {
     let ml;
     if (this.state.login == true) {
       ml = this.mapMenuList(LoggedInMenu);
-    } else {
+    }
+    
+    // if(this.state.login == true &&  manager?){
+    //   ml = this.mapMenuList(LoggedInMenuManager)
+    // }
+    
+    else {
       ml = this.mapMenuList(MenuList);
     }
 

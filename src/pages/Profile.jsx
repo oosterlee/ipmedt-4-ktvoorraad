@@ -33,6 +33,7 @@ class Profile extends Component {
         window.localStorage.setItem('token', null);
         apiClient.defaults.headers.Authorization = null;
         this.setState({logged_out: true});
+        localStorage.clear();
     }
 
 	render() {

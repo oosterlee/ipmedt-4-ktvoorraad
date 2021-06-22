@@ -1,10 +1,10 @@
 import React, { useState, Component } from "react";
 import { NavLink } from "react-router-dom";
-import { MenuList, LoggedInMenu } from "./MenuList";
+import { MenuList, LoggedInMenu, LoggedInManager, LoggedInAdmin } from "./MenuList";
 import "./Navbar.css";
 import {onLoginChange} from '../../utils';
 import { textChangeRangeIsUnchanged } from "typescript";
-
+let getUser;
 class Navbar extends Component {
   constructor(props) {
     super(props);
@@ -32,10 +32,47 @@ class Navbar extends Component {
   }
 
   getMenu(){
+
+    apiClient.get("/api/user").then(response => {
+
+      
+      console.log(response);
+
+      // if (this.state.login == true && response.data.role == "Admin") {
+      //   ml = this.mapMenuList(LoggedInAdmin);
+      // }
+  
+      // else if(this.state.login == true && response.data.role == "Manager") {
+      //   ml = this.mapMenuList(LoggedInManager);
+      // }
+      
+      // else {
+      //   ml = this.mapMenuList(MenuList);
+      // }
+
+      getUser = response.response.data.role;
+
+    }).catch(function (error){
+      // this.setState({logged_out: true});
+    });
+
+
     let ml;
-    if (this.state.login == true) {
+
+
+    if (this.state.login) {
       ml = this.mapMenuList(LoggedInMenu);
-    } else {
+    }
+
+    if (this.state.login == true && getUser == "Admin") {
+      ml = this.mapMenuList(LoggedInAdmin);
+    }
+
+    else if(this.state.login == true && getUser == "Manager") {
+      ml = this.mapMenuList(LoggedInManager);
+    }
+
+    else {
       ml = this.mapMenuList(MenuList);
     }
 

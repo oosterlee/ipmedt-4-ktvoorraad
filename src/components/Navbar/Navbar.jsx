@@ -1,6 +1,6 @@
 import React, { useState, Component } from "react";
 import { NavLink } from "react-router-dom";
-import { MenuList, LoggedInMenu } from "./MenuList";
+import { MenuList, LoggedInUser, LoggedinAdmin, LoggedInManager } from "./MenuList";
 import "./Navbar.css";
 import {onLoginChange} from '../../utils';
 import { textChangeRangeIsUnchanged } from "typescript";

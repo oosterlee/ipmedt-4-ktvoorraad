@@ -22,7 +22,12 @@ class Profile extends Component {
     getUser() {
         if(this.state.get_user_done == false){
             apiClient.get('/api/user').then(response => {
-                this.setState({name: response.data.name, email: response.data.email, get_user_done: true});
+                this.setState({name: response.data.name,
+                                email: response.data.email,
+                                address: response.data.address,
+                                housenumber: response.data.housenumber,
+                                postalcode: response.data.postalcode,
+                                get_user_done: true});
             }).catch(function (error){
                 // this.setState({logged_out: true});
             });
@@ -30,14 +35,13 @@ class Profile extends Component {
     }
 
     logout(){
-        window.localStorage.setItem('token', null);
+        localStorage.setItem('token', null);
+        localStorage.setItem('login', false);
         apiClient.defaults.headers.Authorization = null;
         this.setState({logged_out: true});
     }
 
 	render() {
-        //TODO
-        //check of gebruiker ingelogd is
         this.getUser();
 
         if(this.state.logged_out === true){

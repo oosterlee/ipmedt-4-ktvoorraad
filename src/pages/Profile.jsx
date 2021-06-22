@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../css/profile.css';
 import {Redirect } from 'react-router-dom';
 import apiClient from '../services/api';
+import {callOnLoginCallbacks} from '../utils';
 
 class Profile extends Component {
   constructor(props) {
@@ -33,6 +34,7 @@ class Profile extends Component {
         window.localStorage.setItem('token', null);
         apiClient.defaults.headers.Authorization = null;
         this.setState({logged_out: true});
+        localStorage.clear();
     }
 
 	render() {
@@ -41,6 +43,7 @@ class Profile extends Component {
         this.getUser();
 
         if(this.state.logged_out === true){
+            callOnLoginCallbacks();
             return (<Redirect to="/login"/>)
         }
 

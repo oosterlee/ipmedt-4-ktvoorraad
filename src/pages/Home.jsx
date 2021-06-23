@@ -17,12 +17,15 @@ import ShoppingCart from './ShoppingCart';
 import ProductsManager from './ProductsManager';
 import AddProducts from './AddProducts';
 import CreateUser from './CreateUser';
+import EditProducts from './EditProduct';
 import Profile from './Profile';
 
 import OrderRequests from './OrderRequests';
 import OrderExporter from './OrderExporter';
 import OrderHistory from './OrderHistory';
 import Navbar from "../components/Navbar/Navbar";
+import ProductsAdmin from '../components/ProductsAdmin';
+import EditProduct from './EditProduct';
 
 class Home extends Component {
   constructor(props) {
@@ -40,6 +43,9 @@ class Home extends Component {
 						<PrivateRoute exact path="/products">
 							<Products />
 						</PrivateRoute>
+
+            <PrivateRoute path="/product/:id" component={EditProduct}/>
+
 
             <Route exact path="/cart">
               <ShoppingCart />

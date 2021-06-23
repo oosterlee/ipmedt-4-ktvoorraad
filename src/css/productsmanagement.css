@@ -1,34 +1,12 @@
-.productsmanagement {
-	max-width: 100rem;
-	margin: 0 auto;
+section.add{
+  max-width: 100rem;
+  margin: 0 auto;
 }
 
-.productsmanagement__table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
+.admincedit-form__btn{
+  float: right;
 }
 
-.productsmanagement__col--fit-content {
-    width: 1%;
-    white-space: nowrap;
-}
-
-.productsmanagement td, .productsmanagement th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-.productsmanagement tr:nth-child(even) {
-  background-color: #dddddd;
-}
-
-.exports__button {
-  display: inline-block;
-  margin: 2rem;
-}
-
-.exports__button:hover {
-  color: white;
+.admincdelete-form__btn{
+  float: left;
 }

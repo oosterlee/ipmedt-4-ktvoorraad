@@ -70,6 +70,10 @@ export const LoggedInAdmin = [
     title: "Winkelwagen",
     url: "/cart",
   },
+  {
+    title: "Producten wijzigen",
+    url: "/management/products",
+  },
 
   {
     title: "Bestelgeschiedenis",

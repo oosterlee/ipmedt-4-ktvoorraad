@@ -68,6 +68,7 @@ this.submitHandler = e =>
     let Formdata = new FormData();
     Formdata.append('image',this.state.image
     );
+    
 
     let keys = Object.keys(this.state);
     for(let i = 0 ; i<keys.length; i++)
@@ -76,9 +77,9 @@ this.submitHandler = e =>
     }
 
     
-    for (var pair of Formdata.entries()) {
-        console.log(pair[0]+ ', ' + pair[1]); 
-    }
+    
+
+
 
     console.log(Formdata)
     const header = {
@@ -87,7 +88,7 @@ this.submitHandler = e =>
         
       };
     axios
-        .put('http://localhost:8000/api/management/products' , header)
+        .put('http://localhost:8000/api/management/products' , this.state)
         .then(response => {
         console.log(response)
         })
@@ -105,10 +106,8 @@ render() {
     const { image, productname, description, category, brand, model, price, maxorders, condition, approval, id} = this.state
     return (
         <section class="add">
-            <h1 class="add__title"> Product toevoegen </h1>
+            <h1 class="add__title"> Product wijzigen </h1>
         <form class="create-form" action="/management/products" method="PUT" enctype="multipart/form-data" onSubmit={this.submitHandler}>
-
-            <p name="id" id="id">{this.state.id} value={productname}</p>
 
             <label for="image">Kies een afbeelding </label>
             <input class="create-form__input form-control-file" type="file" name="image" onChange={this.fileHandler} /> 

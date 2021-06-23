@@ -1,11 +1,12 @@
-
-
-
-.exports__button {
-  display: inline-block;
-  margin: 2rem;
+section.add{
+  max-width: 100rem;
+  margin: 0 auto;
 }
 
-.exports__button:hover {
-  color: white;
+.admincedit-form__btn{
+  float: right;
+}
+
+.admincdelete-form__btn{
+  float: left;
 }

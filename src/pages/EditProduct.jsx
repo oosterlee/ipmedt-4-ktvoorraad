@@ -59,6 +59,18 @@ class EditProduct extends Component {
         
     })
     
+    this.delete = e =>
+    {
+        e.preventDefault();
+        axios
+        .delete('http://localhost:8000/api/management/products/'+ this.state.id, header)
+        .then(response => {
+            console.log(response);
+        })
+        .catch(error => {
+        console.log(error)
+    })
+    }
 
 
 
@@ -108,9 +120,6 @@ render() {
         <section class="add">
             <h1 class="add__title"> Product wijzigen </h1>
         <form class="create-form" action="/management/products" method="PUT" enctype="multipart/form-data" onSubmit={this.submitHandler}>
-
-            <label for="image">Kies een afbeelding </label>
-            <input class="create-form__input form-control-file" type="file" name="image" onChange={this.fileHandler} /> 
             
 
             <label for="name">Titel</label>
@@ -143,8 +152,8 @@ render() {
             </select>
             
             <div class="create-form__u-flex">
-                <a class="create-form__btn" href="/index"><button class="create-form__btn create-form__btn--margin" type="submit">Cancel</button></a>
-                <a class="create-form__btn"><button class="create-form__btn" type="submit">Toevoegen</button></a>
+                <a class="create-form__btn" href="/index"><button class="admindelete-form__btn create-form__btn--margin" type="submit" onClick={this.delete}>Verwijderen</button></a>
+                <a class="create-form__btn"><button class="adminedit-form__btn" type="submit">Toevoegen</button></a>
             </div>
             
 

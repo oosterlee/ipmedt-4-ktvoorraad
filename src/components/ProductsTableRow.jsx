@@ -37,7 +37,7 @@ class ProductsTableRow extends Component {
 							!item.dropdownItems.includes(data) ?
 							<option key={data} value="NULL">Selecteer</option>
 							:
-							<></>
+							""
 						}
 						{
 							item.dropdownItems.map((item, i) => (
@@ -60,7 +60,7 @@ class ProductsTableRow extends Component {
 				return(<figure><img src={data} alt={data ? "Afbeelding van product" : "Geen plaatje"} height="100%" width="100%" /></figure>);
 		}
 
-		return (<>{data || "-"}</>);
+		return (data || "-");
 	}
 
 	render() {

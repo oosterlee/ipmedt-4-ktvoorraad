@@ -55,7 +55,7 @@ class ProductsItem extends Component {
 						this.props.verifyRequired ?
 						<p className="products__item__verify-required">Goedkeuring vereist</p>
 						:
-						<></>
+						""
 					}
 					<BasicButton icon="cart-plus" className="products__item__button" onClick={this.addToCart.bind(this)} />
 					{/*<p className="products__item__price products__item__text--m2">€{ this.props.price || "--" }</p>*/}

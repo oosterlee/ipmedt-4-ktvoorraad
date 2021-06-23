@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ProductsItem from '../components/ProductsItem';
 import DataContext from '../DataContext';
 
+import apiClient from '../services/api';
+
 class ShoppingCart extends Component {
 	constructor(props) {
 		super(props);
@@ -35,10 +37,12 @@ class ShoppingCart extends Component {
 
 		console.log(productsToOrder);
 
-		axios.post("http://localhost:8000/api/orderproducts/store", productsToOrder, {headers: {"Accept": "application/json"}}).then(response => {
+		apiClient.post("api/orderproducts/store", productsToOrder).then(response => {
 			this.setState({ ordering: false, cart: [], ordered: true });
 			this.context.cart = [];
 			this.context.__callCartCallbacks();
+		}).catch(error => {
+			this.setState({ ordering: false, ordered: false, errorMsg: "Sorry, het is niet gelukt. Probeer het opnieuw." });
 		});
 	}
 	
@@ -55,12 +59,17 @@ class ShoppingCart extends Component {
 			return (
 				<section class="shoppingcart">
 					<p class="shoppingcart_noitems">De winkelwagen is leeg.</p>
-				
 				</section>
 			);
 		}
 		return (
 			<section className="products">
+				{
+					this.state.errorMsg ?
+					<h2>Error. { this.state.errorMsg }</h2>
+					:
+					""
+				}
 				<ul className="products__list">
 					{
 						this.state.cart.map((item, i) => 

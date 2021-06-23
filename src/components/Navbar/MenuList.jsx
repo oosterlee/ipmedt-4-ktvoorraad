@@ -1,12 +1,12 @@
 export const MenuList = [
-  {
-    title: "Producten",
-    url: "/products",
-  },
-  {
-    title: "Winkelwagen",
-    url: "/cart",
-  },
+  // {
+  //   title: "Producten",
+  //   url: "/products",
+  // },
+  // {
+  //   title: "Winkelwagen",
+  //   url: "/cart",
+  // },
 
   {
     title: "Login",

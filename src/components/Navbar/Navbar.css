@@ -127,7 +127,7 @@ a, a:hover, a:focus, a:active {
 
   .navbar__menu-list li a,
   .navbar__menu-list li:last-child a {
-    width: 12rem;
+    width: 20rem;
     display: block;
     margin: auto;
     font-size: 1.8rem;

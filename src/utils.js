@@ -10,7 +10,7 @@ export const onLoginChange = (func) => {
 
 export const callOnLoginCallbacks = (func) => {
 	for (let i = 0; i < callbackLogins.length; i++) {
-	callbackLogins[i]();
+		callbackLogins[i]();
 	}
 }
 

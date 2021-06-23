@@ -10,14 +10,15 @@ import {
 	tryLogin,
 	isLoggedIn,
 	getToken,
-	tryLoginWithToken
+	tryLoginWithToken,
+	onLoginChange
 } from '../utils';
 
 class PrivateRoute extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			loading: !isLoggedIn(),
+			loading: false,
 			loggedIn: isLoggedIn(),
 		};
 
@@ -25,17 +26,21 @@ class PrivateRoute extends Component {
 	}
 
 	componentDidMount() {
-		this.checkLogin();
+		// this.checkLogin();
+		onLoginChange(() => {
+			this.setState({ loggedIn: isLoggedIn() });
+		});
+
 	}
 
 	checkLogin() {
 		console.log("Check");
-		if (!isLoggedIn()) {
-			tryLoginWithToken().then((res) => {
-				if (res.loggedIn) this.setState({ loading: false, loggedIn: true });
-				else this.setState({ loading: false });
-			});
-		}
+		// if (!isLoggedIn()) {
+		// 	tryLoginWithToken().then((res) => {
+		// 		if (res.loggedIn) this.setState({ loading: false, loggedIn: true });
+		// 		else this.setState({ loading: false });
+		// 	});
+		// }
 	}
 
 	render() {

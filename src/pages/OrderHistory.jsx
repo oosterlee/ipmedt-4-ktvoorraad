@@ -18,6 +18,9 @@ class OrderHistory extends Component {
 			sortBy: "time",
 		};
 
+	}
+
+	componentDidMount() {
 		axios.get("http://localhost:8000/api/orderhistory/" + (this.props.match.params.id || 1)).then(json => this.setState({ products: json.data, renderProducts: json.data.sort(this.sortProducts.bind(this)), loading: false }));
 	}
 
@@ -54,27 +57,27 @@ class OrderHistory extends Component {
 						{
 							this.state.renderProducts.map((item, i) => (
 								<tr key={"tr_" + i}>
-									<td class="key" colspan="1" data-label="Product informatie">
+									<td className="key" colSpan="1" data-label="Product informatie">
 										<p>Naam</p>
 										<p>Merk</p>
 										<p>Model</p>
 										<p>Besteld op</p>
 									</td>
-									<td class="value" colspan="1">
+									<td className="value" colSpan="1">
 										<p>{item.product.productname}</p>
 										<p>{item.product.brand}</p>
 										<p>{item.product.model}</p>
 										<p>{(new Date(item.created_at)).toLocaleDateString()}</p>
 									</td>
 
-									<td class="key" colspan="1" data-label="Persoon details">
+									<td className="key" colSpan="1" data-label="Persoon details">
 										<p>Naam</p>
 										<p>Email</p>
 										<p>Adres</p>
 										<p>Postcode</p>
 										<p>Huisnummer</p>
 									</td>
-									<td class="value" colspan="1">
+									<td className="value" colSpan="1">
 										<p><Link className="link" to={"/orderhistory/" + item.user_id}>{item.user.name}</Link></p>
 										<p>{item.user.email}</p>
 										<p>{item.user.address}</p>
@@ -82,7 +85,7 @@ class OrderHistory extends Component {
 										<p>{item.user.housenumber}</p>
 									</td>
 
-									<td colspan="1" data-label="Acties" className={item.approved == 0 ? "or-wait" : (item.approved == 1) ? "or-approved" : "or-rejected"}>
+									<td colSpan="1" data-label="Acties" className={item.approved == 0 ? "or-wait" : (item.approved == 1) ? "or-approved" : "or-rejected"}>
 										<p>{item.approved == 0 ? "In afwachting" : (item.approved == 1) ? "Goedgekeurd" : "Afgekeurd"}</p>
 									</td>
 								</tr>

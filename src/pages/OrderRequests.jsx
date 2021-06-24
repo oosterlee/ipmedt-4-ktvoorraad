@@ -19,6 +19,9 @@ class OrderRequests extends Component {
 			animateItem: [],
 		};
 
+	}
+
+	componentDidMount() {
 		axios.get("http://localhost:8000/api/orderrequests").then(json => this.setState({ products: json.data, renderProducts: json.data, loading: false }));
 	}
 
@@ -88,27 +91,27 @@ class OrderRequests extends Component {
 						{
 							this.state.renderProducts.map((item, i) => (
 								<tr key={"tr_" + i} className={this.state.animateItem.includes(item.id) ? "orderrequests--fade" : ""}>
-									<td class="key" colspan="1" data-label="Product informatie">
+									<td className="key" colSpan="1" data-label="Product informatie">
 										<p>Naam</p>
 										<p>Merk</p>
 										<p>Model</p>
 										<p>Besteld op</p>
 									</td>
-									<td class="value" colspan="1">
+									<td className="value" colSpan="1">
 										<p>{item.product.productname}</p>
 										<p>{item.product.brand}</p>
 										<p>{item.product.model}</p>
 										<p>{(new Date(item.created_at)).toLocaleDateString()}</p>
 									</td>
 
-									<td class="key" colspan="1" data-label="Persoon details">
+									<td className="key" colSpan="1" data-label="Persoon details">
 										<p>Naam</p>
 										<p>Email</p>
 										<p>Adres</p>
 										<p>Postcode</p>
 										<p>Huisnummer</p>
 									</td>
-									<td class="value" colspan="1">
+									<td className="value" colSpan="1">
 										<p><Link className="link" to={"/orderhistory/" + item.user_id}>{item.user.name}</Link></p>
 										<p>{item.user.email}</p>
 										<p>{item.user.address}</p>
@@ -116,20 +119,20 @@ class OrderRequests extends Component {
 										<p>{item.user.housenumber}</p>
 									</td>
 
-									<td class="key" colspan="1" data-label="Prijsinformatie">
+									<td className="key" colSpan="1" data-label="Prijsinformatie">
 										<p>Prijs per</p>
 										<p>Aantal</p>
 										<p>Totaal</p>
 									</td>
-									<td class="value" colspan="1">
-										<p class="price">{Number(item.product.price).toFixed(2)}</p>
+									<td className="value" colSpan="1">
+										<p className="price">{Number(item.product.price).toFixed(2)}</p>
 										<p>{item.amount}</p>
-										<p class="price">{(Number(item.product.price) * item.amount).toFixed(2)}</p>
+										<p className="price">{(Number(item.product.price) * item.amount).toFixed(2)}</p>
 									</td>
 
-									<td colspan="1" data-label="Acties">
-										<button {...(this.state.loadingItem.includes(item.id) ? {disabled: "disabled"} : {})} class="orderrequests__button orderrequests__button--approve" onClick={this.approve.bind(this, item.id)}>Goedkeuren</button>
-										<button {...(this.state.loadingItem.includes(item.id) ? {disabled: "disabled"} : {})} class="orderrequests__button orderrequests__button--reject" onClick={this.reject.bind(this, item.id)}>Afkeuren</button>
+									<td colSpan="1" data-label="Acties">
+										<button {...(this.state.loadingItem.includes(item.id) ? {disabled: "disabled"} : {})} className="orderrequests__button orderrequests__button--approve" onClick={this.approve.bind(this, item.id)}>Goedkeuren</button>
+										<button {...(this.state.loadingItem.includes(item.id) ? {disabled: "disabled"} : {})} className="orderrequests__button orderrequests__button--reject" onClick={this.reject.bind(this, item.id)}>Afkeuren</button>
 									</td>
 								</tr>
 							))

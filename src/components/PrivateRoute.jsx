@@ -7,10 +7,7 @@ import {
 } from "react-router-dom";
 
 import {
-	tryLogin,
 	isLoggedIn,
-	getToken,
-	tryLoginWithToken,
 	onLoginChange
 } from '../utils';
 

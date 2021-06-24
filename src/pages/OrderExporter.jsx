@@ -18,15 +18,13 @@ class OrderExporter extends Component {
 			loading: true,
 		};
 
-		axios.get("http://localhost:8000/api/export/days").then(json => this.setState({ days: json.data.reverse(), loading: false }));
 	}
 
 	componentDidMount() {
-		console.log(this.state);
+		axios.get("http://localhost:8000/api/export/days").then(json => this.setState({ days: json.data.reverse(), loading: false }));
 	}
 
 	render() {
-		console.log(this.state);
 		if (this.state.loading) {
 			return(<section><p>Loading... Please wait</p></section>);
 		}

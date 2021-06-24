@@ -21,7 +21,8 @@ class OrderExporter extends Component {
 	}
 
 	componentDidMount() {
-		axios.get("http://localhost:8000/api/export/days").then(json => this.setState({ days: json.data.reverse(), loading: false }));
+		axios.get((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/export/days').then(json => this.setState({ days: json.data.reverse(), loading: false }));
+		// axios.get("http://localhost:8000/api/export/days").then(json => this.setState({ days: json.data.reverse(), loading: false }));
 	}
 
 	render() {

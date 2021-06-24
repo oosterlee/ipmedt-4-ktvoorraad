@@ -22,8 +22,7 @@ class Products extends Component {
 	}
 
 	makeApiCall = searchTerm => {
-		const BASE_URL = "http://localhost:8000/api/products";
-		axios.get(BASE_URL).then(json => this.setState({ products: json.data, renderProducts: json.data }));
+		axios.get((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/products').then(json => this.setState({ products: json.data, renderProducts: json.data }));
 	}
 
 	search(e){

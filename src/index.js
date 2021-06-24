@@ -8,6 +8,8 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 
 import DataContext from './DataContext';
 
+console.log("BASE URL=", process.env);
+
 library.add(fas);
 
 const dataContextData = {

@@ -53,7 +53,7 @@ class AddProducts extends Component {
                 
               };
             axios
-			    .post('http://localhost:8000/api/products/store', Formdata, header)
+			    .post((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/products/store', Formdata, header)
 			    .then(response => {
 				console.log(response)
 			    })

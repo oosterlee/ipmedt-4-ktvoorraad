@@ -100,7 +100,7 @@ this.submitHandler = e =>
         
       };
     axios
-        .put('http://localhost:8000/api/management/products' , this.state)
+        .put((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/management/products' , this.state)
         .then(response => {
         console.log(response)
         })

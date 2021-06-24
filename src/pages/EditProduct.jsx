@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import '../css/productsmanagement.css';
 import { useParams } from 'react-router';
-
-
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-
 
 
 class EditProduct extends Component {
@@ -22,6 +20,9 @@ class EditProduct extends Component {
             condition: '',
             approval: '1',
             id: '',
+            redirect: false,
+            errorMsg: false,
+            loading: false,
         }
 
        
@@ -61,13 +62,16 @@ class EditProduct extends Component {
     
     this.delete = e =>
     {
+        this.setState({ loading: true });
         e.preventDefault();
         axios
         .delete((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/management/products/'+ this.state.id, header)
         .then(response => {
             console.log(response);
+            this.setState({ redirect: "/management/products", errorMsg: false, loading: false });
         })
         .catch(error => {
+            this.setState({ errorMsg: "Er is iets misgegaan met het verwijderen van het product. Probeer het later opnieuw.", loading: false })
         console.log(error)
     })
     }
@@ -76,6 +80,7 @@ class EditProduct extends Component {
 
 this.submitHandler = e =>
 {
+    this.setState({ loading: true });
     e.preventDefault()
     let Formdata = new FormData();
     Formdata.append('image',this.state.image
@@ -102,9 +107,11 @@ this.submitHandler = e =>
     axios
         .put((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/management/products' , this.state)
         .then(response => {
+            this.setState({ redirect: "/products", loading: false });
         console.log(response)
         })
         .catch(error => {
+            this.setState({ errorMsg: "Er is iets misgegaan met het updaten van het product. Probeer het later opnieuw.", loading: false })
         console.log(error)
         
     })
@@ -115,45 +122,54 @@ this.submitHandler = e =>
 	
 
 render() {
+    if (this.state.redirect !== false) {
+        return (<Redirect to={this.state.redirect} />)
+    }
     const { image, productname, description, category, brand, model, price, maxorders, condition, approval, id} = this.state
     return (
-        <section class="add">
-            <h1 class="add__title"> Product wijzigen </h1>
-        <form class="create-form" action="/management/products" method="PUT" enctype="multipart/form-data" onSubmit={this.submitHandler}>
+        <section className="add">
+            <h1 className="add__title"> Product wijzigen </h1>
+            {
+                this.state.errorMsg ?
+                <h3 className="text--error">{this.state.errorMsg}</h3>
+                :
+                ""
+            }
+        <form className="create-form" action="/management/products" method="PUT" enctype="multipart/form-data" onSubmit={this.submitHandler}>
             
 
-            <label for="name">Titel</label>
-            <input class="create-form__input" name="productname" type="text" value={productname} onChange={this.changeHandler}/>
-            <label for="kind">Categorie</label>
-            <input class="create-form__input" name="category" id="category" type="text" value={category} onChange={this.changeHandler}/>
-            <label for="kind">Merk</label>
-            <input class="create-form__input" name="brand" id="brand" type="text" value={brand} onChange={this.changeHandler}/>
-            <label for="kind">Model</label>
-            <input class="create-form__input" name="model" id="model" type="text" value={model} onChange={this.changeHandler}/>
+            <label htmlFor="name">Titel</label>
+            <input className="create-form__input" name="productname" type="text" value={productname} onChange={this.changeHandler}/>
+            <label htmlFor="kind">Categorie</label>
+            <input className="create-form__input" name="category" id="category" type="text" value={category} onChange={this.changeHandler}/>
+            <label htmlFor="kind">Merk</label>
+            <input className="create-form__input" name="brand" id="brand" type="text" value={brand} onChange={this.changeHandler}/>
+            <label htmlFor="kind">Model</label>
+            <input className="create-form__input" name="model" id="model" type="text" value={model} onChange={this.changeHandler}/>
 
                 
 
-            <label for="description">Beschrijving</label>
-            <textarea class="create-form__input create-form__input--height" name="description" id="description" value={description} onChange={this.changeHandler}> </textarea>
+            <label htmlFor="description">Beschrijving</label>
+            <textarea className="create-form__input create-form__input--height" name="description" id="description" value={description} onChange={this.changeHandler}> </textarea>
 
-            <label for="prijs">Prijs</label>
-            <input class="create-form__input" name="price" type="number" value={price} onChange={this.changeHandler}/>
+            <label htmlFor="prijs">Prijs</label>
+            <input className="create-form__input" name="price" type="number" value={price} onChange={this.changeHandler}/>
 
-            <label for="maximum">Maximaal aantal</label>
-            <input class="create-form__input" name="maxorders" id="maxorders" type="number" value={maxorders} onChange={this.changeHandler}/>
+            <label htmlFor="maximum">Maximaal aantal</label>
+            <input className="create-form__input" name="maxorders" id="maxorders" type="number" value={maxorders} onChange={this.changeHandler}/>
 
-            <label for="condition">Conditie</label>
-            <input class="create-form__input" name="condition"  type="text" value={condition} onChange={this.changeHandler}/>
+            <label htmlFor="condition">Conditie</label>
+            <input className="create-form__input" name="condition"  type="text" value={condition} onChange={this.changeHandler}/>
 
-            <label for="Goedkeuring">Goedkeuring nodig?</label>
+            <label htmlFor="Goedkeuring">Goedkeuring nodig?</label>
             <select id="approval" name="approval" value={approval} onChange={this.changeHandler}>
                 <option value="1">Wel nodig</option>
                 <option value="0">Niet nodig</option>
             </select>
             
-            <div class="create-form__u-flex">
-                <a class="create-form__btn" href="/index"><button class="admindelete-form__btn create-form__btn--margin" type="submit" onClick={this.delete}>Verwijderen</button></a>
-                <a class="create-form__btn"><button class="adminedit-form__btn" type="submit">Toevoegen</button></a>
+            <div className="create-form__u-flex">
+                <a className="create-form__btn" href="/index"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="admindelete-form__btn create-form__btn--margin" type="submit" onClick={this.delete}>Verwijderen</button></a>
+                <a className="create-form__btn"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="adminedit-form__btn" type="submit">Updaten</button></a>
             </div>
             
 

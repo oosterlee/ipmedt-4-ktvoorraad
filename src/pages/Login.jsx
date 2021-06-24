@@ -12,35 +12,40 @@ class Login extends Component {
 			password: "",
 			loggedIn: false,
 			token: "",
+			errorMsg: false,
+			loading: false,
 		}
 	}
 	
 	login_webtoken(event){
+		this.setState({ loading: true, errorMsg: false });
 		event.preventDefault(); //voorkomt dat de pagina refreshed
 			apiClient.post("/api/login", 
 			{//stuurt een post request naar de API
 					email: this.state.email, //De eerste email moet overeen komen met de naam in de db. De tweede email is van de states dus de daat werkelijke waarde
 					password: this.state.password} //password het zelfde verhaal als email
 				).then(response =>{ 
-					this.setState({loggedIn: true, token: response.data});
-		}).catch(function (error){
-			if(error.response){
-				const error_message = document.getElementById("login__error");
-				error_message.style.display = "block";
-				error_message.innerHTML = error.response.data.message;
-				error_message.classList.remove("login__error--remove");
-				void error_message.offsetWidth;
-				error_message.classList.add("login__error--show");
-			}
+					this.setState({loggedIn: true, token: response.data, loading: false});
+		}).catch(error => {
+			console.log("ERREUR", error);
+			this.setState({ loading: false, errorMsg: error.response ? error.response.data.message : "Er is iets fout gegaan. Probeer het later opnieuw." });
+			// if(error.response){
+			// 	const error_message = document.getElementById("login__error");
+			// 	error_message.style.display = "block";
+			// 	error_message.innerHTML = error.response.data.message;
+			// 	error_message.classList.remove("login__error--remove");
+			// 	void error_message.offsetWidth;
+			// 	error_message.classList.add("login__error--show");
+			// }
 		});
 	}
 
-	display_error(){
-		const error_message = document.getElementById("login__error");
-		error_message.classList.remove("login__error--show");
-		void error_message.offsetWidth;
-		error_message.classList.add("login__error--remove");
-	}
+	// display_error(){
+	// 	const error_message = document.getElementById("login__error");
+	// 	error_message.classList.remove("login__error--show");
+	// 	void error_message.offsetWidth;
+	// 	error_message.classList.add("login__error--remove");
+	// }
 
 	render() {
 		const {username, password, isChecked} = this.state;
@@ -79,7 +84,7 @@ class Login extends Component {
 				</section>
 
 				<form className="login__form" onSubmit={event => this.login_webtoken(event)}>
-					<p onClick={this.display_error} id="login__error">ERROR MESSAGE</p>
+					<p className="text--center text--mb text--error">{this.state.errorMsg ? this.state.errorMsg : ""}</p>
 					<div className="login__form__group">
 						<label className="login__form__label">E-mailadres</label>
 						<input className="login__form__input" name="name" type="email" placeholder="E-mail" required value={username} onChange={e => this.setState({ email: e.target.value })}/>
@@ -88,7 +93,7 @@ class Login extends Component {
 						<label className="login__form__label">Wachtwoord</label>
 						<input className="login__form__input" name="password" type="password" placeholder="Wachtwoord" required value={password} onChange={e => this.setState({ password: e.target.value })}/>
 					</div>
-					<input className="login__form__submit" type="submit" value="Login"/>
+					<input className="login__form__submit" type="submit" value="Login" {...(this.state.loading ? {disabled: "disabled"} : {})} />
 				</form>
 
 				<section className="login__forgot">

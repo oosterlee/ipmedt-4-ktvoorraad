@@ -38,7 +38,7 @@ class OrderExporter extends Component {
 			<section className="exports">
 				{
 					this.state.days.map((item, i) => (
-						<a href={"http://localhost:8000/api/export/" + item.date} className="button exports__button" key={"export_" + i}>{item.date + " (" + item.count + ")"}</a>
+						<a href={(process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/export/' + item.date} className="button exports__button" key={"export_" + i}>{item.date + " (" + item.count + ")"}</a>
 					))
 				}
 			</section>

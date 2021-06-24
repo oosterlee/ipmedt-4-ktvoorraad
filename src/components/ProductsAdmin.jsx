@@ -25,7 +25,7 @@ class adminProductsAdmin extends Component {
 				
 					<figure className="adminProducts__list__figure">
 					<img
-						src={"http://localhost:8000" + this.props.image || "https://www.dia.org/sites/default/files/No_Img_Avail.jpg" }
+						src={(process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + this.props.image || "https://www.dia.org/sites/default/files/No_Img_Avail.jpg" }
 						alt={ this.props.title || "Plaatje niet beschikbaar" }
 						className="adminProducts__item__image"
 					/>

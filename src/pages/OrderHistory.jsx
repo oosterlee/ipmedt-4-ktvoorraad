@@ -21,7 +21,7 @@ class OrderHistory extends Component {
 	}
 
 	componentDidMount() {
-		axios.get("http://localhost:8000/api/orderhistory/" + (this.props.match.params.id || 1)).then(json => this.setState({ products: json.data, renderProducts: json.data.sort(this.sortProducts.bind(this)), loading: false }));
+		axios.get((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/orderhistory/' + (this.props.match.params.id || 1)).then(json => this.setState({ products: json.data, renderProducts: json.data.sort(this.sortProducts.bind(this)), loading: false }));
 	}
 
 	sortProducts(el1, el2) {

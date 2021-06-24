@@ -49,7 +49,7 @@ class EditProduct extends Component {
 
     console.log(this.props)
     axios
-        .get('http://localhost:8000/api/products/' + this.props.match.params.id, header)
+        .get((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/products' + this.props.match.params.id, header)
         .then(response => {
         this.setState(response.data)
         console.log(response)
@@ -63,7 +63,7 @@ class EditProduct extends Component {
     {
         e.preventDefault();
         axios
-        .delete('http://localhost:8000/api/management/products/'+ this.state.id, header)
+        .delete((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/management/products/'+ this.state.id, header)
         .then(response => {
             console.log(response);
         })

@@ -82,13 +82,13 @@ class ProductsItem extends Component {
 	render() {
 		return (
 			<li className="products__list__item">
-				<Link to={"/product/" + this.props.id} className="link--no-style"><figure className="products__list__figure">
+				<figure className="products__list__figure">
 					<img
 						src={(process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + this.props.image || "https://www.dia.org/sites/default/files/No_Img_Avail.jpg" }
 						alt={ this.props.title || "Plaatje niet beschikbaar" }
 						className="products__item__image"
 					/>
-				</figure></Link>
+				</figure>
 				<div className="products__list__info-wrapper">
 					<h2 className="products__item__title products__item__text--m1" { ...(this.state.showInfo ? { "data-info": "show" } : {}) } title={ this.props.condition || "Geen bestelregel" }>
 						{ this.props.brand + " " +  this.props.model }

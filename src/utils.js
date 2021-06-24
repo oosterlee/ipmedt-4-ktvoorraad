@@ -1,4 +1,3 @@
-let loggedIn = false;
 let username = null;
 let name = null;
 
@@ -16,10 +15,6 @@ export const callOnLoginCallbacks = (func) => {
 
 function setLoginToken(token) {
 	localStorage.setItem('token', token);
-}
-
-function __setLoggedIn(_loggedIn) {
-	loggedIn = _loggedIn;
 }
 
 function __setUserInfo(info) {
@@ -40,7 +35,6 @@ function tryLogin(username, password) {
 		// TODO: Try to login with token
 		// setTimeout(() => {
 			setLoginToken("jwt-token");
-			__setLoggedIn(true);
 			__setUserInfo({ username: "test", name: "Test User" });
 			resolve({ loggedIn: true });
 		// }, 1000);

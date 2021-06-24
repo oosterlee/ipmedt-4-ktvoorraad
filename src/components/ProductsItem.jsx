@@ -91,7 +91,7 @@ class ProductsItem extends Component {
 				</figure></Link>
 				<div className="products__list__info-wrapper">
 					<h2 className="products__item__title products__item__text--m1" { ...(this.state.showInfo ? { "data-info": "show" } : {}) } title={ this.props.condition || "Geen bestelregel" }>
-						<h2>{ this.props.brand + " " +  this.props.model }</h2>
+						{ this.props.brand + " " +  this.props.model }
 					</h2>
 					
 					<FontAwesomeIcon icon="info-circle" className="products__item__info-icon" onMouseEnter={this.showInfo.bind(this)} onMouseLeave={this.hideInfo.bind(this)} />

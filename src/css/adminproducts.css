@@ -18,6 +18,7 @@ li.adminProducts__list__item {
     letter-spacing: 0.03rem;
 	color: var(--main-text-color);
 	font-size: 120%;
+	word-break: break-all;
 }
 
 .adminProducts__item__title[data-info="show"]::before {

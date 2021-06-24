@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 import ProductsItem from '../components/ProductsItem';
 import Searchbar from "../components/Searchbar";
 
-import { getUserInfo } from '../utils';
 
 class Products extends Component {
 	constructor(props) {

@@ -32,7 +32,7 @@ class adminProductsAdmin extends Component {
 				</figure>
 				<div className="adminProducts__list__info-wrapper">
 					<h2 className="adminProducts__item__title adminProducts__item__text--m1" { ...(this.state.showInfo ? { "data-info": "show" } : {}) }>
-						<h4>{ this.props.brand + " " +  this.props.model }</h4>
+						{ this.props.brand + " " +  this.props.model }
 					</h2>		
 					</div>
 					

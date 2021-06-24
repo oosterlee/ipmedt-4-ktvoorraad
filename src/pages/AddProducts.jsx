@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../css/addproducts.css'
 import axios from 'axios'; 
+import { Redirect } from 'react-router-dom';
 
 
 class AddProducts extends Component {
@@ -18,6 +19,9 @@ class AddProducts extends Component {
             maxorders: '',
             condition: '',
             approval: '1',
+            redirect: false,
+            loading: false,
+            errorMsg: false,
         }
 
         
@@ -35,6 +39,7 @@ class AddProducts extends Component {
 
         this.submitHandler = e =>
         {
+            this.setState({ loading: true });
             e.preventDefault()
             let Formdata = new FormData();
             Formdata.append('image',this.state.image
@@ -55,9 +60,11 @@ class AddProducts extends Component {
             axios
 			    .post((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/products/store', Formdata, header)
 			    .then(response => {
+                    this.setState({ redirect: "/products", loading: false });
 				console.log(response)
 			    })
 			    .catch(error => {
+                    this.setState({ loading: false, errorMsg: "Er is iets mis gegaan het een product toevoegen. Probeer het later opnieuw." });
 				console.log(error)
                 
 			})
@@ -67,9 +74,18 @@ class AddProducts extends Component {
 
     render() {
         const { image, productname, description, category, brand, model, price, maxorders, condition, approval} = this.state
-		return (
+		if (this.state.redirect !== false) {
+            return (<Redirect to={this.state.redirect} />)
+        }
+        return (
             <section className="add">
                 <h1 className="add__title"> Product toevoegen </h1>
+                {
+                    this.state.errorMsg ?
+                    <h3 className="text--error">{this.state.errorMsg}</h3>
+                    :
+                    ""
+                }
             <form className="create-form" action="/products" method="POST" encType="multipart/form-data" onSubmit={this.submitHandler}>
                 <label htmlFor="image">Kies een afbeelding </label>
                 <input className="create-form__input form-control-file" type="file" name="image"  onChange={this.fileHandler} /> 
@@ -105,8 +121,8 @@ class AddProducts extends Component {
                 </select>
                 
                 <div className="create-form__u-flex">
-                    <a className="create-form__btn" href="/index"><button className="create-form__btn create-form__btn--margin" type="submit">Cancel</button></a>
-                    <a className="create-form__btn"><button className="create-form__btn" type="submit">Toevoegen</button></a>
+                    <a className="create-form__btn" href="/index"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="create-form__btn create-form__btn--margin" type="submit">Cancel</button></a>
+                    <a className="create-form__btn"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="create-form__btn" type="submit">Toevoegen</button></a>
                 </div>
 
 

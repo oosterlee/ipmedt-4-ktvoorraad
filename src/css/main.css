@@ -45,3 +45,32 @@ body{
 .text--sm {
 	font-size: 2.4rem;
 }
+
+.text--mb {
+	margin-bottom: 1rem;
+}
+
+.text--error {
+	color: orangered;
+}
+
+button[disabled],
+button:disabled,
+input[type="submit"]:disabled {
+	animation: loading 1s infinite;
+	filter: opacity(.5);
+	pointer-events: none;
+	cursor: default;
+}
+
+@keyframes loading {
+	0% {
+		filter: opacity(.5);
+	}
+	50% {
+		filter: opacity(.2);
+	}
+	100% {
+		filter: opacity(.5);
+	}
+}

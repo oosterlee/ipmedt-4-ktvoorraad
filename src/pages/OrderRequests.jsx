@@ -37,7 +37,8 @@ class OrderRequests extends Component {
 		let loadingItem = this.state.loadingItem;
 		loadingItem.push(id);
 		this.setState({ loadingItem });
-		axios.put("http://localhost:8000/api/orderrequests/" + id, { approved: data }).then(result => {
+		axios.put((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/orderrequests/' + id, { approved: data }).then(result => {
+		// axios.put("http://localhost:8000/api/orderrequests/" + id, { approved: data }).then(result => {
 			let products = [...this.state.products];
 
 			for (let i = 0; i < products.length; i++) {
@@ -63,6 +64,10 @@ class OrderRequests extends Component {
 
 				this.setState({ renderProducts: this.state.products, loadingItem, animateItem });
 			}, 990);
+		}).catch(e => {
+			let index = loadingItem.indexOf(id);
+			if (index >= 0) loadingItem.splice(index, 1);
+			this.setState({ loadingItem });
 		});
 	}
 

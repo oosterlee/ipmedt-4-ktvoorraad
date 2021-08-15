@@ -9,7 +9,6 @@ class Profile extends Component {
     super(props);
 
 		this.state = {
-			new_password: "",
             id: "",
             name: "",
             email: "",
@@ -20,6 +19,9 @@ class Profile extends Component {
             logged_out: false,
             profile__wrapper: "block",
             profile__form: "none",
+            password_form: "none",
+            password_new: "",
+            password_old: "",
 		}
 	}
 
@@ -44,6 +46,11 @@ class Profile extends Component {
         this.setState({profile__wrapper: "none", profile__form: "flex"});
     }
 
+    show_password_reset(e){
+        e.preventDefault();
+        this.setState({profile__wrapper: "none", password_form: "flex"});
+    }
+
     profile_edit(event){
         event.preventDefault(); //voorkomt dat de pagina refreshed
         apiClient.put("/api/user/update",
@@ -57,6 +64,17 @@ class Profile extends Component {
         }).then(response => {
             this.setState({profile__wrapper: "block", profile__form: "none"});
         });
+    }
+
+    reset_password(event){
+        event.preventDefault();
+        console.log(this.state.password_old);
+
+        apiClient.put("/api/user/password", {
+            id: this.state.id,
+            password_old: this.state.password_old,
+            password_new: this.state.password_new,
+        }).then( response => {this.logout(); });
     }
 
     logout(){
@@ -85,6 +103,8 @@ class Profile extends Component {
                     <p className="profile__info">Postcode: {this.state.postalcode}</p>
                     <button className="profile__logout" onClick={this.logout.bind(this)}>Uitloggen</button>
                     <a className="profile_bewerken" href="#" onClick={e => this.show_profile_edit(e)}>Profiel bewerken</a>
+                    <br></br>
+                    <a className="profile_bewerken" href="#" onClick={e => this.show_password_reset(e)}>Wachtwoord aanpassen</a>
                 </div>
                 <form  className="profile__form" style={{display: this.state.profile__form, gridColumnStart: 2, padding: "2rem", alignItems: "center", flexDirection: "column"}} onSubmit={event => this.profile_edit(event)}>
                     <div className="profile__form__group">
@@ -113,7 +133,20 @@ class Profile extends Component {
 					</div>
 
                     <button className="profile__form__button" type="submit">Profiel Aanpassen</button>
+                </form>
 
+                <form  className="profile__form" style={{display: this.state.password_form, gridColumnStart: 2, padding: "2rem", alignItems: "center", flexDirection: "column"}} onSubmit={event => this.reset_password(event)}>
+                    <div className="profile__form__group">
+						<label className="profile__form__label">Oud wachtwoord</label>
+						<input className="profile__form__input" name="password_old" type="password" placeholder="Oud wachtwoord" required onChange={e => this.setState({ password_old: e.target.value })}/>
+					</div>
+
+                    <div className="profile__form__group">
+						<label className="profile__form__label">Niew wachtwoord</label>
+						<input className="profile__form__input" name="password_new" type="password" placeholder="Nieuw wachtwoord" required onChange={e => this.setState({ password_new: e.target.value })}/>
+					</div>
+
+                    <button className="profile__form__button" type="submit">Wachtwoord Aanpassen</button>
                 </form>
             </article>
 		);

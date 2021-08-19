@@ -83,11 +83,11 @@ button:hover {
 }
 
 .pack:hover{
-    border: 3px solid #ffb900;
+    border: 3px solid rgba(255, 185, 0, 0.8) !important ;
 
 }
-.pack:active{
-    border: 3px solid #ffb900;
+.pactive{
+    border: 3px solid #ffb900 !important;
 
 }
 

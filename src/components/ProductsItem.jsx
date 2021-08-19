@@ -81,7 +81,7 @@ class ProductsItem extends Component {
 
 	render() {
 		return (
-			<li className="products__list__item">
+			<li className={"products__list__item " + this.props.className} >
 				<figure className="products__list__figure">
 					<img
 						src={(process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + this.props.image || "https://www.dia.org/sites/default/files/No_Img_Avail.jpg" }
@@ -89,14 +89,19 @@ class ProductsItem extends Component {
 						className="products__item__image"
 					/>
 				</figure>
-				<div className="products__list__info-wrapper">
+				<div className="products__list__info-wrapper" {...(this.props.pack ? {style: {marginBottom: 0}} : {})}>
 					<h2 className="products__item__title products__item__text--m1" { ...(this.state.showInfo ? { "data-info": "show" } : {}) } title={ this.props.condition || "Geen bestelregel" }>
 						{ this.props.brand + " " +  this.props.model }
 					</h2>
 					
 					<FontAwesomeIcon icon="info-circle" className="products__item__info-icon" onMouseEnter={this.showInfo.bind(this)} onMouseLeave={this.hideInfo.bind(this)} />
 					
-					<p className="products__item__description">{ this.props.description.substr(0, 350) }</p>			
+					{
+						this.props.pack ?
+						""
+						: 
+						<p className="products__item__description">{ this.props.description.substr(0, 350) }</p>
+					}		
 					</div>
 					{
 						this.props.cart ?
@@ -106,16 +111,20 @@ class ProductsItem extends Component {
 						:
 						""
 					}
-					
-					
+
 					{
-						this.props.cart ?
+						this.props.pack ?
+						""
+						:
+						this.props.cart  ?
 						<BasicButton icon="trash" className={"products__item__button" + (this.props.verifyRequired ? " pib--verify" : "")} onClick={this.removeFromCart.bind(this)} />
 						: 
 						<BasicButton {...(!this.state.putInCart ? {icon: "cart-plus"} : {title: "Toegevoegd aan winkelwagen"})} className={"products__item__button" + (this.props.verifyRequired ? " pib--verify" : "") + (this.state.putInCart ? " pic--animation" : "")} onClick={this.addToCart.bind(this)} />
 
 
+
 					}
+					
 
 			</li>
 		);

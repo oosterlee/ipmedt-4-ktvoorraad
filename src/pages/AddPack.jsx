@@ -14,6 +14,7 @@ class AddPack extends Component {
             description:'',
             products: [],
             renderProducts: [],
+            addedProducts: [],
         }
 
         this.getProducts();
@@ -24,6 +25,20 @@ class AddPack extends Component {
 
     getProducts(){
         axios.get((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/products').then(json => this.setState({ products: json.data, renderProducts: json.data }));
+
+    }
+
+    toggleProduct(pid) {
+        let addedProducts = this.state.addedProducts;
+        console.log(addedProducts);
+        
+        if (addedProducts.includes(pid)) {
+            addedProducts.splice(addedProducts.indexOf(pid), 1);
+        } else {
+            addedProducts.push(pid);
+        }
+
+        this.setState({ addedProducts });
 
     }
 
@@ -56,7 +71,7 @@ class AddPack extends Component {
                 <ul className="products__list">
 					{
 						this.state.renderProducts.map((item, i) => 
-							<ProductsItem className="pack" {...item} key={item.id} pack={true} />
+							<ProductsItem {...(this.state.addedProducts.includes(item.id) ? {"className": "pack pactive"} : {"className": "pack"})} {...item} key={item.id} pack={true} onClick={this.toggleProduct.bind(this, item.id)} />
 						)
 					}
 				</ul>

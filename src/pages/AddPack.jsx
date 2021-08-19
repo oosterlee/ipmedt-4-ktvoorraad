@@ -56,7 +56,7 @@ class AddPack extends Component {
                 <ul className="products__list">
 					{
 						this.state.renderProducts.map((item, i) => 
-							<ProductsItem className="TEST" {...item} key={item.id} pack={true} />
+							<ProductsItem className="pack" {...item} key={item.id} pack={true} />
 						)
 					}
 				</ul>

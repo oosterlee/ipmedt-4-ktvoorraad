@@ -5,6 +5,8 @@ import { Redirect } from 'react-router-dom';
 import ProductsItem from '../components/ProductsItem';
 import apiClient from '../services/api';
 
+import Loading from '../components/Loading';
+
 class AddPack extends Component {
     constructor(props) {
 		super(props);
@@ -15,20 +17,43 @@ class AddPack extends Component {
             products: [],
             renderProducts: [],
             addedProducts: [],
+            redirect: false,
+            loading: true,
         }
 
         this.getProducts();
 
-
+        if (this.props.match && this.props.match.params.id) {
+            this.getPack(this.props.match.params.id);
+        }
         
 	}
 
     getProducts(){
-        axios.get((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/products').then(json => this.setState({ products: json.data, renderProducts: json.data }));
+        this.setState({ loading: true });
+        axios.get((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/products').then(json => this.setState({ products: json.data, renderProducts: json.data, loading: false }));
+    }
 
+    getPack(id) {
+        this.setState({ loading: true });
+        axios.get((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/pack/' + id).then(json => {
+
+            let addedProducts = [];
+
+            console.log("GETPACK", json);
+
+            for (let i = 0; i < json.data.products.length; i++) {
+                addedProducts.push(json.data.products[i].id);
+            }
+
+            console.log(addedProducts);
+
+            this.setState({ packname: json.data.name, packdescription: json.data.description, addedProducts, loading: false });
+        });
     }
 
     store() { // TOEVOEGEN
+        this.setState({ loading: true });
         const { packname, packdescription, addedProducts } = this.state;
         console.log(packname, packdescription, addedProducts);
 
@@ -55,13 +80,18 @@ class AddPack extends Component {
     }
 
     update() { // SPREEKT VOOR ZICHZELF
+        this.setState({ loading: true });
         const { packname, packdescription, addedProducts } = this.state;
         console.log(packname, packdescription, addedProducts);
 
         let updateData = {};
 
+        updateData.name = packname;
+        updateData.description = packdescription;
+        updateData.products = addedProducts;
+
         axios
-            .put((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/pack/' + this.props.id + '/update' , updateData)
+            .put((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/pack/' + this.props.match.params.id + '/update' , updateData)
             .then(response => {
                 this.setState({ redirect: "/products", loading: false });
             console.log(response)
@@ -74,10 +104,20 @@ class AddPack extends Component {
 
     }
 
+    cancel(e) {
+        e.preventDefault();
+        this.setState({ redirect: '/management/products' });
+    }
+
+    delete(e) {
+        e.preventDefault();
+        console.log("Delete");
+    }
+
     submitHandler(e) {
         e.preventDefault();
 
-        if (this.props.id) this.update();
+        if (this.props.match && this.props.match.params.id) this.update();
         else this.store();
 
         console.log("SUBMIT");
@@ -103,9 +143,14 @@ class AddPack extends Component {
 
     render() {
         const { packname, packdescription} = this.state
-		// if (this.state.redirect !== false) {
-        //     return (<Redirect to={this.state.redirect} />)
-        // }
+		if (this.state.redirect !== false) {
+            return (<Redirect to={this.state.redirect} />)
+        }
+
+        if (this.state.loading !== false) {
+            return (<Loading />);
+        }
+
         return (
             <section className="add">
                 <h1 className="add__title"> Pack toevoegen </h1>
@@ -118,8 +163,9 @@ class AddPack extends Component {
             <form className="create-form" action="/products" method="POST" encType="multipart/form-data" onSubmit={this.submitHandler.bind(this)}>
 
                 <div className="create-form__u-flex">
-                    <a className="create-form__btn" href="/index"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="create-form__btn create-form__btn--margin" type="submit">Cancel</button></a>
-                    <a className="create-form__btn"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="create-form__btn" type="submit">Toevoegen</button></a>
+                    <a className="create-form__btn" href="/index"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="create-form__btn create-form__btn--margin" onClick={this.cancel.bind(this)}>Cancel</button></a>
+                    <a className="create-form__btn"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="create-form__btn" type="submit">{ (this.props.match && this.props.match.params.id) ? "Bewerken" : "Toevoegen" }</button></a>
+                    <a className="create-form__btn"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="create-form__btn"  onClick={this.delete.bind(this)}>Verwijderen</button></a>
                 </div>
 
                 <label htmlFor="name">Titel</label>
@@ -137,8 +183,9 @@ class AddPack extends Component {
 
      
                 <div className="create-form__u-flex">
-                    <a className="create-form__btn" href="/index"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="create-form__btn create-form__btn--margin" type="submit">Cancel</button></a>
-                    <a className="create-form__btn"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="create-form__btn" type="submit">Toevoegen</button></a>
+                    <a className="create-form__btn" href="/index"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="create-form__btn create-form__btn--margin" onClick={this.cancel.bind(this)}>Cancel</button></a>
+                    <a className="create-form__btn"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="create-form__btn" type="submit">{ (this.props.match && this.props.match.params.id) ? "Bewerken" : "Toevoegen" }</button></a>
+                    <a className="create-form__btn"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="create-form__btn"  onClick={this.delete.bind(this)}>Verwijderen</button></a>
                 </div>
 
 

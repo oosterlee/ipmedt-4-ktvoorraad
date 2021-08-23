@@ -82,6 +82,15 @@ button:hover {
     margin-bottom: 2rem;
 }
 
+.pack:hover{
+    border: 3px solid rgba(255, 185, 0, 0.8) !important ;
+
+}
+.pactive{
+    border: 3px solid #ffb900 !important;
+
+}
+
 
 
 /*responsive classes */

@@ -8,7 +8,15 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 
 import DataContext from './DataContext';
 
+import axios from 'axios';
+
 console.log("BASE URL=", process.env);
+
+axios.defaults.withCredentials = true;
+
+axios.get(process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000' + '/sanctum/csrf-cookie').then(res => {
+	console.log(res);
+});
 
 library.add(fas);
 

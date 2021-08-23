@@ -3,6 +3,7 @@ import '../css/profile.css';
 import {Redirect } from 'react-router-dom';
 import apiClient from '../services/api';
 import {callOnLoginCallbacks} from '../utils';
+import Loading from '../components/Loading';
 
 class Profile extends Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class Profile extends Component {
             postalcode: "",
             get_user_done: false,
             logged_out: false,
+            loading: true,
 		}
 	}
 
@@ -28,7 +30,8 @@ class Profile extends Component {
                                 address: response.data.address,
                                 housenumber: response.data.housenumber,
                                 postalcode: response.data.postalcode,
-                                get_user_done: true});
+                                get_user_done: true,
+                                loading: false});
             }).catch(function (error){
                 // this.setState({logged_out: true});
             });
@@ -49,6 +52,9 @@ class Profile extends Component {
         if(this.state.logged_out === true){
             callOnLoginCallbacks();
             return (<Redirect to="/login"/>)
+        }
+        if (this.state.loading !== false) {
+            return (<Loading />);
         }
 
 		return (

@@ -16,6 +16,7 @@ import Login from './Login';
 import ShoppingCart from './ShoppingCart';
 import ProductsManager from './ProductsManager';
 import AddProducts from './AddProducts';
+import AddPack from './AddPack';
 import CreateUser from './CreateUser';
 import Profile from './Profile';
 
@@ -52,6 +53,10 @@ class Home extends Component {
             <Route exact path="/toevoegen">
               <AddProducts />
             </Route>
+            <Route exact path="/packtoevoegen">
+              <AddPack />
+            </Route>
+            <PrivateRoute path="/packtoevoegen/:id" component={AddPack}/>
 
             			<Route exact path="/createuser">
 							<CreateUser />

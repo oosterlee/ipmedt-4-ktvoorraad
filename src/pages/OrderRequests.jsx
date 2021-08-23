@@ -3,6 +3,7 @@ import '../css/orderrequests.css';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+import Loading from '../components/Loading';
 
 // import ProductsItem from '../components/ProductsItem';
 // import DataContext from '../DataContext';
@@ -17,11 +18,13 @@ class OrderRequests extends Component {
 			loading: true,
 			loadingItem: [],
 			animateItem: [],
+			loading: true,
 		};
 
 	}
 
 	componentDidMount() {
+		this.setState({ loading: true });
 		axios.get((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/orderrequests').then(json => this.setState({ products: json.data, renderProducts: json.data, loading: false }));
 	}
 
@@ -72,9 +75,9 @@ class OrderRequests extends Component {
 	}
 
 	render() {
-		if (this.state.loading) {
-			return(<section><p>Loading... Please wait</p></section>);
-		}
+		if (this.state.loading !== false) {
+            return (<Loading />);
+        }
 
 		if (this.state.products.length == 0) {
 			return(<section><p className="text--center text--sm">Er zijn geen orderrequests.</p></section>);

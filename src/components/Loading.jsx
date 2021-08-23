@@ -8,7 +8,7 @@ class Loading extends Component {
     render() {
         return(
             <section class="loading">
-                <div class="navbar__logo"><a href="/" class="navbar__redirect">Jung<font>heinrich</font></a></div>
+                <div class="navbar__logo loading__logo"><a href="/" class="navbar__redirect loading__text">Jung<font>heinrich</font></a></div>
             </section>
         );
 	}

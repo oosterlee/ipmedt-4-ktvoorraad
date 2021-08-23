@@ -4,6 +4,7 @@ import '../css/productsmanagement.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import ProductsAdmin from '../components/ProductsAdmin';
+import Loading from '../components/Loading';
 
 
 class Products extends Component {
@@ -14,6 +15,7 @@ class Products extends Component {
 			products: [],
 			searchValue: "",
 			renderProducts: [],
+			loading: true,
 		};
 	}
 
@@ -22,7 +24,8 @@ class Products extends Component {
 	}
 
 	makeApiCall = searchTerm => {
-		axios.get((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/products').then(json => this.setState({ products: json.data, renderProducts: json.data }));
+		this.setState({ loading: true });
+		axios.get((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/products').then(json => this.setState({ products: json.data, renderProducts: json.data, loading: false }));
 	}
 
 	search(e){
@@ -39,6 +42,9 @@ class Products extends Component {
 
 
 	render() {
+		if (this.state.loading !== false) {
+            return (<Loading />);
+        }
 		return (
 			<section className="adminProducts">
 				

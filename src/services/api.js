@@ -11,4 +11,12 @@ const apiClient = axios.create({ //maakt een axios req aan
     headers
 });
 
+apiClient.defaults.withCredentials = true;
+
+apiClient.get((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/sanctum/csrf-cookie').then(res => {
+	console.log(res.headers);
+});
+
+window['apiClient'] = apiClient;
+
 export default apiClient;

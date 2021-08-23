@@ -56,6 +56,7 @@ class Home extends Component {
             <Route exact path="/packtoevoegen">
               <AddPack />
             </Route>
+            <PrivateRoute path="/packtoevoegen/:id" component={AddPack}/>
 
             			<Route exact path="/createuser">
 							<CreateUser />

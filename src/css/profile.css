@@ -32,6 +32,7 @@
     padding: 2rem;
     align-items: center;
     flex-direction: column;
+    position: relative;
 }
 
 .profile__form__group{
@@ -51,4 +52,13 @@
 
 .profile__form__button{
     margin-top: 2rem;
+}
+
+.profile__form__cancel{
+    position: absolute;
+    font-size: 80%;
+    bottom: -2rem;
+    left: 14%;
+    color: blue;
+    border-bottom: blue 0.1rem solid;
 }

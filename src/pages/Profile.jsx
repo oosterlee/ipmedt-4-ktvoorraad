@@ -70,9 +70,23 @@ class Profile extends Component {
         });
     }
 
+    profile_edit_cancel(e){
+        apiClient.get('/api/user').then(response => {
+            this.setState({id: response.data.id,
+                            name: response.data.name,
+                            email: response.data.email,
+                            address: response.data.address,
+                            housenumber: response.data.housenumber,
+                            postalcode: response.data.postalcode,
+                            get_user_done: true,
+                            loading: false});
+        }).then(response => {
+            this.setState({profile__wrapper: "block", profile__form: "none"});
+        });
+    }
+
     reset_password(event){
         event.preventDefault();
-        console.log(this.state.password_old);
 
         apiClient.put("/api/user/password", {
             id: this.state.id,
@@ -141,6 +155,7 @@ class Profile extends Component {
 					</div>
 
                     <button className="profile__form__button" type="submit">Profiel Aanpassen</button>
+                    <a className="profile__form__cancel" href="#" onClick={e => this.profile_edit_cancel(e)}>Annuleren</a>
                 </form>
 
                 <form  className="profile__form" style={{display: this.state.password_form, gridColumnStart: 2, padding: "2rem", alignItems: "center", flexDirection: "column"}} onSubmit={event => this.reset_password(event)}>
@@ -155,6 +170,7 @@ class Profile extends Component {
 					</div>
 
                     <button className="profile__form__button" type="submit">Wachtwoord Aanpassen</button>
+                    <a className="profile__form__cancel" href="#" onClick={e => this.setState({profile__wrapper: "block", password_form: "none"})}>Annuleren</a>
                 </form>
             </article>
 		);

@@ -81,7 +81,7 @@ class ProductsItem extends Component {
 
 	render() {
 		return (
-			<li className={"products__list__item " + this.props.className} onClick={this.props.onClick ? this.props.onClick : () => {}} >
+			<li className={"products__list__item " + this.props.className} onClick={this.props.onClick ? this.props.onClick : () => {}} data-kind-of-product={this.props.category} >
 				<figure className="products__list__figure">
 					{
 						this.props.isPack ?

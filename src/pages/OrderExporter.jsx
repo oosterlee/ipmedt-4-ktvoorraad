@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 import BasicButton from '../components/BasicButton';
 
+import Loading from '../components/Loading';
 // import ProductsItem from '../components/ProductsItem';
 // import DataContext from '../DataContext';
 
@@ -21,14 +22,15 @@ class OrderExporter extends Component {
 	}
 
 	componentDidMount() {
+		this.setState({ loading: true });
 		axios.get((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/export/days').then(json => this.setState({ days: json.data.reverse(), loading: false }));
 		// axios.get("http://localhost:8000/api/export/days").then(json => this.setState({ days: json.data.reverse(), loading: false }));
 	}
 
 	render() {
-		if (this.state.loading) {
-			return(<section><p>Loading... Please wait</p></section>);
-		}
+		if (this.state.loading !== false) {
+            return (<Loading />);
+        }
 
 		if (this.state.days.length == 0) {
 			return(<section><p className="text--center text--sm">Er zijn nog geen downloads beschikbaar.</p></section>);

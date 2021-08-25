@@ -4,6 +4,7 @@ import '../css/productsmanagement.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import ProductsAdmin from '../components/ProductsAdmin';
+import Loading from '../components/Loading';
 
 
 class Products extends Component {
@@ -44,6 +45,9 @@ class Products extends Component {
 
 
 	render() {
+    if (this.state.loading !== false) {
+            return (<Loading />);
+        }
 		return (
 			<section className="adminProducts">
 				
@@ -63,5 +67,6 @@ class Products extends Component {
 		);
 	}
 }
+
 
 export default Products;

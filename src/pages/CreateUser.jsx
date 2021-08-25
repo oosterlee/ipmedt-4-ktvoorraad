@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import '../css/main.css';
 import '../css/create_user.css';
 import apiClient from '../services/api';
-
-import { Link } from 'react-router-dom';
-
-import { getUserInfo } from '../utils';
+import {Redirect} from 'react-router-dom';
+import {callOnLoginCallbacks} from '../utils';
 
 class CreateUser extends Component{
   constructor(props) {
@@ -58,11 +56,42 @@ class CreateUser extends Component{
       role: this.state.role,
       }
 			).then(response =>{ //Op het moment is er een CSRF token mismatch error dit is een safety iets van laravel maar dit betekent wel dat de req bij de API binnekomt
-			this.setState({loggedIn: true, token: response.data});
+        this.setState({token: response.data});
+        apiClient.post("/api/login", 
+        {//stuurt een post request naar de API
+            email: this.state.email, //De eerste email moet overeen komen met de naam in de db. De tweede email is van de states dus de daat werkelijke waarde
+            password: this.state.password} //password het zelfde verhaal als email
+          ).then(response =>{ 
+            this.setState({loggedIn: true, token: response.data, loading: false});
+      });
 		});
 	}
 
   render (){
+    if (this.state.loggedIn === true) {
+			console.log(this.state.token.token);
+			window.localStorage.setItem('token', this.state.token.token);
+			// Gets update when a user is logged.
+
+			window.localStorage.setItem('login', true);
+			apiClient.defaults.headers.Authorization = "Bearer " + this.state.token.token;
+			
+			apiClient
+			.get("/api/user")
+			.then((response) => {
+			console.log(response.data.role);
+			localStorage.setItem("role",response.data.role);
+			localStorage.setItem("userId",response.data.id);
+			callOnLoginCallbacks(); 
+
+			}).catch(function (error) {
+			console.log("er gaat iets fouts", error)
+
+			});
+			callOnLoginCallbacks();
+			return (<Redirect to="/products" />)
+		}
+
     return(
       <main className="create_user">
         <form className="create_user__form"  onSubmit={event => this.register_webtoken(event)}>

@@ -15,5 +15,40 @@
 .profile__logout{
     margin-top: 4rem;
     margin-left: 50%;
+    margin-right: 50%;
     transform: translateX(-50%);
+}
+
+.profile_bewerken{
+    width: 100%;
+    font-size: 80%;
+    text-align: left;
+    color: blue;
+    border-bottom: blue 0.1rem solid;
+}
+
+.profile__form{
+    grid-column-start: 2;
+    padding: 2rem;
+    align-items: center;
+    flex-direction: column;
+}
+
+.profile__form__group{
+    margin-top: 2rem;
+    width: 80%;
+}
+
+.profile__form__label{
+    text-align: left;
+}
+
+.profile__form__input{
+    width: 100%;
+    padding: 0.5rem;
+    border: none;
+}
+
+.profile__form__button{
+    margin-top: 2rem;
 }

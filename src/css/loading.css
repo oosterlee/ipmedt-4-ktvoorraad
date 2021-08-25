@@ -6,15 +6,15 @@
 	justify-content: center;
 }
 
-.loading div {
+.loading__logo {
 	text-align: center;
 	align-self: center;
 	margin-bottom: 5rem;
 	animation: test 2s infinite;
 }
 
-.loading div a {
-	font-size: 10rem;
+.loading__text {
+	font-size: 2rem;
 }
 
 @keyframes test {
@@ -28,5 +28,17 @@
 
 	100% {
 		transform: scale(1);
+	}
+}
+
+@media screen and (min-width: 600px) {
+	.loading__text {
+		font-size: 4rem;
+	}
+}
+
+@media screen and (min-width: 950px) {
+	.loading__text {
+		font-size: 7rem;
 	}
 }

@@ -64,6 +64,7 @@ class Products extends Component {
 			</section>
 		);
 	}
+
 }
 
 export default Products;

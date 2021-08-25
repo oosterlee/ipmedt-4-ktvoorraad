@@ -1,80 +1,73 @@
-
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import '../css/products.css';
 import axios from "axios";
 
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import ProductsItem from '../components/ProductsItem';
 import Searchbar from "../components/Searchbar";
-import Category from '../components/Category';
+import Loading from "../components/Loading";
+
 
 class Products extends Component {
+	constructor(props) {
+		super(props);
 
-    constructor(props) {
-        super(props);
+		this.state = {
+			products: [],
+			searchValue: "",
+			renderProducts: [],
+			packs: [],
+			renderPacks: [],
+			loading: true
+		};
+	}
 
-        this.state = {
-            products: [],
-            searchValue: "",
-            renderProducts: []
-        };
-    }
+	componentDidMount(){
+		this.makeApiCall();
+	}
 
-    handleCallback = (childData) => {
-        this.setState({name: childData})
-    }
+	makeApiCall = searchTerm => {
+		const BASE_URL = "http://localhost:8000/api/products";
+		axios.get((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/products').then(json => this.setState({ products: json.data, renderProducts: json.data, loading: false }));
+		axios.get((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/pack').then(json => this.setState({ packs: json.data, renderPacks: json.data, loading: false }));
+	}
 
-    componentDidMount() {
-        this.makeApiCall();
-    }
+	search(e){
+		let searchValue = e.target.value;
+		let products = this.state.products;
+		let renderProducts = []
+		products.forEach((item, i) => {
+            if (JSON.stringify(item).toLowerCase().includes(searchValue.toLowerCase())) renderProducts.push(item);
+        });
+		console.log(e);
+		this.setState({searchValue, renderProducts});
+	}
 
-    makeApiCall = searchTerm => {
-        const BASE_URL = "http://localhost:8000/api/products";
-        axios
-            .get(
-                (process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/products'
-            )
-            .then(json => this.setState({products: json.data, renderProducts: json.data}));
-    }
 
-    search(e) {
-        let searchValue = e.target.value;
-        let products = this.state.products;
-        let renderProducts = []
-        products.forEach((item, i) => {
-            if (JSON.stringify(item).toLowerCase().includes(searchValue.toLowerCase())) 
-                renderProducts.push(item);
-            }
-        );
-        console.log(e);
-        this.setState({searchValue, renderProducts});
-    }
 
-    render() {
+	render() {
+		if (this.state.loading) return(<Loading />);
+		return (
+			<section className="products">
+				<Searchbar value={this.state.searchValue} onChange={this.search.bind(this)}/>
+				<ul className="products__list">
+					{
+						this.state.renderPacks.map((item, i) => 
+							<ProductsItem {...item} key={item.id} isPack={true} />
+						)
+					}
+					{
+						this.state.renderProducts.map((item, i) => 
+							<ProductsItem {...item} key={item.id} />
+						)
+					}
+				</ul>
+				<Link to="/cart">My Cart</Link>
+			</section>
+		);
+	}
 
-        return (
-
-            <section className="products">
-                <Searchbar
-                    value={this.state.searchValue}
-                    onChange={this
-                        .search
-                        .bind(this)}/>
-                <Category/>
-
-                <ul className="products__list">
-                    {
-                        this
-                            .state
-                            .renderProducts
-                            .map((item, i) => <ProductsItem {...item} key={item.id}/>)
-                    }
-                </ul>
-                <Link to="/cart">My Cart</Link>
-            </section>
-        );
-    }
 }
 
 export default Products;

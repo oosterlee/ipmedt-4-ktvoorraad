@@ -43,7 +43,7 @@ class AddPack extends Component {
             console.log("GETPACK", json);
 
             for (let i = 0; i < json.data.products.length; i++) {
-                addedProducts.push(json.data.products[i].id);
+                addedProducts.push(json.data.products[i].product_id);
             }
 
             console.log(addedProducts);
@@ -111,7 +111,17 @@ class AddPack extends Component {
 
     delete(e) {
         e.preventDefault();
-        console.log("Delete");
+        axios
+            .delete((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/pack/' + this.props.match.params.id)
+            .then(response => {
+                this.setState({ redirect: "/products", loading: false });
+            console.log(response)
+            })
+            .catch(error => {
+                this.setState({ errorMsg: "Er is iets misgegaan met het updaten van het product. Probeer het later opnieuw.", loading: false })
+            console.log(error)
+            
+        })
     }
 
     submitHandler(e) {
@@ -165,7 +175,12 @@ class AddPack extends Component {
                 <div className="create-form__u-flex">
                     <a className="create-form__btn" href="/index"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="create-form__btn create-form__btn--margin" onClick={this.cancel.bind(this)}>Cancel</button></a>
                     <a className="create-form__btn"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="create-form__btn" type="submit">{ (this.props.match && this.props.match.params.id) ? "Bewerken" : "Toevoegen" }</button></a>
-                    <a className="create-form__btn"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="create-form__btn"  onClick={this.delete.bind(this)}>Verwijderen</button></a>
+                    {
+                        (this.props.match && this.props.match.params.id) ?
+                        <a className="create-form__btn"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="create-form__btn"  onClick={this.delete.bind(this)}>Verwijderen</button></a>
+                        :
+                        ""
+                    }
                 </div>
 
                 <label htmlFor="name">Titel</label>
@@ -185,7 +200,12 @@ class AddPack extends Component {
                 <div className="create-form__u-flex">
                     <a className="create-form__btn" href="/index"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="create-form__btn create-form__btn--margin" onClick={this.cancel.bind(this)}>Cancel</button></a>
                     <a className="create-form__btn"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="create-form__btn" type="submit">{ (this.props.match && this.props.match.params.id) ? "Bewerken" : "Toevoegen" }</button></a>
-                    <a className="create-form__btn"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="create-form__btn"  onClick={this.delete.bind(this)}>Verwijderen</button></a>
+                    {
+                        (this.props.match && this.props.match.params.id) ?
+                        <a className="create-form__btn"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="create-form__btn"  onClick={this.delete.bind(this)}>Verwijderen</button></a>
+                        :
+                        ""
+                    }
                 </div>
 
 

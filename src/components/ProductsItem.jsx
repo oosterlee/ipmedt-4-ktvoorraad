@@ -124,8 +124,8 @@ class ProductsItem extends Component {
 					</div>
 					{
 						this.props.cart ?
-						<section class="products__item__input">
-						<span class="products__item__input__minus" onClick={this.cartMinus.bind(this)}>–</span><input class="products__item__input__number" type="text" value={this.props.amount} min="0" max="10" onChange={this.cartProductAmountChange.bind(this)} /><span class="products__item__input__plus"  onClick={this.cartPlus.bind(this)}>+</span>
+						<section className="products__item__input">
+						<span className="products__item__input__minus" onClick={this.cartMinus.bind(this)}>–</span><input className="products__item__input__number" type="text" value={this.props.amount} min="0" max="10" onChange={this.cartProductAmountChange.bind(this)} /><span className="products__item__input__plus"  onClick={this.cartPlus.bind(this)}>+</span>
 						</section>
 						:
 						""

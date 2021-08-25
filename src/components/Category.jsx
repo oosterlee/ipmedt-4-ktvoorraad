@@ -118,7 +118,7 @@ class Category extends React.Component {
     render() {
 
         return (
-            <div class="products__categories">
+            <div className="products__categories">
                 <input type="checkbox" id="Communicatie"/>
                 <label for="Communicatie">
                     Communicatie</label>

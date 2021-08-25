@@ -124,6 +124,7 @@ li.products__list__item {
 .searchbar__icon {
     position: absolute;
     right: 0;
+    top: 0;
 	padding: 1.3rem;
 	color: var(--dark-grey);
 }

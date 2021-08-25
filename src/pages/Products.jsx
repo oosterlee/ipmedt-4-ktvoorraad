@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 import ProductsItem from '../components/ProductsItem';
 import Searchbar from "../components/Searchbar";
+import Loading from "../components/Loading";
 
 
 class Products extends Component {
@@ -17,7 +18,8 @@ class Products extends Component {
 			searchValue: "",
 			renderProducts: [],
 			packs: [],
-			renderPacks: []
+			renderPacks: [],
+			loading: true
 		};
 	}
 
@@ -27,8 +29,8 @@ class Products extends Component {
 
 	makeApiCall = searchTerm => {
 		const BASE_URL = "http://localhost:8000/api/products";
-		axios.get((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/products').then(json => this.setState({ products: json.data, renderProducts: json.data }));
-		axios.get((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/pack').then(json => this.setState({ packs: json.data, renderPacks: json.data }));
+		axios.get((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/products').then(json => this.setState({ products: json.data, renderProducts: json.data, loading: false }));
+		axios.get((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/pack').then(json => this.setState({ packs: json.data, renderPacks: json.data, loading: false }));
 	}
 
 	search(e){
@@ -45,6 +47,7 @@ class Products extends Component {
 
 
 	render() {
+		if (this.state.loading) return(<Loading />);
 		return (
 			<section className="products">
 				<Searchbar value={this.state.searchValue} onChange={this.search.bind(this)}/>

@@ -86,6 +86,11 @@ export const LoggedInAdmin = [
   },
 
   {
+    title: "Pakket Toevoegen",
+    url: "/packtoevoegen",
+  },
+
+  {
     title: "Bestelverzoeken",
     url: "/management/orderrequests",
   },

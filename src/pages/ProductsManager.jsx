@@ -12,8 +12,11 @@ class Products extends Component {
 
 		this.state = {
 			products: [],
+			packs: [],
 			searchValue: "",
 			renderProducts: [],
+			renderPacks: [],
+			loading: true,
 		};
 	}
 
@@ -22,7 +25,9 @@ class Products extends Component {
 	}
 
 	makeApiCall = searchTerm => {
-		axios.get((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/products').then(json => this.setState({ products: json.data, renderProducts: json.data }));
+		this.setState({ loading: true });
+		axios.get((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/products').then(json => this.setState({ products: json.data, renderProducts: json.data, loading: false }));
+		axios.get((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/pack').then(json => this.setState({ packs: json.data, renderPacks: json.data, loading: false }));
 	}
 
 	search(e){
@@ -43,6 +48,11 @@ class Products extends Component {
 			<section className="adminProducts">
 				
 				<ul className="adminProducts__list">
+					{
+						this.state.renderPacks.map((item, i) => 
+							<ProductsAdmin {...item} key={item.id} isPack={true} />
+						)
+					}
 					{
 						this.state.renderProducts.map((item, i) => 
 							<ProductsAdmin {...item} key={item.id} />

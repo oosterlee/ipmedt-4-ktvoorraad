@@ -32,7 +32,7 @@ class ShoppingCart extends Component {
 		this.setState({ ordering: true });
 		console.log("ORDERING", this.context.cart);
 		let productsToOrder = this.context.cart.map((item) => {
-			return { product_id: item.id, amount: item.amount };
+			return { product_id: item.id, amount: item.amount, isPack: item.isPack, uuid: item.uuid };
 		});
 
 		console.log(productsToOrder);

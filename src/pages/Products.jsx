@@ -16,6 +16,8 @@ class Products extends Component {
 			products: [],
 			searchValue: "",
 			renderProducts: [],
+			packs: [],
+			renderPacks: []
 		};
 	}
 
@@ -26,6 +28,7 @@ class Products extends Component {
 	makeApiCall = searchTerm => {
 		const BASE_URL = "http://localhost:8000/api/products";
 		axios.get((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/products').then(json => this.setState({ products: json.data, renderProducts: json.data }));
+		axios.get((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/pack').then(json => this.setState({ packs: json.data, renderPacks: json.data }));
 	}
 
 	search(e){
@@ -46,6 +49,11 @@ class Products extends Component {
 			<section className="products">
 				<Searchbar value={this.state.searchValue} onChange={this.search.bind(this)}/>
 				<ul className="products__list">
+					{
+						this.state.renderPacks.map((item, i) => 
+							<ProductsItem {...item} key={item.id} isPack={true} />
+						)
+					}
 					{
 						this.state.renderProducts.map((item, i) => 
 							<ProductsItem {...item} key={item.id} />

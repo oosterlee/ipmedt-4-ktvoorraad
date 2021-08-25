@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import '../css/products.css';
 import axios from "axios";
+import ListButton from '../components/ListButton';
+import GridButton from '../components/GridButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 import { Link } from 'react-router-dom';
 
 import ProductsItem from '../components/ProductsItem';
 import Searchbar from "../components/Searchbar";
+import BasicButton from '../components/BasicButton';
+
+
 
 
 class Products extends Component {
@@ -19,7 +26,7 @@ class Products extends Component {
 		};
 	}
 
-	componentDidMount(){
+	componentDidMount() {
 		this.makeApiCall();
 	}
 
@@ -28,15 +35,15 @@ class Products extends Component {
 		axios.get((process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:8000') + '/api/products').then(json => this.setState({ products: json.data, renderProducts: json.data }));
 	}
 
-	search(e){
+	search(e) {
 		let searchValue = e.target.value;
 		let products = this.state.products;
 		let renderProducts = []
 		products.forEach((item, i) => {
-            if (JSON.stringify(item).toLowerCase().includes(searchValue.toLowerCase())) renderProducts.push(item);
-        });
+			if (JSON.stringify(item).toLowerCase().includes(searchValue.toLowerCase())) renderProducts.push(item);
+		});
 		console.log(e);
-		this.setState({searchValue, renderProducts});
+		this.setState({ searchValue, renderProducts });
 	}
 
 
@@ -44,10 +51,15 @@ class Products extends Component {
 	render() {
 		return (
 			<section className="products">
-				<Searchbar value={this.state.searchValue} onChange={this.search.bind(this)}/>
+				<Searchbar value={this.state.searchValue} onChange={this.search.bind(this)} />
+				<div className="products__button">
+					<ListButton></ListButton>
+					<GridButton>Grid</GridButton>
+				</div>
+				
 				<ul className="products__list">
 					{
-						this.state.renderProducts.map((item, i) => 
+						this.state.renderProducts.map((item, i) =>
 							<ProductsItem {...item} key={item.id} />
 						)
 					}

@@ -163,7 +163,7 @@ class AddPack extends Component {
 
         return (
             <section className="add">
-                <h1 className="add__title"> Pack toevoegen </h1>
+                <h1 className="add__title"> Pakket toevoegen </h1>
                 {
                     this.state.errorMsg ?
                     <h3 className="text--error">{this.state.errorMsg}</h3>
@@ -173,7 +173,7 @@ class AddPack extends Component {
             <form className="create-form" action="/products" method="POST" encType="multipart/form-data" onSubmit={this.submitHandler.bind(this)}>
 
                 <div className="create-form__u-flex">
-                    <a className="create-form__btn" href="/index"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="create-form__btn create-form__btn--margin" onClick={this.cancel.bind(this)}>Cancel</button></a>
+                    <a className="create-form__btn" href="/index"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="create-form__btn create-form__btn--margin" onClick={this.cancel.bind(this)}>Annuleren</button></a>
                     <a className="create-form__btn"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="create-form__btn" type="submit">{ (this.props.match && this.props.match.params.id) ? "Bewerken" : "Toevoegen" }</button></a>
                     {
                         (this.props.match && this.props.match.params.id) ?
@@ -198,7 +198,7 @@ class AddPack extends Component {
 
      
                 <div className="create-form__u-flex">
-                    <a className="create-form__btn" href="/index"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="create-form__btn create-form__btn--margin" onClick={this.cancel.bind(this)}>Cancel</button></a>
+                    <a className="create-form__btn" href="/index"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="create-form__btn create-form__btn--margin" onClick={this.cancel.bind(this)}>Annuleren</button></a>
                     <a className="create-form__btn"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="create-form__btn" type="submit">{ (this.props.match && this.props.match.params.id) ? "Bewerken" : "Toevoegen" }</button></a>
                     {
                         (this.props.match && this.props.match.params.id) ?

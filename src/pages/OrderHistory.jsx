@@ -43,7 +43,7 @@ class OrderHistory extends Component {
 			return(<Loading />);
 		}
 
-		if (this.state.products.length == 0) {
+		if (this.state.products.length == 0 && this.state.packs.length == 0) {
 			return(<section><p className="text--center text--sm">Deze gebruiker heeft nog geen producten besteld.</p></section>);
 		}
 

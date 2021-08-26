@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import ProductsItem from '../components/ProductsItem';
 import Searchbar from "../components/Searchbar";
 import Loading from "../components/Loading";
+import Category from '../components/Category';
 
 
 class Products extends Component {
@@ -51,6 +52,7 @@ class Products extends Component {
 		return (
 			<section className="products">
 				<Searchbar value={this.state.searchValue} onChange={this.search.bind(this)}/>
+				<Category/>
 				<ul className="products__list">
 					{
 						this.state.renderPacks.map((item, i) => 

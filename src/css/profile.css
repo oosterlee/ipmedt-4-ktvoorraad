@@ -62,3 +62,41 @@
     color: blue;
     border-bottom: blue 0.1rem solid;
 }
+
+@media only screen and (max-width: 40rem) {
+	.profile{
+        grid-template-columns: 1fr;
+    }
+
+    .profile__wrapper{
+        grid-column-start: 1;
+    }
+
+    .profile__info{
+        margin-left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .profile__logout{
+        width: 40%;
+        margin: 4rem 0 4rem 50%;
+        transform: translateX(-50%);
+    }
+    
+    .profile_bewerken{
+        margin-top: 4rem;
+        margin-left: 25%;
+        font-size: 100%;
+    }
+
+    .profile__form{
+        grid-column-start: 1;
+    }
+}
+
+@media only screen and (max-width: 28rem) {
+    .profile__info{
+        margin-left: 20%;
+        transform: translateX(0);
+    }
+}

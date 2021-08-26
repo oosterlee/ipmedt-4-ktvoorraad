@@ -4,6 +4,7 @@ import {Redirect } from 'react-router-dom';
 import apiClient from '../services/api';
 import {callOnLoginCallbacks} from '../utils';
 import Loading from '../components/Loading';
+import { IoReturnDownBack } from 'react-icons/io5';
 
 
 class Profile extends Component {
@@ -117,7 +118,7 @@ class Profile extends Component {
 
 		return (
             <article className="profile">
-                <div style={{display: this.state.profile__wrapper, gridColumnStart: 2}}>
+                <div className="profile__wrapper" style={{display: this.state.profile__wrapper}}>
                     <p className="profile__info">Naam: {this.state.name}</p>
                     <p className="profile__info">Email: {this.state.email}</p>
                     <p className="profile__info">Adres: {this.state.address}</p>
@@ -128,7 +129,7 @@ class Profile extends Component {
                     <br></br>
                     <a className="profile_bewerken" href="#" onClick={e => this.show_password_reset(e)}>Wachtwoord aanpassen</a>
                 </div>
-                <form  className="profile__form" style={{display: this.state.profile__form, gridColumnStart: 2, padding: "2rem", alignItems: "center", flexDirection: "column"}} onSubmit={event => this.profile_edit(event)}>
+                <form  className="profile__form" style={{display: this.state.profile__form}} onSubmit={event => this.profile_edit(event)}>
                     <div className="profile__form__group">
 						<label className="profile__form__label">Naam</label>
 						<input className="profile__form__input" name="name" type="text" placeholder="Naam" required value={this.state.name} onChange={e => this.setState({ name: e.target.value })}/>
@@ -155,10 +156,10 @@ class Profile extends Component {
 					</div>
 
                     <button className="profile__form__button" type="submit">Profiel Aanpassen</button>
-                    <a className="profile__form__cancel" href="#" onClick={e => this.profile_edit_cancel(e)}>Annuleren</a>
+                    <a className="profile__form__cancel" href="#" onClick={e => this.profile_edit_cancel(e)}><IoReturnDownBack />Annuleren</a>
                 </form>
 
-                <form  className="profile__form" style={{display: this.state.password_form, gridColumnStart: 2, padding: "2rem", alignItems: "center", flexDirection: "column"}} onSubmit={event => this.reset_password(event)}>
+                <form  className="profile__form" style={{display: this.state.password_form}} onSubmit={event => this.reset_password(event)}>
                     <div className="profile__form__group">
 						<label className="profile__form__label">Oud wachtwoord</label>
 						<input className="profile__form__input" name="password_old" type="password" placeholder="Oud wachtwoord" required onChange={e => this.setState({ password_old: e.target.value })}/>
@@ -170,7 +171,7 @@ class Profile extends Component {
 					</div>
 
                     <button className="profile__form__button" type="submit">Wachtwoord Aanpassen</button>
-                    <a className="profile__form__cancel" href="#" onClick={e => this.setState({profile__wrapper: "block", password_form: "none"})}>Annuleren</a>
+                    <a className="profile__form__cancel" href="#" onClick={e => this.setState({profile__wrapper: "block", password_form: "none"})}><IoReturnDownBack />Annuleren</a>
                 </form>
             </article>
 		);

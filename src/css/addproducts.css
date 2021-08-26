@@ -61,25 +61,25 @@ button:hover {
     height: 20rem;
 }
 
-.create-form label {
+.edit-form label {
     font-family: 'OpenSans-Regular', sans-serif;
     font-size: 1.6rem;
     font-weight: 500;
 }
 
-.create-form__u-flex {
+.edit-form__u-flex {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.create-form__btn {
-    width: 100%;
-    max-width: 23rem;
+
+.edit-form__btn:nth-of-type(2) {
+    margin-left: auto;
 }
 
-.create-form__btn--margin {
-    margin-bottom: 2rem;
+.edit-form__btn{
+    margin-top: 1rem;
 }
 
 .pack:hover{
@@ -97,14 +97,27 @@ button:hover {
 /*TabletView*/
 @media only screen and (min-width: 45rem) {
 	.add__title {
-		margin: 3rem;
+		margin-top: 3rem;
 		text-align: left;
 	}
-    .create-form__u-flex {
-        display: block;
+    .edit-form__u-flex {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
     }
-    .create-form__btn--margin {
-        margin-right: 2rem;
+
+}
+
+/* 
+telefoon */
+@media only screen and (max-width: 45rem) {
+    .edit-form__u-flex {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .edit-form__btn{
+        margin-top: 2rem;
     }
 
 }

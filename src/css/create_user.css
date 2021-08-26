@@ -8,17 +8,18 @@
   max-width: 30%;
 }
 .create_user__form__group{
-  padding: 5px 16px;
+  padding: 0.3rem 1rem;
   background-color: var(--white);
 }
 
-.create_user__form__group:nth-last-child(2){
-  padding-bottom: 15px;
+.create_user__form__group:nth-of-type(10){
+  padding-bottom: 3rem;
 }
+
 
 .create_user__form__input{
   width: 100%;
-  padding: 5px;
+  padding: 0.3rem;
   display: inline-block;
   border: none;
   background: var(--light-grey);
@@ -26,11 +27,34 @@
 
 .create_user__form__button{
   background-color: var(--jh-yellow);
-  padding: 5px;
-  margin-top: 5px;
+  padding: 0.3rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.create_user__form__login__button{
+  background-color: var(--jh-yellow);
+  padding: 0.3rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  width: 99%;
+  text-align: center;
 }
 
 .create_user__form__input:focus {
   background-color: #ddd;
   outline: none;
+}
+
+.create_user__header{
+  margin: 0 auto;
+  margin-top: 2rem;  
+}
+
+.create_user__header > h1{
+  color: #f9b800;
+}
+
+.create_user__form__button:nth-of-type(2){
+  padding: 3rem;
 }

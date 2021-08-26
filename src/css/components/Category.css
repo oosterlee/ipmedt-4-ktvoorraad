@@ -1,11 +1,16 @@
-input{
+.products__categories__box{
     cursor: pointer;
 }
 
 label{
-    margin-right: 1%;
+    margin-left: 0.5%;
 }
 
-input{
+.products__categories__box{
     margin-left: 1%;
+    margin-top: 1%;
+}
+
+.products__categories__box:nth-of-type(1){
+    margin-left: 0;
 }

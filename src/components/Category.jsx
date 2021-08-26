@@ -119,23 +119,23 @@ class Category extends React.Component {
 
         return (
             <div className="products__categories">
-                <input type="checkbox" id="Communicatie"/>
+                <input className="products__categories__box" type="checkbox" id="Communicatie"/>
                 <label for="Communicatie">
                     Communicatie</label>
 
-                <input type="checkbox" id="Ergonomie"/>
+                <input className="products__categories__box" type="checkbox" id="Ergonomie"/>
                 <label for="Ergonomie">
                     Ergonomie</label>
 
-                <input type="checkbox" id="Kabels"/>
+                <input className="products__categories__box" type="checkbox" id="Kabels"/>
                 <label for="Kabels">
                     Kabels</label>
 
-                <input type="checkbox" id="Print apparatuur"/>
+                <input className="products__categories__box" type="checkbox" id="Print apparatuur"/>
                 <label for="Print apparatuur">
                     Print apparatuur</label>
 
-                <input type="checkbox" id="Rand apparatuur"/>
+                <input className="products__categories__box" type="checkbox" id="Rand apparatuur"/>
                 <label for="Rand apparatuur">
                     Rand apparatuur</label>
 

@@ -97,9 +97,12 @@ class Login extends Component {
 				</form>
 
 				<section className="login__forgot">
-					<p className="login__forgot__p"><a className="login__forgot__a" href="https://www.google.com/">Wachtwoord</a> vergeten?</p>
-					<p className="login__forgot__p"><a className="login__forgot__a" href="https://www.google.com/theapot">E-mailadres</a> vergeten?</p>
+					<p className="login__forgot__p"><a className="login__forgot__a" href="/createuser">Profiel </a>aanmaken</p>
+					<p className="login__forgot__p"><a className="login__forgot__a" href="https://www.google.com/">Wachtwoord</a> vergeten?</p>					
 				</section>
+				
+					
+			
 			</article>
 		);
 	}

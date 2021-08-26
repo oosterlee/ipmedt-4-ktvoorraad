@@ -57,12 +57,31 @@ li.products__list__item {
 	width: 4rem;
 }
 
-.products__list {
+.products__grid {
 	margin: 2rem 0;
 	list-style-type: none;
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
 	grid-gap: 3rem;
+	background-color:blue;
+}
+
+.products__list {
+	margin: 2rem 0;
+	list-style-type: none;
+	display: flex;
+	flex-direction: row;
+	gap: 3rem;
+	background-color: red;
+}
+
+
+.products__button__list{
+	background-color: red;
+}
+
+.products__button__grid{
+	background-color: blue;
 }
 
 .products__list__figure {

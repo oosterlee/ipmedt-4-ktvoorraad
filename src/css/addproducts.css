@@ -121,3 +121,13 @@ telefoon */
     }
 
 }
+
+.add-form__u-flex{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.add-form__btn{
+    margin-top: 1rem;
+}

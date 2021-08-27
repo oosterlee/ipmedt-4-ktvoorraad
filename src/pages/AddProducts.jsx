@@ -120,9 +120,9 @@ class AddProducts extends Component {
                     <option value="0">Niet nodig</option>
                 </select>
                 
-                <div className="create-form__u-flex">
-                    <a className="create-form__btn" href="/index"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="create-form__btn create-form__btn--margin" type="submit">Cancel</button></a>
-                    <a className="create-form__btn"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="create-form__btn" type="submit">Toevoegen</button></a>
+                <div className="add-form__u-flex">
+                    <a className="add-form__btn" href="/index"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="add-form__btn create-form__btn--margin" type="submit">Cancel</button></a>
+                    <a className="add-form__btn"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="add-form__btn" type="submit">Toevoegen</button></a>
                 </div>
 
 

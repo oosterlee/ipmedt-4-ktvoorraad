@@ -169,7 +169,7 @@ render() {
             
             <div className="edit-form__u-flex">
                 <a className="edit-form__btn" href="/index"><button {...(this.state.loading ? {disabled: "disabled"} : {})} className="admindelete-form__btn create-form__btn--margin" type="submit" onClick={this.delete}>Verwijderen</button></a>
-                <a className="edit-form__btn"><button className="create-form__btn1" {...(this.state.loading ? {disabled: "disabled"} : {})} className="adminedit-form__btn" type="submit">Updaten</button></a>
+                <a className="edit-form__btn"><button className="create-form__btn" {...(this.state.loading ? {disabled: "disabled"} : {})} className="adminedit-form__btn" type="submit">Updaten</button></a>
             </div>
             
 

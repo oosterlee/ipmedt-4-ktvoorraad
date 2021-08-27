@@ -91,6 +91,12 @@ button:hover {
 
 }
 
+button.create-form__btn:first-child {
+    margin-left: 0;
+}
+a.create-form__btn:first-child {
+    margin-left: 0;
+}
 
 
 /*responsive classes */

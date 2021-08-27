@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../css/products.css';
 import axios from "axios";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Link } from 'react-router-dom';
 
@@ -60,11 +61,20 @@ class Products extends Component {
 			<section className="products">
 				<Searchbar value={this.state.searchValue} onChange={this.search.bind(this)}/>
 				<Category/>
-				<div>
-					<button classname="toggleButton"onClick={(e) => this.changeLayout(e)}>
+
+				<div className="toggle">
+					{/* <button className="toggle__button" onClick={(e) => this.changeLayout(e)}>
 						Toggle Layout
-					</button>
+					</button> */}
+					<i className="fas fa-th listIcons"></i>
+					<label className="switch toggle__button">
+						<input type="checkbox" onClick={(e) => this.changeLayout(e)}/>
+						<span class="slider round"></span>
+					</ label>
+					<i className="fas fa-list listIcons"></i>
+
             	</div>
+
 				<ul className={layout__class}>
 					{
 						this.state.renderPacks.map((item, i) => 

@@ -6,7 +6,7 @@
 
 li.products__list__item {
 	position: relative;
-	border-bottom: 6px solid #e0e4e8;
+	border-bottom: 6px solid var(--background);
 	background-color: var(--bg-products);
 	width: 100%;
 }

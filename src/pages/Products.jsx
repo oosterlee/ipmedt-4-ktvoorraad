@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../css/products.css';
 import axios from "axios";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Link } from 'react-router-dom';
 
@@ -20,13 +21,19 @@ class Products extends Component {
 			renderProducts: [],
 			packs: [],
 			renderPacks: [],
-			loading: true
+			loading: true,
+			list: false,
 		};
 	}
 
 	componentDidMount(){
 		this.makeApiCall();
 	}
+
+	changeLayout() {
+        this.setState({ list: !this.state.list })
+        console.log("ik werk");
+    }
 
 	makeApiCall = searchTerm => {
 		const BASE_URL = "http://localhost:8000/api/products";
@@ -48,12 +55,27 @@ class Products extends Component {
 
 
 	render() {
+		let layout__class = this.state.list ? "products__grid" : "products__list";
 		if (this.state.loading) return(<Loading />);
 		return (
 			<section className="products">
 				<Searchbar value={this.state.searchValue} onChange={this.search.bind(this)}/>
 				<Category/>
-				<ul className="products__list">
+
+				<div className="toggle">
+					{/* <button className="toggle__button" onClick={(e) => this.changeLayout(e)}>
+						Toggle Layout
+					</button> */}
+					<i className="fas fa-th listIcons"></i>
+					<label className="switch toggle__button">
+						<input type="checkbox" onClick={(e) => this.changeLayout(e)}/>
+						<span class="slider round"></span>
+					</ label>
+					<i className="fas fa-list listIcons"></i>
+
+            	</div>
+
+				<ul className={layout__class}>
 					{
 						this.state.renderPacks.map((item, i) => 
 							<ProductsItem {...item} key={item.id} isPack={true} />

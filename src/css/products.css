@@ -1,5 +1,5 @@
 .products {
-	max-width: 1000px;
+	max-width: 62.5rem;
 	margin: 10rem auto;
 }
 
@@ -138,11 +138,11 @@ li.products__list__item {
 .products__item__input__plus,
 .products__item__input__number{
 	border: 1px solid #ccc;
-  	height: 40px;
+  	height: 2.5rem;
   	user-select: none;
 	display: inline-block;
-	width: 30px;
-	line-height: 38px;
+	width: 1.8rem;
+	line-height: 2.4rem;
 	background: #f1f1f1;
 	color: #444;
 	text-align: center;

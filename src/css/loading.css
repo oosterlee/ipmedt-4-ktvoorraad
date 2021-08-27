@@ -31,13 +31,13 @@
 	}
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 37.5rem) {
 	.loading__text {
 		font-size: 4rem;
 	}
 }
 
-@media screen and (min-width: 950px) {
+@media screen and (min-width: 60rem) {
 	.loading__text {
 		font-size: 7rem;
 	}

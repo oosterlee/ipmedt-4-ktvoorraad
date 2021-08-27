@@ -7,7 +7,7 @@ import {
   LoggedInManager,
 } from "./MenuList";
 import "./Navbar.css";
-import "../Darkmode.js";
+import Darkmode from "../Darkmode.js";
 import { onLoginChange } from "../../utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

@@ -8,6 +8,7 @@ import {
 } from "./MenuList";
 import "./Navbar.css";
 import { onLoginChange } from "../../utils";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class Navbar extends Component {
   constructor(props) {
@@ -66,15 +67,16 @@ class Navbar extends Component {
   }
 
   mapMenuList(arr) {
-    return arr.map(({ url, title }, index) => {
+    return arr.map(({ url, title, icon }, index) => {
       return (
-        <li key={index}>
-          <NavLink
+        <li className="navbar__menu__item" key={index}>
+          <NavLink className="navbar__menu__link"
             exact
             to={url.replace(":id", this.state.userId)}
             activeClassName="active"
           >
-            {title}
+            <FontAwesomeIcon className="navbar__menu__link__icons" icon={icon}/>
+            <div className="navbar__menu__link__icons-text">{title}</div>
           </NavLink>
         </li>
       );

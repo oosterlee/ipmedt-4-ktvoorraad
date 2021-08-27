@@ -64,7 +64,7 @@ a, a:hover, a:focus, a:active {
   align-items: center;
 }
 
-.navbar__menu-list li:last-child a {
+.navbar__menu__item:last-child {
   font-weight: 300;
   padding: .5rem 1rem;
   background-color: #FFB900;
@@ -73,20 +73,39 @@ a, a:hover, a:focus, a:active {
   border-radius: .2rem;
 }
 
-.navbar__menu-list li a {
-  text-decoration: none;
+.navbar__menu__item{
+  margin-right: 2rem;
+  padding: 0.5rem 1rem;
+  text-align: center;
   color: #fff;
-  font-weight: 300;
-  padding: .5rem 1rem;
-  margin-left: 2rem;
+  transition: all 0.5s ease-in-out;
 }
 
-.navbar__menu-list li a:hover,
-.navbar__menu-list li a.active {
+.navbar__menu__link {
+  text-decoration: none;
+  font-weight: 300;
+}
+
+.navbar__menu__item:hover {
   background-color: #fff;
   border-radius: .2rem;
   color: #000;
   transition: all 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+.navbar__menu__link.active{
+  color: #FFB900;
+}
+
+.navbar__menu__link__icons{
+  font-size: 150%;
+  width: 100%;
+}
+
+.navbar__menu__link__icons-text{
+  width: 100%;
+  font-size: 80%;
 }
 
 @media screen and (max-width: 80rem) {
@@ -95,7 +114,6 @@ a, a:hover, a:focus, a:active {
   }
   .navbar__menu-list li a {
     font-size: 1.2rem;
-    margin-left: 1rem;
   }
 }
 
@@ -125,12 +143,20 @@ a, a:hover, a:focus, a:active {
     margin-bottom: 0rem;
   }
 
-  .navbar__menu-list li a,
-  .navbar__menu-list li:last-child a {
-    width: 20rem;
-    display: block;
+  .navbar__menu-list li a {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
     margin: auto;
-    font-size: 1.8rem;
+    font-size: 130%;
+  }
+
+  .navbar__menu__item:last-child{
+    margin-left: 0;
+  }
+
+  .navbar__menu__link__icons{
+    margin-right: 2rem;
   }
 
   .navbar__menu-list.close {

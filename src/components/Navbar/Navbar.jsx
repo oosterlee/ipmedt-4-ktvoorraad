@@ -7,6 +7,7 @@ import {
   LoggedInManager,
 } from "./MenuList";
 import "./Navbar.css";
+import "../Darkmode.js";
 import { onLoginChange } from "../../utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -104,6 +105,9 @@ class Navbar extends Component {
             onClick={this.handleClick.bind(this)}
           >
             <i className={clicked ? "fas fa-times" : "fas fa-bars"}></i>
+          </div>
+          <div>
+            <Darkmode/>
           </div>
           <ul
             className={

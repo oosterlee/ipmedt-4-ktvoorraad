@@ -16,15 +16,15 @@ class Login extends Component {
 			loading: false,
 		}
 	}
-	
+
 	login_webtoken(event){
 		this.setState({ loading: true, errorMsg: false });
 		event.preventDefault(); //voorkomt dat de pagina refreshed
-			apiClient.post("/api/login", 
+			apiClient.post("/api/login",
 			{//stuurt een post request naar de API
 					email: this.state.email, //De eerste email moet overeen komen met de naam in de db. De tweede email is van de states dus de daat werkelijke waarde
 					password: this.state.password} //password het zelfde verhaal als email
-				).then(response =>{ 
+				).then(response =>{
 					this.setState({loggedIn: true, token: response.data, loading: false});
 		}).catch(error => {
 			console.log("ERREUR", error);
@@ -56,14 +56,14 @@ class Login extends Component {
 
 			window.localStorage.setItem('login', true);
 			apiClient.defaults.headers.Authorization = "Bearer " + this.state.token.token;
-			
+
 			apiClient
 			.get("/api/user")
 			.then((response) => {
 			console.log(response.data.role);
 			localStorage.setItem("role",response.data.role);
 			localStorage.setItem("userId",response.data.id);
-			callOnLoginCallbacks(); 
+			callOnLoginCallbacks();
 
 			}).catch(function (error) {
 			console.log("er gaat iets fouts", error)
@@ -80,10 +80,11 @@ class Login extends Component {
 					<figure className="login__header__figure">
 						<img className="login__header__img" src="./JH_Logo.png" alt="Logo van Jungheinrich" /> {/* temp logo */}
 					</figure>
-					<h2 className="login__header__sub-title">Inloggen</h2>
+
 				</section>
 
 				<form className="login__form" onSubmit={event => this.login_webtoken(event)}>
+					<h2 className="login__header__sub-title">Inloggen</h2>
 					<p className="text--center text--mb text--error">{this.state.errorMsg ? this.state.errorMsg : ""}</p>
 					<div className="login__form__group">
 						<label className="login__form__label">E-mailadres</label>
@@ -97,12 +98,9 @@ class Login extends Component {
 				</form>
 
 				<section className="login__forgot">
-					<p className="login__forgot__p"><a className="login__forgot__a" href="/createuser">Profiel </a>aanmaken</p>
-					<p className="login__forgot__p"><a className="login__forgot__a" href="https://www.google.com/">Wachtwoord</a> vergeten?</p>					
+					<p className="login__forgot__p"><a className="login__forgot__a" href="https://www.google.com/">Wachtwoord</a> vergeten?</p>
+					<p className="login__forgot__p"><a className="login__forgot__a" href="https://www.google.com/theapot">E-mailadres</a> vergeten?</p>
 				</section>
-				
-					
-			
 			</article>
 		);
 	}

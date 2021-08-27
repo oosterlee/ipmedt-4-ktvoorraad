@@ -1,5 +1,6 @@
 .login{
     width: 100%;
+    background-color: var(--background);
 }
 
 .login__header{
@@ -31,18 +32,13 @@
 }
 
 .login__header__sub-title{
-    font-weight: 400;
-    font-size: 250%;
     text-align: center;
-    text-transform: uppercase;
-    font-style: italic;
-    bottom: 40rem;
 }
 
 .login__form{
     padding-top: 15rem;
     width: 100%;
-
+    color: var(--field);
 }
 
 .login__form__group{
@@ -58,7 +54,6 @@
 .login__form__input{
     right: 10%;
     position: absolute;
-    border: 0.1rem black solid;
     padding: 0.5rem;
 }
 
@@ -69,9 +64,8 @@
 
 .login__form__submit{
     background-color: var(--jh-yellow);
-    border: 0.1rem black solid;
-    color: var(--white);
-    font-weight: bold;
+    border: 0.1rem var(--field-accent);
+    color: var(--field);
     font-size: 1.8rem;
     text-align: center;
     margin-left: 50%;
@@ -87,11 +81,7 @@
 
 .login__forgot__p{
     padding: 1rem;
-    color: var(--dark-grey);
-}
-
-.login__forgot__p:nth-of-type(2){
-    margin-bottom: 2rem;
+    color: var(--field);
 }
 
 .login__forgot__a:link{
@@ -99,7 +89,7 @@
 }
 
 .login__forgot__a:hover{
-    color: var(--dark-grey);
+    color: var(--field);
 }
 
 #login__error{

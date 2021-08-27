@@ -131,7 +131,7 @@ li.adminProducts__list__item {
 	.adminProducts__item__button__info{
 		padding: 1.2rem 3rem;
 		background:var(--jh-yellow);
-		color: var(--dark-grey);
+		color: var(--background-accent);
 		border: none;
 		font-family: sans-bold,Arial,sans-serif;
 		letter-spacing: .4px;

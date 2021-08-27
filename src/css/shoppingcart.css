@@ -1,8 +1,8 @@
 .products__order__button{
     padding: 0.8rem 1.6rem;
     margin: 1rem 0 3rem 0;
-    background-color: var(--dark-grey);
-    border: 0.1rem solid var(--light-grey);
+    background-color: var(--background-accent);
+    border: 0.1rem solid var(--background);
     transition: all 0.4s ease 0s;
     color:var(--white);
     height: 4rem;

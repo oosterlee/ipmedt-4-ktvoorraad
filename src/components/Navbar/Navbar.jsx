@@ -71,10 +71,11 @@ class Navbar extends Component {
     return arr.map(({ url, title, icon }, index) => {
       return (
         <li className="navbar__menu__item" key={index}>
-          <NavLink className="navbar__menu__link"
+          <NavLink
             exact
             to={url.replace(":id", this.state.userId)}
             activeClassName="active"
+            className="navbar__menu__link"
           >
             <FontAwesomeIcon className="navbar__menu__link__icons" icon={icon}/>
             <div className="navbar__menu__link__icons-text">{title}</div>

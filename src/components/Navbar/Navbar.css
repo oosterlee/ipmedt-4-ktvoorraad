@@ -64,38 +64,40 @@ a, a:hover, a:focus, a:active {
   align-items: center;
 }
 
+
 .navbar__menu__item:last-child {
   font-weight: 300;
   padding: .5rem 1rem;
-  background-color: #FFB900;
+  background-color: var(--background-accent);
+  color: white !important;
   transition: all 0.5s ease-in-out;
   margin-left: 2rem;
   border-radius: .2rem;
+}
+
+.navbar__menu__link.active{
+  color: #FFB900;
 }
 
 .navbar__menu__item{
   margin-right: 2rem;
   padding: 0.5rem 1rem;
   text-align: center;
-  color: #fff;
   transition: all 0.5s ease-in-out;
 }
 
 .navbar__menu__link {
   text-decoration: none;
   font-weight: 300;
+  color: #fff;
 }
 
 .navbar__menu__item:hover {
   background-color: #fff;
   border-radius: .2rem;
-  color: #000;
+  color: #000 !important;
   transition: all 0.5s ease-in-out;
   cursor: pointer;
-}
-
-.navbar__menu__link.active{
-  color: #FFB900;
 }
 
 .navbar__menu__link__icons{

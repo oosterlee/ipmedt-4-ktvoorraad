@@ -101,14 +101,14 @@ class Navbar extends Component {
               Jung<font>heinrich</font>
             </a>
           </div>
+          <div>
+            <Darkmode/>
+          </div>
           <div
             className="navbar__menu-icon"
             onClick={this.handleClick.bind(this)}
           >
             <i className={clicked ? "fas fa-times" : "fas fa-bars"}></i>
-          </div>
-          <div>
-            <Darkmode/>
           </div>
           <ul
             className={

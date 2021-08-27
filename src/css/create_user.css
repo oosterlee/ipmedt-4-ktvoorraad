@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: var(--background);
 }
 .create_user__form{
   display: grid;
@@ -9,7 +10,7 @@
 }
 .create_user__form__group{
   padding: 5px 16px;
-  background-color: var(--white);
+  background-color: var(--background);
 }
 
 .create_user__form__group:nth-last-child(2){
@@ -21,7 +22,7 @@
   padding: 5px;
   display: inline-block;
   border: none;
-  background: var(--light-grey);
+  background: rgb(255,255,255);
 }
 
 .create_user__form__button{

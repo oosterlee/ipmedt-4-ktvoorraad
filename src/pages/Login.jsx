@@ -80,10 +80,11 @@ class Login extends Component {
 					<figure className="login__header__figure">
 						<img className="login__header__img" src="./JH_Logo.png" alt="Logo van Jungheinrich" /> {/* temp logo */}
 					</figure>
-					<h2 className="login__header__sub-title">Inloggen</h2>
+				
 				</section>
 
 				<form className="login__form" onSubmit={event => this.login_webtoken(event)}>
+					<h2 className="login__header__sub-title">Inloggen</h2>
 					<p className="text--center text--mb text--error">{this.state.errorMsg ? this.state.errorMsg : ""}</p>
 					<div className="login__form__group">
 						<label className="login__form__label">E-mailadres</label>

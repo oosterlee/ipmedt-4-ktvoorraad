@@ -1,6 +1,6 @@
 .component__basicbutton {
 	padding: 1.2rem 3rem;
-	background: var(--dark-grey);
+	background: var(--background-accent);
 	color: var(--white);
 	border: none;
 	font-family: sans-bold,Arial,sans-serif;
@@ -18,7 +18,7 @@
 
 }
 .component__basicbutton:hover {
-	background: var(--dark-grey);
+	background: var(--background-accent);
 	color: var(--white);
 
 }
